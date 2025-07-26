@@ -1,0 +1,52 @@
+---
+title: Bem-Vindo
+icon: PiHandWavingBold
+description: Página inicial da documentação do ShopEasy
+---
+import { Rocket, UserPlus, Settings, Home, Code, HelpCircle, ShoppingCart, ShieldCheck, BadgePercent, CreditCard, MousePointerClick } from "lucide-react";
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+
+Seja bem vindo a documentação oficial do ShopEasy, seu assistente de vendas do discord! O ShopEasy oferece uma solução completa de vendas para vendedores de todos tamanhos! Configura alguns de nossos recursos:
+
+
+<Cards className="lg:grid-cols-3 mt-4">
+
+  <Card
+    icon={<ShieldCheck className="text-primary" />}
+    title="Segurança integrada"
+    description="Controle total, proteção contra fraudes e automação confiável."
+  />
+  <Card
+    icon={<BadgePercent className="text-primary" />}
+    title="0% de comissão"
+    description="Fique com 100% do que você vende. Nós não cobramos taxas."
+  />
+  <Card
+    icon={<CreditCard className="text-primary" />}
+    title="Pagamentos integrados"
+    description="Pix, MercadoPago e outros métodos disponíveis."
+  />
+</Cards>
+
+## Dúvidas Frequentes
+
+<Accordions>
+
+  <Accordion title="Como posso começar a usar o ShopEasy?" id="como-comecar">
+    Para começar a usar o ShopEasy, basta adicionar o bot ao seu servidor do Discord e seguir o passo a passo de configuração via comandos.
+  </Accordion>
+
+  <Accordion title="Quais métodos de pagamento são aceitos?" id="metodos-pagamento">
+    Atualmente suportamos Pix, MercadoPago, PayPal (em breve) e outros métodos populares.
+  </Accordion>
+
+  <Accordion title="O ShopEasy cobra alguma taxa sobre as vendas?" id="comissao">
+    Não! O ShopEasy é 100% gratuito e não cobra comissão sobre suas vendas.
+  </Accordion>
+
+  <Accordion title="É possível personalizar minha loja?" id="personalizacao">
+    Sim! Você pode alterar nome, descrição, imagem e até os produtos da sua loja diretamente.
+  </Accordion>
+
+</Accordions>

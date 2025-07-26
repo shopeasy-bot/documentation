@@ -1,0 +1,47 @@
+{
+  "plans": [
+    {
+      "name": "Básico",
+      "price": "Grátis",
+      "period": "",
+      "description": "Ideal para quem está começando e quer testar o ShopEasy sem compromisso.",
+      "features": [
+        "Sem limite de vendas",
+        "Acesso a funcionalidades básicas",
+        "Suporte básico",
+        "Produtos, cupons e catálogos limitados",
+        "Automações essenciais"
+      ],
+      "popular": false
+    },
+    {
+      "name": "Essencial",
+      "price": "R$ 4,90",
+      "period": "/mês",
+      "description": "Pensado para servidores em crescimento que buscam mais recursos e agilidade.",
+      "features": [
+        "Sem limite de vendas",
+        "Acesso a funcionalidades essenciais",
+        "Suporte prioritário",
+        "Produtos, cupons e catálogos limitados",
+        "Automações avançadas"
+      ],
+      "popular": true
+    },
+    {
+      "name": "Completo",
+      "price": "R$ 8,90",
+      "period": "/mês",
+      "description": "Para comunidades que precisam de performance máxima e controle total.",
+      "features": [
+        "Sem limite de vendas",
+        "Acesso a funcionalidades completas",
+        "Suporte prioritário",
+        "Produtos, cupons e catálogos ilimitados",
+        "Automações avançadas"
+      ],
+      "popular": false
+    }
+  
+  ]
+}
