@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next';
 import './global.css';
 import { RootProvider } from 'fumadocs-ui/provider';
 import { Inter } from 'next/font/google';
@@ -97,6 +98,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             }}>
               
             {children}
+               <Analytics />
             </RootProvider>
       </body>
     </html>
