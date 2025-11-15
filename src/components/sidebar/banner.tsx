@@ -11,7 +11,7 @@ export function SidebarBanner() {
     <div
       className="mt-4 p-3 relative overflow-hidden rounded-xl border border-emerald-500/20 backdrop-blur-sm bg-gradient-to-br from-emerald-500/5 to-transparent shadow-md shadow-emerald-500/10"
     >
-      {/* <div
+      <div
         className="absolute inset-0 rounded-xl pointer-events-none"
         style={{
           background:
@@ -36,7 +36,7 @@ export function SidebarBanner() {
             Ver novidades →
           </Link>
         </div>
-      </div> */}
+      </div>
     </div>
   )
 }

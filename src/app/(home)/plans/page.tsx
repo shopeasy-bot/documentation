@@ -52,7 +52,7 @@ export default function PlanosPage() {
             </ul>
 
             <Link
-               href={`/api/discord/auth?plan=${encodeURIComponent(plan.name)}`}
+               href={`/discord`}
               target="_blank"
               className={cn(
                 `${jetbrains.className} group relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl overflow-hidden font-medium shadow-lg transition-all hover:shadow-2xl active:opacity-90 hover:scale-105 duration-300 w-full`,

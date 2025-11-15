@@ -7,6 +7,9 @@ const config = {
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true
+  },
+  images: { 
+      domains: ['images-ext-1.discordapp.net', 'cdn.discordapp.com', 'media.discordapp.net'],
   }
 };
 

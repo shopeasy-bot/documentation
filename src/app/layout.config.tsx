@@ -4,7 +4,7 @@ import { FaBook, FaCreditCard } from 'react-icons/fa';
 
 export const baseOptions: BaseLayoutProps = {
   disableThemeSwitch: true,
-  githubUrl: "https://github.com/jeanbrnd/shopeasy-docs",
+  githubUrl: "https://github.com/shopeasy-bot/shopeasy-docs",
   nav: {
     title: <NavTitle />,
     transparentMode: "top"

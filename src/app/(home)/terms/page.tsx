@@ -113,7 +113,6 @@ export default function TermsPage() {
         </div>
       </div>
 
-      {/* Back to Home */}
       <div className="motion-preset-expand motion-delay-[200ms]">
         <Link
           href="/"
