@@ -1,10 +1,10 @@
-import { GridDecoration } from "@/components/decoration/Grid"
-import { FlareDecoration } from "@/components/decoration/Flare"
-import { cn } from "@/lib/cn"
-import { Poppins } from "next/font/google"
-import Link from "next/link"
+import { GridDecoration } from "@/components/decoration/Grid";
+import { FlareDecoration } from "@/components/decoration/Flare";
+import { cn } from "@/lib/cn";
+import { Poppins } from "next/font/google";
+import Link from "next/link";
 
-const poppins = Poppins({ subsets: ["latin"], weight: "500" })
+const poppins = Poppins({ subsets: ["latin"], weight: "500" });
 
 export default function TermsPage() {
   return (
@@ -13,7 +13,9 @@ export default function TermsPage() {
       <GridDecoration
         width={60}
         height={60}
-        className={cn("[mask-image:linear-gradient(-160deg,white,transparent,transparent)] opacity-30")}
+        className={cn(
+          "[mask-image:linear-gradient(-160deg,white,transparent,transparent)] opacity-30"
+        )}
       />
 
       <div className="max-w-4xl w-full text-left motion-preset-expand motion-delay-[100ms]">
@@ -28,86 +30,139 @@ export default function TermsPage() {
 
         <div className="space-y-8 text-neutral-400">
           <section>
-            <h2 className={`${poppins.className} text-2xl font-semibold mb-4 text-white`}>1. Termos de Serviço</h2>
+            <h2
+              className={`${poppins.className} text-2xl font-semibold mb-4 text-white`}
+            >
+              1. Termos de Serviço
+            </h2>
             <p className="mb-4">
-              Bem-vindo ao ShopEasy! Ao utilizar nossos serviços, você concorda em cumprir e estar vinculado aos
-              seguintes termos e condições de uso. Por favor, leia-os atentamente. Se você não concordar com qualquer
-              parte destes termos, não utilize nossos serviços.
+              Bem-vindo ao ShopEasy! Ao utilizar nossos serviços, você concorda
+              em cumprir estes termos e condições de uso. Se não concordar com
+              qualquer parte, não utilize nossos serviços.
             </p>
             <p className="mb-4">
-              O ShopEasy é um bot de Discord projetado para automatizar e gerenciar lojas e transações dentro de
-              servidores Discord. Nosso objetivo é fornecer uma ferramenta eficiente e segura para a sua comunidade.
+              O ShopEasy é um bot de Discord que fornece{" "}
+              <span className="font-bold">
+                uma ferramenta para automatizar e gerenciar lojas e transações
+                em servidores
+              </span>
+              . Nós{" "}
+              <span className="font-bold">
+                não vendemos produtos nem participamos das transações
+              </span>{" "}
+              realizadas pelos usuários. Cada usuário é{" "}
+              <span className="font-bold">totalmente responsável</span> por seus
+              próprios produtos, preços e conformidade legal.
             </p>
             <p>
-              Reservamo-nos o direito de modificar estes Termos de Serviço a qualquer momento. Quaisquer alterações
-              serão publicadas nesta página, e o uso continuado dos serviços após tais modificações constituirá sua
-              aceitação dos novos termos.
+              Reservamo-nos o direito de modificar estes Termos a qualquer
+              momento. Quaisquer alterações serão publicadas nesta página, e o
+              uso continuado dos serviços após tais modificações constitui sua
+              aceitação.
             </p>
           </section>
 
           <section>
-            <h2 className={`${poppins.className} text-2xl font-semibold mb-4 text-white`}>
+            <h2
+              className={`${poppins.className} text-2xl font-semibold mb-4 text-white`}
+            >
               2. Política de Privacidade
             </h2>
             <p className="mb-4">
-              Sua privacidade é de extrema importância para nós. Esta Política de Privacidade descreve como coletamos,
-              usamos e protegemos suas informações ao utilizar o ShopEasy.
+              A privacidade é importante. Esta política descreve como coletamos
+              e usamos dados mínimos necessários para operar o ShopEasy.
             </p>
-            <h3 className={`${poppins.className} text-xl font-semibold mb-2 text-white`}>2.1. Coleta de Dados</h3>
+            <h3
+              className={`${poppins.className} text-xl font-semibold mb-2 text-white`}
+            >
+              2.1. Coleta de Dados
+            </h3>
+            <ul className="list-disc list-inside space-y-2 mb-4">
+              <li>IDs de usuários e servidores Discord para operar o bot.</li>
+              <li>
+                Dados relacionados a transações dentro do servidor para
+                gerenciar lojas automatizadas.
+              </li>
+              <li>
+                Configurações específicas do servidor para personalização do
+                bot.
+              </li>
+            </ul>
             <p className="mb-4">
-              Coletamos informações mínimas necessárias para o funcionamento do bot e a prestação dos serviços. Isso
-              pode incluir:
-            </p>
-            <ul className="list-disc list-inside space-y-2 mb-4">
-              <li>IDs de usuários e servidores Discord (para identificar e operar o bot).</li>
-              <li>Dados relacionados a transações e itens da loja (para gerenciar sua economia no servidor).</li>
-              <li>Configurações do bot específicas do servidor (para personalizar sua experiência).</li>
-            </ul>
-            <p>
-              Não coletamos mensagens de chat privadas, informações pessoais identificáveis (como nome real, e-mail)
-              fora do contexto de IDs de Discord, ou qualquer dado que não seja estritamente necessário para a
-              funcionalidade do ShopEasy.
+              Não coletamos mensagens privadas, informações pessoais fora do
+              contexto de IDs de Discord, ou dados desnecessários.
             </p>
 
-            <h3 className={`${poppins.className} text-xl font-semibold mb-2 text-white`}>2.2. Uso de Dados</h3>
-            <p className="mb-4">Os dados coletados são utilizados exclusivamente para:</p>
+            <h3
+              className={`${poppins.className} text-xl font-semibold mb-2 text-white`}
+            >
+              2.2. Uso de Dados
+            </h3>
             <ul className="list-disc list-inside space-y-2 mb-4">
-              <li>Operar e manter as funcionalidades do ShopEasy.</li>
-              <li>Melhorar a experiência do usuário e a performance do bot.</li>
-              <li>Fornecer suporte técnico e resolver problemas.</li>
-              <li>Garantir a segurança e integridade dos nossos serviços.</li>
+              <li>Manter e operar as funcionalidades do bot.</li>
+              <li>Melhorar a experiência do usuário.</li>
+              <li>Fornecer suporte técnico.</li>
+              <li>Garantir segurança e integridade do serviço.</li>
             </ul>
 
-            <h3 className={`${poppins.className} text-xl font-semibold mb-2 text-white`}>
+            <h3
+              className={`${poppins.className} text-xl font-semibold mb-2 text-white`}
+            >
               2.3. Compartilhamento de Dados
             </h3>
             <p className="mb-4">
-              Não vendemos, alugamos ou compartilhamos suas informações com terceiros, exceto quando exigido por lei ou
-              para proteger nossos direitos e segurança. Todos os dados são armazenados de forma segura e acessados
-              apenas por pessoal autorizado para fins de manutenção e desenvolvimento.
+              Não vendemos ou compartilhamos dados com terceiros, exceto quando
+              exigido por lei ou para proteger nossos direitos. Apenas pessoal
+              autorizado acessa os dados para manutenção e desenvolvimento.
             </p>
 
-            <h3 className={`${poppins.className} text-xl font-semibold mb-2 text-white`}>2.4. Seus Direitos</h3>
+            <h3
+              className={`${poppins.className} text-xl font-semibold mb-2 text-white`}
+            >
+              2.4. Seus Direitos
+            </h3>
             <p className="mb-4">
-              Você tem o direito de solicitar acesso, correção ou exclusão dos seus dados armazenados pelo ShopEasy.
-              Para exercer esses direitos, entre em contato conosco através dos canais de suporte no Discord.
+              Você pode solicitar acesso, correção ou exclusão dos seus dados
+              armazenados pelo ShopEasy através do nosso suporte no Discord.
             </p>
 
-            <h3 className={`${poppins.className} text-xl font-semibold mb-2 text-white`}>
-              2.5. Alterações na Política de Privacidade
+            <h3
+              className={`${poppins.className} text-xl font-semibold mb-2 text-white`}
+            >
+              2.5. Alterações
             </h3>
             <p>
-              Podemos atualizar esta Política de Privacidade periodicamente. Notificaremos você sobre quaisquer
-              alterações significativas publicando a nova política nesta página. Recomendamos que você revise esta
-              política regularmente.
+              Atualizaremos esta política periodicamente. Revisões importantes
+              serão publicadas nesta página.
             </p>
           </section>
 
           <section>
-            <h2 className={`${poppins.className} text-2xl font-semibold mb-4 text-white`}>3. Contato</h2>
+            <h2
+              className={`${poppins.className} text-2xl font-semibold mb-4 text-white`}
+            >
+              3. Responsabilidade do Usuário
+            </h2>
             <p>
-              Se você tiver alguma dúvida sobre estes Termos de Serviço ou nossa Política de Privacidade, entre em
-              contato conosco através do nosso servidor de suporte no Discord.
+              O ShopEasy fornece apenas a ferramenta para vendas e automação.
+              Todo conteúdo, produto ou transação realizada por usuários é de{" "}
+              <span className="font-bold">
+                responsabilidade exclusiva do próprio usuário
+              </span>
+              . Nós não nos responsabilizamos por disputas, ilegalidades ou
+              problemas de transações.
+            </p>
+          </section>
+
+          <section>
+            <h2
+              className={`${poppins.className} text-2xl font-semibold mb-4 text-white`}
+            >
+              4. Contato
+            </h2>
+            <p>
+              Para dúvidas sobre Termos ou Política de Privacidade, entre em
+              contato via nosso servidor de suporte no Discord.
             </p>
           </section>
         </div>
@@ -122,5 +177,5 @@ export default function TermsPage() {
         </Link>
       </div>
     </main>
-  )
+  );
 }

@@ -17,7 +17,6 @@ export default function HomePage() {
     <main className="flex flex-1 flex-col z-10 items-center justify-center text-center gap-16 px-4">
       <FlareDecoration />
 
-      {/* AI Badge */}
       <div className="motion-preset-expand motion-delay-[100ms]">
         <div className="relative">
           <div className="absolute inset-0 bg-emerald-500/20 rounded-full blur-lg"></div>
@@ -31,7 +30,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Logo and Title */}
       <div className="flex flex-col md:flex-row justify-center items-center gap-4 motion-preset-expand motion-delay-[200ms]">
         <div className="relative">
           <div className="absolute inset-0 bg-emerald-500/20 rounded-full blur-xl"></div>
@@ -47,10 +45,9 @@ export default function HomePage() {
         </h1>
       </div>
 
-      {/* Description */}
       <div className="max-w-4xl motion-preset-expand motion-delay-[300ms]">
         <p className="text-lg lg:text-2xl font-light text-neutral-600 dark:text-neutral-300 leading-relaxed">
-          Automatize seu servidor no Discord com o{" "}
+          Automatize suas vendas no Discord com o{" "}
           <span className="font-bold bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">
             ShopEasy
           </span>
@@ -102,32 +99,6 @@ export default function HomePage() {
         </div>
       </div>
    
-    <div className="motion-preset-expand motion-delay-[500ms]">
-        <Link
-          href="https://constatic-docs.vercel.app/pt"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group inline-flex items-center gap-2 px-4 py-2 rounded-full border border-neutral-200/10 bg-transparent backdrop-blur-sm text-sm text-neutral-500/70 hover:text-neutral-700 hover:bg-neutral-100/20 hover:border-neutral-200/30 dark:border-neutral-700/10 dark:text-neutral-500/70 dark:hover:text-neutral-300 dark:hover:bg-neutral-800/20 dark:hover:border-neutral-600/30 transition-all duration-500 opacity-60 hover:opacity-100 hover:scale-105"
-        >
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
-          <FiTerminal className="w-3.5 h-3.5 relative z-10" />
-          <span className="text-xs font-medium relative z-10">Feito com Constatic CLI</span>
-          <svg
-            className="w-3 h-3 transition-transform group-hover:translate-x-0.5 relative z-10"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-            />
-          </svg>
-        </Link>
-      </div>
-
       <GridDecoration
         width={60}
         height={60}

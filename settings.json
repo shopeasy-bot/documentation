@@ -16,7 +16,7 @@
     },
     {
       "name": "Essencial",
-      "price": "R$ 4,90",
+      "price": "R$ 3,90",
       "period": "/mês",
       "description": "Pensado para servidores em crescimento que buscam mais recursos e agilidade.",
       "features": [
@@ -30,7 +30,7 @@
     },
     {
       "name": "Completo",
-      "price": "R$ 8,90",
+      "price": "R$ 6,90",
       "period": "/mês",
       "description": "Para comunidades que precisam de performance máxima e controle total.",
       "features": [

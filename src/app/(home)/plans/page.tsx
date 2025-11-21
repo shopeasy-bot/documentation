@@ -10,7 +10,7 @@ import settings from "@/../settings.json"
 const poppins = Poppins({ subsets: ["latin"], weight: "500" })
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], weight: "500" })
 
-export default function PlanosPage() {
+export default function PlansPage() {
   return (
     <main className="flex flex-1 flex-col z-10 items-center justify-center text-center gap-16 px-4">
       <FlareDecoration />
