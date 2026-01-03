@@ -51,9 +51,15 @@ export default function PlansPage() {
               ))}
             </ul>
 
+            {plan.price !== "Grátis" && (
+              <div className="mb-3">
+                <p className="text-xs text-neutral-500 dark:text-neutral-400">Disponível na nossa lojinha</p>
+              </div>
+            )}
+
             <Link
-               href={`/discord`}
-              target="_blank"
+              href={plan.price === "Grátis" ? "/invite" : "https://lojinha.shopeasy.site"}
+              target={plan.price === "Grátis" ? "_self" : "_blank"}
               className={cn(
                 `${jetbrains.className} group relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl overflow-hidden font-medium shadow-lg transition-all hover:shadow-2xl active:opacity-90 hover:scale-105 duration-300 w-full`,
                 plan.popular
@@ -62,7 +68,7 @@ export default function PlansPage() {
               )}
             >
               <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(255,255,255,0.4),rgba(255,255,255,0))] group-hover:translate-x-full duration-700" />
-              <span className="relative z-10">{plan.price === "Grátis" ? "Começar Grátis" : "Adquirir Plano"}</span>
+              <span className="relative z-10">{plan.price === "Grátis" ? "Começar Grátis" : "Comprar na Lojinha"}</span>
             </Link>
           </div>
         ))}
