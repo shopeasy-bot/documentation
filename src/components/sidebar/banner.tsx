@@ -21,7 +21,7 @@ export function SidebarBanner() {
         }}
       />
 
-      {/* <div className="relative z-10 flex items-center gap-3">
+       <div className="relative z-10 flex items-center gap-3">
         <div className="flex items-center justify-center w-8 h-8 bg-emerald-500/10 rounded-full">
           <FiZap className="w-4.5 h-4.5 text-emerald-400 animate-pulse" />
         </div>
@@ -36,7 +36,7 @@ export function SidebarBanner() {
             Ver novidades →
           </Link>
         </div>
-      </div> */}
+      </div> 
     </div>
   )
 }

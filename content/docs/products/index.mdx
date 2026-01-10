@@ -1,9 +1,110 @@
 ---
 title: Cadastro
 icon: BiPlus
-description: Página inicial da documentação do ShopEasy
+description: Como criar e cadastrar produtos na sua loja
 ---
+import { Plus, Package, AlertCircle, Settings, ArrowRight } from "lucide-react";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
 
+# Cadastro de Produtos
 
+Aprenda a criar seu primeiro produto no ShopEasy de forma simples e rápida.
 
-Seja bem vindo a documentação oficial do ShopEasy, seu assistente de vendas do discord! O ShopEasy oferece uma solução completa de vendas para vendedores de todos tamanhos! Configura alguns de nossos recursos:
+## Criando um Produto
+
+Para criar um novo produto, execute o comando no canal onde deseja que o produto seja exibido:
+
+```bash
+/produto criar
+```
+
+![Comando produto criar](/images/products/criar-comando.png)
+
+<Callout type="info" icon={<AlertCircle />}>
+O produto será enviado no canal onde você executar o comando. Certifique-se de estar no canal correto!
+</Callout>
+
+## Campo de Referência
+
+Para criar o produto, o bot solicitará que você informe a referência do produto.
+<Steps>
+<Step>
+### O que é a Referência?
+
+A referência é um identificador único para o produto, usado para gerenciá-lo posteriormente. Pense nela como um "código" ou "ID" do produto.
+
+**Características:**
+- Deve ser única (não pode haver dois produtos com a mesma referência)
+- Pode conter letras, números e hífens
+- Não pode conter espaços
+
+**Exemplos válidos:**
+```
+vip-30-dias
+produto-001
+key-minecraft
+cargo-premium
+```
+</Step>
+
+<Step>
+### Após Enviar a Referência
+
+Depois de definir a referência, o bot enviará a mensagem do produto no canal onde o comando foi executado.
+
+**Como ficará:**
+
+![Exemplo de produto criado](/images/products/produto-exemplo.png)
+
+O produto aparecerá como um embed elegante contendo:
+- Nome do produto
+- Descrição
+- Preço
+- Botão de compra
+
+</Step>
+</Steps>
+
+## Produto Não Apareceu?
+
+<Callout type="warn" icon={<AlertCircle />}>
+Se o produto não foi enviado no canal, verifique se o bot tem as seguintes permissões:
+
+- ✅ Ver canal
+- ✅ Enviar mensagens
+- ✅ Inserir links
+- ✅ Adicionar reações
+
+Sem essas permissões, o bot não conseguirá exibir o produto.
+</Callout>
+
+### Como Corrigir Permissões
+
+1. Clique com o botão direito no canal
+2. Vá em "Editar Canal"
+3. Selecione "Permissões"
+4. Adicione o ShopEasy e conceda as permissões necessárias
+
+## Próximos Passos
+
+Agora que seu produto foi criado, você pode configurá-lo completamente:
+
+<Cards className="mt-4">
+  <Card
+    icon={<Settings className="text-primary" />}
+    title="Configurar Produto"
+    description="Defina preço, descrição, imagem e muito mais"
+    href="/produtos/configuracao"
+  />
+  <Card
+    icon={<Package className="text-primary" />}
+    title="Gerenciar Estoque"
+    description="Adicione e gerencie o estoque do produto"
+    href="/produtos/estoque"
+  />
+</Cards>
+
+<Callout type="success">
+Produto criado com sucesso! Continue para a [configuração do produto](/produtos/configuracao) para personalizar todos os detalhes.
+</Callout>
