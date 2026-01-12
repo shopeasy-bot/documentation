@@ -1,5 +1,5 @@
 // import { generateOGImage } from "fumadocs-ui/og";
-import { source } from "@/lib/source";
+import { source } from "@/lib/sourcer";
 import { notFound } from "next/navigation";
 import { generateOGImage } from "./og";
 

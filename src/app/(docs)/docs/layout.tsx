@@ -1,7 +1,7 @@
 import { DocsLayout, DocsLayoutProps } from 'fumadocs-ui/layouts/notebook';
 import type { ReactNode } from 'react';
 import { baseOptions } from '@/app/layout.config';
-import { source } from '@/lib/source';
+import { source } from '@/lib/sourcer';
 import { BannerDiscordNav } from '@/components/nav/bannerDiscord';
 import { GridDecoration } from '@/components/decoration/Grid';
 import { cn } from '@/lib/cn';
@@ -21,9 +21,10 @@ const docsOptions: DocsLayoutProps = {
     banner: [< SidebarBanner />]
     
   },
-  disableThemeSwitch: true,
- 
+  themeSwitch: { enabled: false }, 
+  
   nav: {    
+    
     ...baseOptions.nav,
     mode: "top"
   }
