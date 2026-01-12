@@ -15,11 +15,15 @@ Aprenda a criar seu primeiro produto no ShopEasy de forma simples e rápida.
 
 Para criar um novo produto, execute o comando no canal onde deseja que o produto seja exibido:
 
-```bash
-/produto criar
-```
+<DiscordSlashCommand
+  name="produto"
+  subcommand="criar"
+  description="[📦] - Cadastre um produto para venda"
+  options={[
+    { name: "referencia", type: "text" }
+  ]}
+/>
 
-![Comando produto criar](/images/products/criar-comando.png)
 
 <Callout type="info" icon={<AlertCircle />}>
 O produto será enviado no canal onde você executar o comando. Certifique-se de estar no canal correto!
@@ -55,7 +59,12 @@ Depois de definir a referência, o bot enviará a mensagem do produto no canal o
 
 **Como ficará:**
 
-![Exemplo de produto criado](/images/products/produto-exemplo.png)
+<DiscordProductCard
+  title="Sem título configurado.."
+  description="Sem descrição configurada..."
+  price="R$ 10,00"
+  stock="0 unidades disponíveis"
+/>
 
 O produto aparecerá como um embed elegante contendo:
 - Nome do produto

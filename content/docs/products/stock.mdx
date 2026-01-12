@@ -1,0 +1,319 @@
+---
+title: Estoque
+icon: BiPackage
+description: Configure o estoque e entrega dos seus produtos
+---
+import { Package, Zap, Hand, FileText, Plus, Trash2, Download, AlertCircle, CheckCircle, Settings } from "lucide-react";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+
+# Configurações de Estoque
+
+Gerencie como seus produtos serão entregues aos clientes de forma automática ou manual.
+
+## Acessando as Configurações de Estoque
+
+As configurações de estoque são acessadas através do menu de configuração do produto:
+
+<Steps>
+<Step>
+## Abra as Configurações
+
+Execute o comando e selecione o produto:
+
+```bash
+/produto configurar
+```
+</Step>
+
+<Step>
+## Selecione "Configurar Estoque"
+
+No menu de configurações, clique na opção **"Configurar Estoque"** no select menu.
+
+![Opção configurar estoque](/images/products/opcao-configurar-estoque.png)
+
+</Step>
+
+<Step>
+## Menu de Estoque
+
+A mensagem será editada exibindo o menu completo de configurações de estoque.
+
+![Menu de configurações de estoque](/images/products/menu-config-estoque.png)
+
+</Step>
+</Steps>
+
+## Tipos de Entrega
+
+No centro do menu existem dois botões para escolher o tipo de entrega:
+
+### <Zap className="inline w-5 h-5" /> Automático (Padrão)
+
+O produto é entregue automaticamente ao cliente após a confirmação do pagamento, de acordo com o estoque configurado.
+
+**Quando usar:**
+- Keys de jogos
+- Códigos de ativação
+- Credenciais de acesso
+- Qualquer conteúdo digital pré-definido
+
+<Callout type="success" icon={<CheckCircle />}>
+Recomendado para a maioria dos produtos digitais! A entrega é instantânea.
+</Callout>
+
+### <Hand className="inline w-5 h-5" /> Manual
+
+O produto aguarda sua intervenção manual para ser entregue. Você receberá uma notificação e deverá enviar o produto manualmente.
+
+**Quando usar:**
+- Produtos personalizados
+- Serviços que exigem configuração manual
+- Produtos físicos
+- Itens que dependem de disponibilidade externa
+
+<Callout type="info">
+Com entrega manual, você tem controle total sobre quando e como entregar o produto.
+</Callout>
+
+## Configurações do Modo Automático
+
+Quando o modo **Automático** está ativado, as seguintes opções ficam disponíveis:
+
+<Tabs items={['Adicionar por Linhas', 'Adicionar por Texto', 'Backup', 'Esvaziar']}>
+<Tab value="Adicionar por Linhas">
+
+### <Plus className="inline w-5 h-5" /> Adicionar por Linhas
+
+Adicione múltiplos itens ao estoque, onde **cada linha representa uma unidade**.
+
+**Como funciona:**
+
+1. Clique em **"Adicionar por Linhas"**
+2. Um formulário será aberto
+3. Cole ou digite os itens (um por linha)
+4. Confirme
+
+![Formulário adicionar por linhas](/images/products/form-adicionar-linhas.png)
+
+**Exemplo de uso - Keys de jogos:**
+```
+ABCD-1234-EFGH-5678
+IJKL-9012-MNOP-3456
+QRST-7890-UVWX-1234
+```
+
+**Exemplo de uso - Credenciais:**
+```
+usuario1:senha123
+usuario2:senha456
+usuario3:senha789
+```
+
+**Resultado:**
+- Cada linha vira uma unidade de estoque
+- Ao vender, o bot envia automaticamente um item da lista
+- O item usado é removido do estoque
+
+<Callout type="info">
+Perfeito para quando você tem múltiplos códigos/keys únicos!
+</Callout>
+
+</Tab>
+
+<Tab value="Adicionar por Texto">
+
+### <FileText className="inline w-5 h-5" /> Adicionar por Texto
+
+Adicione um único texto que será entregue para **todos** os clientes.
+
+**Como funciona:**
+
+1. Clique em **"Adicionar por Texto"**
+2. Digite o texto que será entregue
+3. Confirme
+
+**Exemplo de uso - Instruções:**
+```
+Seu acesso VIP foi ativado!
+
+Para começar a usar seus benefícios:
+1. Vá até o canal #vip
+2. Digite /verificar
+3. Aproveite!
+```
+
+**Exemplo de uso - Link fixo:**
+```
+Download disponível em: https://exemplo.com/download
+Código de acesso: PREMIUM2024
+```
+
+<Callout type="warn">
+Este texto será enviado para TODOS os clientes. Use apenas para conteúdo que não precisa ser único.
+</Callout>
+
+</Tab>
+
+<Tab value="Backup">
+
+### <Download className="inline w-5 h-5" /> Backup do Estoque
+
+Faça o download de todo o conteúdo do estoque atual em formato de texto.
+
+**Quando usar:**
+- Antes de fazer alterações grandes
+- Para ter uma cópia de segurança
+- Para migrar estoque entre produtos
+
+**O que é salvo:**
+- Todos os itens que ainda não foram vendidos
+- Formato de texto simples (um item por linha)
+
+<Callout type="success">
+Recomendamos fazer backup regularmente para não perder seus códigos/keys!
+</Callout>
+
+</Tab>
+
+<Tab value="Esvaziar">
+
+### <Trash2 className="inline w-5 h-5" /> Esvaziar Estoque
+
+Remove **todo** o conteúdo do estoque do produto.
+
+<Callout type="error" icon={<AlertCircle />}>
+**ATENÇÃO!** Esta ação é irreversível. Todo o conteúdo será permanentemente deletado.
+</Callout>
+
+**Quando usar:**
+- Trocar completamente o tipo de produto
+- Lote de keys inválidas/expiradas
+- Reiniciar o estoque do zero
+
+**Recomendação:**
+Faça um backup antes de esvaziar o estoque!
+
+</Tab>
+</Tabs>
+
+## Configurações do Modo Manual
+
+Quando o modo **Manual** está ativado, as seguintes opções ficam disponíveis:
+
+<Tabs items={['Alterar Instruções', 'Alterar Quantidade', 'Esvaziar']}>
+<Tab value="Alterar Instruções">
+
+### <FileText className="inline w-5 h-5" /> Alterar Instruções
+
+Defina as instruções que você verá quando precisar fazer a entrega manual.
+
+**Como funciona:**
+
+1. Clique em **"Alterar Instruções"**
+2. Digite as instruções para você mesmo
+3. Confirme
+
+**Exemplo:**
+```
+1. Verificar disponibilidade no site X
+2. Gerar código personalizado
+3. Enviar via DM do Discord
+4. Confirmar recebimento com o cliente
+```
+
+<Callout type="info">
+Estas instruções são apenas para você! O cliente não as verá.
+</Callout>
+
+</Tab>
+
+<Tab value="Alterar Quantidade">
+
+### Alterar Quantidade
+
+Defina quantas unidades estão disponíveis para venda manual.
+
+**Como funciona:**
+
+1. Clique em **"Alterar Quantidade"**
+2. Digite o número de unidades disponíveis
+3. Confirme
+
+**Exemplo:**
+```
+Quantidade: 10
+```
+
+**O que isso significa:**
+- Até 10 pessoas poderão comprar
+- Você receberá 10 notificações de entrega pendente
+- Após as 10 vendas, o produto ficará esgotado
+
+<Callout type="warn">
+Lembre-se de atualizar a quantidade conforme você entrega os produtos!
+</Callout>
+
+</Tab>
+
+<Tab value="Esvaziar">
+
+### <Trash2 className="inline w-5 h-5" /> Esvaziar Estoque
+
+Reseta a quantidade do estoque manual para zero.
+
+**O que acontece:**
+- A quantidade disponível volta para 0
+- O produto fica marcado como esgotado
+- As instruções não são apagadas
+
+<Callout type="info">
+Diferente do modo automático, aqui você não perde nenhum conteúdo, apenas reseta o contador.
+</Callout>
+
+</Tab>
+</Tabs>
+
+## Comparação: Automático vs Manual
+
+| Característica | Automático | Manual |
+|----------------|------------|--------|
+| Entrega | Instantânea | Você entrega |
+| Estoque | Keys/códigos únicos | Quantidade numérica |
+| Notificações | Apenas venda concluída | Pedido + confirmação de entrega |
+| Melhor para | Produtos digitais | Serviços/produtos físicos |
+| Trabalho | Nenhum após configurar | Requer ação sua |
+
+## Dicas de Uso
+
+**Para produtos automáticos:**
+- Sempre adicione mais estoque do que você acha que vai vender
+- Teste um código antes de adicionar o lote todo
+- Faça backup antes de adicionar novo estoque
+- Use "por linhas" para códigos únicos
+- Use "por texto" apenas para instruções gerais
+
+**Para produtos manuais:**
+- Seja realista com a quantidade disponível
+- Defina instruções claras para você mesmo
+- Configure notificações para não perder vendas
+- Atualize a quantidade regularmente
+
+## Próximos Passos
+
+<Cards className="mt-4">
+  <Card
+    icon={<Settings className="text-primary" />}
+    title="Voltar para Configuração"
+    description="Configurações gerais do produto"
+    href="/produtos/configuracao"
+  />
+  <Card
+    icon={<FileText className="text-primary" />}
+    title="Tipos de Entrega"
+    description="Configure cargos, webhooks e mais"
+    href="/produtos/entrega"
+  />
+</Cards>
