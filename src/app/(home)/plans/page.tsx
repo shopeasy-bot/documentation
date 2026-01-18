@@ -1,14 +1,14 @@
-import { GridDecoration } from "@/components/decoration/Grid"
-import { FlareDecoration } from "@/components/decoration/Flare"
-import { cn } from "@/lib/cn"
-import { JetBrains_Mono, Poppins } from "next/font/google"
-import Link from "next/link"
-import { FiCheck } from "react-icons/fi"
-import { Badge } from "@/components/ui/badge"
-import settings from "@/../settings.json"
+import { GridDecoration } from "@/components/decoration/Grid";
+import { FlareDecoration } from "@/components/decoration/Flare";
+import { cn } from "@/lib/cn";
+import { JetBrains_Mono, Poppins } from "next/font/google";
+import Link from "next/link";
+import { FiCheck, FiX } from "react-icons/fi";
+import { Badge } from "@/components/ui/badge";
+import settings from "@/../settings.json";
 
-const poppins = Poppins({ subsets: ["latin"], weight: "500" })
-const jetbrains = JetBrains_Mono({ subsets: ["latin"], weight: "500" })
+const poppins = Poppins({ subsets: ["latin"], weight: "500" });
+const jetbrains = JetBrains_Mono({ subsets: ["latin"], weight: "500" });
 
 export default function PlansPage() {
   return (
@@ -28,37 +28,67 @@ export default function PlansPage() {
           >
             {plan.popular && (
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <Badge className="bg-emerald-500 text-white px-4 py-1">Mais Vendido</Badge>
+                <Badge className="bg-emerald-500 text-white px-4 py-1">
+                  Mais Vendido
+                </Badge>
               </div>
             )}
 
             <div className="text-center mb-8">
-              <h3 className={`${poppins.className} text-2xl font-bold mb-2`}>{plan.name}</h3>
-              <p className="text-neutral-500 dark:text-neutral-400 text-sm mb-6">{plan.description}</p>
+              <h3 className={`${poppins.className} text-2xl font-bold mb-2`}>
+                {plan.name}
+              </h3>
+              <p className="text-neutral-500 dark:text-neutral-400 text-sm mb-6">
+                {plan.description}
+              </p>
 
               <div className="flex items-baseline justify-center gap-1 mb-6">
-                <span className={`${jetbrains.className} text-4xl font-bold`}>{plan.price}</span>
-                <span className="text-neutral-500 dark:text-neutral-400">{plan.period}</span>
+                <span className={`${jetbrains.className} text-4xl font-bold`}>
+                  {plan.price}
+                </span>
+                <span className="text-neutral-500 dark:text-neutral-400">
+                  {plan.period}
+                </span>
               </div>
             </div>
 
             <ul className="space-y-4 mb-8">
               {plan.features.map((feature, featureIndex) => (
                 <li key={featureIndex} className="flex items-center gap-3">
-                  <FiCheck className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-                  <span className="text-sm text-neutral-600 dark:text-neutral-300">{feature}</span>
+                  {feature.enabled ? (
+                    <FiCheck className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                  ) : (
+                    <FiX className="w-5 h-5 text-red-400 flex-shrink-0" />
+                  )}
+
+                  <span
+                    className={cn(
+                      "text-sm",
+                      feature.enabled
+                        ? "text-neutral-600 dark:text-neutral-300"
+                        : "text-neutral-400 line-through",
+                    )}
+                  >
+                    {feature.label}
+                  </span>
                 </li>
               ))}
             </ul>
 
             {plan.price !== "Grátis" && (
               <div className="mb-3">
-                <p className="text-xs text-neutral-500 dark:text-neutral-400">Disponível na nossa lojinha</p>
+                <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                  Disponível na nossa lojinha
+                </p>
               </div>
             )}
 
             <Link
-              href={plan.price === "Grátis" ? "/invite" : "https://lojinha.shopeasy.site"}
+              href={
+                plan.price === "Grátis"
+                  ? "/invite"
+                  : "https://lojinha.shopeasy.site"
+              }
               target={plan.price === "Grátis" ? "_self" : "_blank"}
               className={cn(
                 `${jetbrains.className} group relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl overflow-hidden font-medium shadow-lg transition-all hover:shadow-2xl active:opacity-90 hover:scale-105 duration-300 w-full`,
@@ -68,7 +98,11 @@ export default function PlansPage() {
               )}
             >
               <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(255,255,255,0.4),rgba(255,255,255,0))] group-hover:translate-x-full duration-700" />
-              <span className="relative z-10">{plan.price === "Grátis" ? "Começar Grátis" : "Comprar na Lojinha"}</span>
+              <span className="relative z-10">
+                {plan.price === "Grátis"
+                  ? "Começar Grátis"
+                  : "Comprar na Lojinha"}
+              </span>
             </Link>
           </div>
         ))}
@@ -77,8 +111,10 @@ export default function PlansPage() {
       <GridDecoration
         width={60}
         height={60}
-        className={cn("[mask-image:linear-gradient(-160deg,white,transparent,transparent)] opacity-30")}
+        className={cn(
+          "[mask-image:linear-gradient(-160deg,white,transparent,transparent)] opacity-30",
+        )}
       />
     </main>
-  )
+  );
 }
