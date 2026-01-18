@@ -5,7 +5,7 @@
   "defaultOpen": true,
   "pages": [
     "index",
-    "configs"
-
+    "configs",
+     "stock"
   ]
 }

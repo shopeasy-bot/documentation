@@ -1,14 +1,14 @@
 // import { generateOGImage } from "fumadocs-ui/og";
-import { source } from "@/lib/source";
+import { source } from "@/lib/sourcer";
 import { notFound } from "next/navigation";
 import { generateOGImage } from "./og";
 
 export async function GET(
   _req: Request,
-  { params }: { params: Promise<{ slug: string[], lang: string }> },
+  { params }: { params: Promise<{ slug: string[] }> },
 ) {
-  const { slug, lang } = await params;
-  const page = source.getPage(slug.slice(0, -1), lang);
+  const { slug } = await params;
+  const page = source.getPage(slug.slice(0, -1));
   if (!page) notFound();
 
   const { title, description, icon } = page.data;

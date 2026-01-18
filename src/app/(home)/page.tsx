@@ -53,7 +53,7 @@ export default function HomePage() {
           </span>
           <br />
           <span className="text-base lg:text-xl text-neutral-500 dark:text-neutral-400">
-            Gratuito, Fácil, e Seguro 
+                      A solução completa para gerenciar sua loja no Discord. Configure em minutos, venda em segundos.
           </span>
         </p>
       </div>

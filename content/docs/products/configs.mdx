@@ -1,9 +1,187 @@
 ---
 title: Configuração
 icon: BiCog
-description: Página inicial da documentação do ShopEasy
+description: Configure e personalize seus produtos de forma completa
 ---
+import { Settings, Image, DollarSign, Package, FileText, Save, Clock, AlertCircle } from "lucide-react";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
 
+# Configuração de Produtos
 
+Personalize todos os detalhes dos seus produtos de forma simples e intuitiva.
 
-Seja bem vindo a documentação oficial do ShopEasy, seu assistente de vendas do discord! O ShopEasy oferece uma solução completa de vendas para vendedores de todos tamanhos! Configura alguns de nossos recursos:
+## Acessando as Configurações
+
+Para configurar um produto existente, use o comando:
+
+```bash
+/produto configurar
+```
+
+<Steps>
+<Step>
+## Selecione o Produto
+
+Após executar o comando, será exibido um menu com todos os produtos criados no servidor.
+
+![Menu de seleção de produtos](/images/products/selecao-produtos.png)
+
+Clique no **select menu** e escolha o produto que deseja configurar.
+
+</Step>
+
+<Step>
+## Menu de Configuração
+
+Depois de selecionar o produto, um novo menu será exibido com todas as opções de configuração disponíveis.
+
+![Menu de configuração do produto](/images/products/menu-configuracao.png)
+
+</Step>
+</Steps>
+
+## Opções de Configuração
+
+### <FileText className="inline w-5 h-5" /> Título
+
+Define o nome do produto que será exibido para os clientes.
+
+**Exemplo:**
+```
+VIP Premium - 30 Dias
+```
+
+### <FileText className="inline w-5 h-5" /> Descrição
+
+Adicione uma descrição detalhada sobre o produto, seus benefícios e o que o cliente receberá.
+
+**Exemplo:**
+```
+Acesso VIP completo por 30 dias incluindo:
+• Chat exclusivo
+• Cor personalizada
+• Suporte prioritário
+• Benefícios especiais
+```
+
+### <DollarSign className="inline w-5 h-5" /> Preço
+
+Defina o valor do produto em reais (R$).
+
+**Formato aceito:**
+```
+29.90
+15.00
+100
+```
+
+<Callout type="info">
+Use ponto (.) para separar os centavos, não vírgula.
+</Callout>
+
+### <Image className="inline w-5 h-5" /> Imagem
+
+Adicione uma imagem atrativa para o produto. A imagem deve ser uma URL pública.
+
+**Exemplo:**
+```
+https://i.imgur.com/exemplo.png
+```
+
+<Callout type="info">
+Formatos aceitos: PNG, JPG, JPEG, GIF. Recomendamos imagens com proporção 16:9 ou 1:1.
+</Callout>
+
+### <Package className="inline w-5 h-5" /> Estoque
+
+Gerencie a quantidade disponível do produto. Esta opção abre um menu específico para controle de estoque.
+
+<Callout type="info">
+A configuração detalhada de estoque será abordada em uma página separada.
+</Callout>
+
+## Sistema de Draft
+
+<Callout type="warn" icon={<Clock />}>
+**Importante:** As alterações ficam salvas como rascunho por **24 horas**.
+
+Se você não clicar em "Salvar Alterações" dentro deste período, todas as modificações serão perdidas!
+</Callout>
+
+### Como Funciona
+
+1. Você faz as alterações nos campos desejados
+2. As mudanças ficam temporariamente salvas (draft)
+3. Você tem até 24 horas para revisar e fazer mais alterações
+4. Clique em **"Salvar Alterações"** para aplicar definitivamente
+
+**Exemplo de uso:**
+```
+14:00 - Você altera o título
+14:30 - Você altera o preço
+15:00 - Você altera a descrição
+15:15 - Você clica em "Salvar Alterações"
+✅ Todas as alterações são aplicadas de uma vez
+```
+
+### <Save className="inline w-5 h-5" /> Salvando as Alterações
+
+Após configurar todos os campos desejados, clique no botão **"Salvar Alterações"**.
+
+O que acontece ao salvar:
+- ✅ As configurações são aplicadas permanentemente
+- ✅ Todas as mensagens do produto são atualizadas automaticamente nos canais
+- ✅ Os clientes já podem ver as novas informações
+- ✅ O draft é limpo
+
+<Callout type="success">
+Alterações salvas com sucesso! O produto foi atualizado em todos os canais.
+</Callout>
+
+<Callout type="warn" icon={<AlertCircle />}>
+**Atenção:** Se você fechar o menu sem salvar, as alterações permanecem no draft por 24 horas. Você pode voltar e continuar editando.
+</Callout>
+
+## Dicas de Configuração
+
+**Para um produto atrativo:**
+
+- **Título claro:** Use nomes diretos e fáceis de entender
+- **Descrição completa:** Liste todos os benefícios e o que está incluso
+- **Imagem de qualidade:** Use imagens nítidas e profissionais
+- **Preço competitivo:** Pesquise o mercado antes de definir
+- **Atualize regularmente:** Mantenha as informações sempre correntes
+
+**Exemplos de bons títulos:**
+```
+✅ VIP Premium - 30 Dias
+✅ Pack de Keys Minecraft - 5 Unidades
+✅ Acesso Vitalício ao Servidor
+```
+
+**Exemplos de títulos ruins:**
+```
+❌ produto 1
+❌ vip
+❌ coisa legal compre
+```
+
+## Próximos Passos
+
+Depois de configurar o básico do produto, você pode:
+
+<Cards className="mt-4">
+  <Card
+    icon={<Package className="text-primary" />}
+    title="Gerenciar Estoque"
+    description="Configure o controle de estoque do produto"
+    href="/produtos/estoque"
+  />
+  <Card
+    icon={<Settings className="text-primary" />}
+    title="Adicionar Conteúdo"
+    description="Configure o que será entregue ao cliente"
+    href="/produtos/conteudo"
+  />
+</Cards>

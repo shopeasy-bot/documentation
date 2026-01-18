@@ -1,4 +1,7 @@
 {
-  "pages": ["index"],
+  "pages": [
+     "index",
+     "products"
+  ],
   "defaultOpen": true
 }
