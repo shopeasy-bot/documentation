@@ -19,7 +19,6 @@ const docsOptions: DocsLayoutProps = {
     footer: [<BannerDiscordNav key="discord" />],
     lang: "pt-br",
     banner: [< SidebarBanner />]
-    
   },
   themeSwitch: { enabled: false }, 
   
