@@ -8,8 +8,7 @@ import {
 import { notFound } from "next/navigation";
 import { getMDXComponents } from "@/mdx-components";
 import { createRelativeLink } from "fumadocs-ui/mdx";
-import { LLMCopyButton, ViewOptions } from "@/components/page-actions";
-import { OpenChatGPTButton } from "@/components/ai/chatgpt-open-button";
+import { ViewOptions } from "@/components/page-actions";
 
 export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
   const params = await props.params;
@@ -23,9 +22,12 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
 
-    <div className="flex flex-row flex-wrap gap-2 items-center border-b pb-6">
-         <OpenChatGPTButton markdownUrl={`${page.url}.mdx`} />
-     </div>
+      <div className="flex flex-row gap-2 items-center border-b pt-2 pb-6">
+        <ViewOptions
+          
+          markdownUrl={`${page.url}.mdx`}
+        />
+      </div>
 
       <DocsBody>
         <MDX
