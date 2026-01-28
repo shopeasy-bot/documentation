@@ -15,9 +15,11 @@ Personalize todos os detalhes dos seus produtos de forma simples e intuitiva.
 
 Para configurar um produto existente, use o comando:
 
-```bash
-/produto configurar
-```
+<DiscordSlashCommand
+  name="produto"
+  subcommand="configurar"
+  description="[📦] - Configure um produto cadastrado"
+/>
 
 <Steps>
 <Step>
@@ -176,12 +178,6 @@ Depois de configurar o básico do produto, você pode:
     icon={<Package className="text-primary" />}
     title="Gerenciar Estoque"
     description="Configure o controle de estoque do produto"
-    href="/produtos/estoque"
-  />
-  <Card
-    icon={<Settings className="text-primary" />}
-    title="Adicionar Conteúdo"
-    description="Configure o que será entregue ao cliente"
-    href="/produtos/conteudo"
+    href="/products/stock"
   />
 </Cards>
