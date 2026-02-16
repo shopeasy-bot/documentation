@@ -1,0 +1,113 @@
+---
+title: ínicio
+icon: BiHome
+description: Configure seu bot de forma completa e personalizada
+---
+import { Settings, ShoppingCart, Hash, Shield, Palette } from "lucide-react";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Card, Cards } from 'fumadocs-ui/components/card';
+
+# Configurações Gerais
+
+Acesse e personalize todas as configurações do seu bot em um único lugar.
+
+## Acessando Configurações
+
+Para acessar o menu de configurações gerais, use o comando:
+
+<DiscordSlashCommand
+  name="configuracoes"
+  description="[⚙️] Acesse as configurações gerais"
+/>
+
+<Steps>
+<Step>
+## Menu de Configurações
+
+Após executar o comando, será exibido o menu principal de configurações.
+
+![Menu de configurações gerais](/images/configs/menu-configuracoes.png)
+
+</Step>
+
+<Step>
+## Selecione a Categoria
+
+Clique no **select menu** e escolha a categoria de configuração que deseja acessar.
+
+As opções disponíveis são:
+- **Configurações de Compra** - Configure o sistema de pagamentos e compras
+- **Configurações de Canais e Categorias** - Defina onde as mensagens serão enviadas
+- **Configurações de Permissões** - Gerencie quem pode usar cada funcionalidade
+- **Configurações de Personalização** - Customize a aparência e identidade do bot
+
+</Step>
+</Steps>
+
+## Navegando Entre Configurações
+
+Você pode navegar livremente entre as diferentes categorias de configuração:
+
+1. Abra o menu com `/configuracoes`
+2. Selecione uma categoria
+3. Faça as alterações desejadas
+4. Volte ao menu principal para acessar outra categoria
+5. Ou feche o menu quando terminar
+
+<Callout type="success">
+Todas as alterações são salvas automaticamente ao confirmar cada configuração.
+</Callout>
+
+## Acesso Rápido às Configurações
+
+Clique nos cards abaixo para acessar a documentação detalhada de cada categoria:
+
+<Cards className="mt-4">
+  <Card
+    icon={<ShoppingCart className="text-primary" />}
+    title="Configurações de Compra"
+    description="Configure pagamentos, taxas e fluxo de compra"
+    href="/docs/configs/purchase"
+  />
+  <Card
+    icon={<Hash className="text-primary" />}
+    title="Canais e Categorias"
+    description="Defina onde as mensagens serão enviadas"
+    href="/docs/configs/channels"
+  />
+  <Card
+    icon={<Shield className="text-primary" />}
+    title="Permissões"
+    description="Gerencie quem pode usar cada funcionalidade"
+    href="/docs/configs/perms"
+  />
+  <Card
+    icon={<Palette className="text-primary" />}
+    title="Personalização"
+    description="Customize a aparência do bot"
+    href="/docs/configs/customization"
+  />
+</Cards>
+
+## Dicas de Configuração
+
+**Recomendações importantes:**
+
+- **Configure primeiro os canais:** Defina onde tudo será enviado antes de ativar funcionalidades
+- **Teste as permissões:** Sempre teste se os cargos estão funcionando corretamente
+- **Personalize com identidade:** Use cores e logos que representem sua marca
+- **Revise regularmente:** Verifique se as configurações ainda atendem suas necessidades
+
+<Callout type="warn">
+Algumas configurações são essenciais para o funcionamento do bot. Certifique-se de configurar ao menos os canais básicos antes de começar a usar.
+</Callout>
+
+## Próximos Passos
+
+Agora que você conhece o menu de configurações, escolha uma categoria para começar:
+
+1. **Iniciantes:** Comece pelas [Configurações de Canais](/docs/configs/channels)
+2. **Intermediário:** Configure as [Permissões](/docs/configs/perms)
+3. **Avançado:** Personalize em [Personalização](/docs/configs/customization)
+4. **Para vender:** Configure os [Métodos de Compra](/docs/configs/purchase)

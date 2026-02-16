@@ -1,0 +1,12 @@
+{
+  "title": "Configuracoes",
+  "icon": "BiCog",
+  "defaultOpen": true,
+  "pages": [
+    "index",
+    "channels",
+    "perms",
+    "customization",
+    "purchase"
+  ]
+}

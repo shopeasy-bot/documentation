@@ -1,0 +1,422 @@
+---
+title: Permissões
+icon: BiShield
+description: Controle quem pode usar cada funcionalidade do bot
+---
+import { Shield, Crown, Settings, Package, ShoppingCart, BarChart3, CreditCard, Landmark, Users, Bot, Save, Clock, AlertCircle, Lock } from "lucide-react";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Configurações de Permissões
+
+Gerencie com precisão quem pode acessar cada funcionalidade do bot no seu servidor.
+
+<Callout type="warn" icon={<Lock />}>
+**Recurso Exclusivo do Plano Completo**
+
+O sistema avançado de permissões está disponível apenas para usuários do **Plano Completo**. 
+
+Quer saber mais sobre os planos disponíveis? [Clique aqui para ver os planos](/docs/plans)
+</Callout>
+
+## Acessando as Configurações
+
+Para configurar as permissões, primeiro acesse o menu principal:
+
+<DiscordSlashCommand
+  name="configuracoes"
+  description="[⚙️] Acesse as configurações gerais"
+/>
+
+<Steps>
+<Step>
+## Selecione Permissões
+
+Após executar o comando `/configuracoes`, será exibido o menu principal de configurações.
+
+![Menu principal de configurações](/images/configs/menu-configuracoes.png)
+
+No **select menu**, escolha a opção **"Configurações de Permissões"**.
+
+</Step>
+
+<Step>
+## Menu de Permissões
+
+Você será direcionado para o menu específico de configuração de permissões.
+
+![Menu de configuração de permissões](/images/configs/menu-permissoes.png)
+
+</Step>
+
+<Step>
+## Selecione um Cargo
+
+Clique no **select menu** e escolha o cargo do servidor que deseja configurar permissões.
+
+![Seleção de cargo](/images/configs/selecao-cargo.png)
+
+Após selecionar, você verá todas as permissões disponíveis para atribuir a esse cargo.
+
+</Step>
+</Steps>
+
+## ⚠️ Importante: Mudança no Sistema de Permissões
+
+<Callout type="warn" icon={<AlertCircle />}>
+**Atenção ao configurar permissões:**
+
+Por padrão, **administradores do servidor** têm acesso completo ao bot.
+
+⚡ **PORÉM:** A partir do momento que você **configura permissões personalizadas**, os administradores **perdem o acesso automático** e passam a precisar dos cargos configurados!
+
+Isso significa que você deve:
+1. Criar um cargo administrativo
+2. Configurar todas as permissões necessárias nele
+3. Atribuir esse cargo aos administradores
+</Callout>
+
+**Exemplo:**
+```
+❌ ANTES da configuração:
+- @Administrador do Discord → Acesso total ao bot (automático)
+
+✅ DEPOIS da configuração:
+- @Administrador do Discord → Sem acesso ao bot
+- @Admin Loja → Acesso total ao bot (configurado)
+- @Moderador → Acesso parcial ao bot (configurado)
+```
+
+## Permissões Disponíveis
+
+Depois de selecionar um cargo, você poderá atribuir as seguintes permissões:
+
+### 📦 Produtos
+
+Permite gerenciar todos os produtos da loja.
+
+**O que essa permissão permite:**
+- Criar novos produtos
+- Editar produtos existentes
+- Excluir produtos
+- Configurar estoque
+- Definir preços
+
+**Ideal para:**
+- Gerentes de loja
+- Equipe de produtos
+- Administradores
+
+---
+
+### 🛒 Carrinhos
+
+Permite gerenciar os carrinhos (tickets) de compra dos clientes.
+
+**O que essa permissão permite:**
+- Visualizar carrinhos ativos
+- Responder mensagens nos carrinhos
+- Fechar carrinhos
+- Reabrir carrinhos
+- Adicionar membros da equipe aos carrinhos
+
+**Ideal para:**
+- Equipe de suporte
+- Atendentes
+- Moderadores
+
+---
+
+### ⚙️ Configurações
+
+Permite acessar e modificar as configurações gerais do bot.
+
+**O que essa permissão permite:**
+- Alterar configurações de canais
+- Modificar configurações de compra
+- Ajustar personalização
+- Configurar integrações
+
+**Ideal para:**
+- Administradores
+- Gerentes técnicos
+
+<Callout type="warn">
+Esta é uma permissão sensível - atribua apenas a pessoas de confiança!
+</Callout>
+
+---
+
+### 📊 Vendas
+
+Permite visualizar relatórios e estatísticas de vendas.
+
+**O que essa permissão permite:**
+- Ver dashboard de vendas
+- Acessar relatórios financeiros
+- Visualizar histórico de compras
+- Consultar estatísticas de produtos
+
+**Ideal para:**
+- Gestores
+- Administradores
+- Equipe financeira
+
+---
+
+### 💳 Processar Pagamentos
+
+Permite processar e validar pagamentos manualmente.
+
+**O que essa permissão permite:**
+- Aprovar pagamentos manualmente
+- Recusar pagamentos
+- Validar comprovantes
+- Processar reembolsos
+
+**Ideal para:**
+- Equipe financeira
+- Administradores de confiança
+
+<Callout type="warn">
+Permissão crítica! Conceda apenas a pessoas responsáveis pelo financeiro.
+</Callout>
+
+---
+
+### 🏦 Gerenciar Pagamentos
+
+Permite configurar métodos de pagamento e integrações.
+
+**O que essa permissão permite:**
+- Adicionar/remover métodos de pagamento
+- Configurar APIs (Mercado Pago, etc)
+- Ajustar taxas
+- Configurar PIX automático
+
+**Ideal para:**
+- Administradores
+- Responsáveis técnicos
+
+<Callout type="warn">
+Esta permissão dá acesso a dados sensíveis de pagamento!
+</Callout>
+
+---
+
+### 🛡️ Gerenciar Cargos
+
+Permite gerenciar a entrega automática de cargos após compras.
+
+**O que essa permissão permite:**
+- Configurar cargos a serem entregues
+- Definir produtos com entrega de cargo
+- Ajustar duração de cargos temporários
+- Remover cargos manualmente
+
+**Ideal para:**
+- Administradores
+- Gerentes de comunidade
+
+---
+
+### 🤖 Gerenciar Bot
+
+Permite configurações avançadas e técnicas do bot.
+
+**O que essa permissão permite:**
+- Configurar integrações avançadas
+- Ajustar comportamentos do bot
+- Gerenciar webhooks
+- Acessar logs detalhados
+
+**Ideal para:**
+- Administradores técnicos
+- Desenvolvedores
+- Donos do servidor
+
+---
+
+### 👑 Administrador
+
+Concede **acesso total** a todas as funcionalidades do bot.
+
+**O que essa permissão permite:**
+- ✅ **TODAS** as permissões acima
+- Acesso irrestrito a qualquer comando
+- Controle total sobre o bot
+
+**Ideal para:**
+- Dono do servidor
+- Co-fundadores
+- Administradores principais
+
+<Callout type="success">
+Esta é a permissão mais alta - equivale a ter todas as outras permissões juntas!
+</Callout>
+
+## Sistema de Draft
+
+<Callout type="warn" icon={<Clock />}>
+**Importante:** As alterações ficam salvas como rascunho por **24 horas**.
+
+Se você não clicar em "Salvar Alterações" dentro deste período, todas as modificações serão perdidas!
+</Callout>
+
+### Como Funciona
+
+1. Selecione um cargo
+2. Marque as permissões desejadas
+3. As mudanças ficam temporariamente salvas (draft)
+4. Você tem até 24 horas para revisar e configurar mais cargos
+5. Clique em **"Salvar Alterações"** para aplicar definitivamente
+
+**Exemplo de uso:**
+```
+14:00 - Você configura permissões para @Admin Loja
+14:30 - Você configura permissões para @Moderador
+15:00 - Você configura permissões para @Suporte
+15:15 - Você clica em "Salvar Alterações"
+✅ Todas as permissões são aplicadas de uma vez
+```
+
+### <Save className="inline w-5 h-5" /> Salvando as Alterações
+
+Após configurar as permissões de todos os cargos desejados, clique no botão **"Salvar Alterações"**.
+
+O que acontece ao salvar:
+- ✅ As permissões são ativadas imediatamente
+- ✅ Membros com os cargos ganham acesso às funcionalidades
+- ✅ Administradores perdem acesso automático (se não configurados)
+- ✅ O draft é limpo
+
+<Callout type="success">
+Permissões salvas com sucesso! O sistema já está ativo.
+</Callout>
+
+## Estrutura Recomendada de Cargos
+
+Configure uma hierarquia clara de permissões:
+
+```
+👑 @Administrador (Administrador)
+├─ Acesso total ao bot
+└─ Todas as permissões
+
+🛡️ @Gerente (Gerenciar Bot + Configurações + Vendas)
+├─ Configurar o bot
+├─ Ver relatórios
+└─ Sem acesso financeiro direto
+
+💼 @Financeiro (Processar Pagamentos + Gerenciar Pagamentos + Vendas)
+├─ Gerenciar pagamentos
+├─ Ver vendas
+└─ Sem acesso a produtos/config
+
+📦 @Produtos (Produtos + Vendas)
+├─ Gerenciar produtos
+├─ Ver vendas
+└─ Sem acesso financeiro
+
+🎫 @Suporte (Carrinhos)
+├─ Atender clientes
+└─ Apenas acesso a tickets
+```
+
+## Dicas de Configuração
+
+**Boas práticas de segurança:**
+
+- **Princípio do menor privilégio:** Dê apenas as permissões necessárias
+- **Separe responsabilidades:** Financeiro ≠ Suporte ≠ Produtos
+- **Configure antes de usar:** Defina tudo antes de distribuir cargos
+- **Documente os cargos:** Deixe claro quem tem acesso a quê
+- **Revise regularmente:** Remova permissões de ex-membros da equipe
+
+**Exemplos de configurações seguras:**
+
+✅ **CORRETO:**
+```
+@Admin Loja → 👑 Administrador
+@Financeiro → 💳 Processar Pagamentos + 🏦 Gerenciar Pagamentos
+@Suporte → 🛒 Carrinhos
+```
+
+❌ **EVITE:**
+```
+@Todos → 👑 Administrador (muito acesso!)
+@Suporte → 💳 Processar Pagamentos (desnecessário)
+@Estagiário → ⚙️ Configurações (arriscado)
+```
+
+## Cenários de Uso
+
+### Loja Pequena (1-3 pessoas)
+
+```
+@Dono → 👑 Administrador
+@Ajudante → 📦 Produtos + 🛒 Carrinhos + 📊 Vendas
+```
+
+### Loja Média (4-10 pessoas)
+
+```
+@Admin → 👑 Administrador
+@Gerente → 📦 Produtos + ⚙️ Configurações + 📊 Vendas
+@Financeiro → 💳 Processar Pagamentos + 🏦 Gerenciar Pagamentos
+@Suporte → 🛒 Carrinhos
+```
+
+### Loja Grande (10+ pessoas)
+
+```
+@Fundador → 👑 Administrador
+@Admin → 🤖 Gerenciar Bot + ⚙️ Configurações
+@Gerente Vendas → 📦 Produtos + 📊 Vendas
+@Gerente Financeiro → 💳 Processar Pagamentos + 🏦 Gerenciar Pagamentos
+@Líder Suporte → 🛒 Carrinhos + 🛡️ Gerenciar Cargos
+@Suporte → 🛒 Carrinhos
+```
+
+## Solução de Problemas
+
+### Administrador perdeu acesso após configurar
+
+Isso é **normal** e **esperado**! Quando você configura permissões personalizadas, o acesso automático dos administradores é desativado.
+
+**Solução:**
+1. Crie um cargo administrativo (ex: @Admin Loja)
+2. Configure a permissão 👑 Administrador nele
+3. Atribua o cargo aos administradores
+
+### Membro não consegue usar o bot
+
+Verifique:
+1. Se o cargo dele está configurado nas permissões
+2. Se você salvou as alterações
+3. Se o cargo tem as permissões específicas necessárias
+
+### Preciso resetar as permissões
+
+1. Acesse novamente o menu de permissões
+2. Remova todos os cargos configurados
+3. Salve as alterações
+4. Os administradores voltarão a ter acesso automático
+
+### Draft expirou
+
+1. Refaça as configurações
+2. Configure todos os cargos de uma vez
+3. Salve dentro de 24 horas
+
+## Próximos Passos
+
+Depois de configurar as permissões, você pode:
+
+- [Configurar Personalização](/docs/configs/customization) - Customize a aparência do bot
+- [Configurar Canais](/docs/configs/channels) - Defina onde as mensagens serão enviadas
+- [Voltar às Configurações](/docs/configs) - Ver todas as categorias de configuração
+
+<Callout type="success">
+Com as permissões bem configuradas, sua equipe terá o acesso certo para trabalhar com eficiência e segurança!
+</Callout>

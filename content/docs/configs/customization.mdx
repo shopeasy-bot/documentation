@@ -1,0 +1,299 @@
+---
+title: Personalização
+icon: BiPalette
+description: Customize a aparência e identidade visual do bot
+---
+import { Palette, Droplet, Lock, Wrench, Save, Clock, AlertCircle } from "lucide-react";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Configurações de Personalização
+
+Crie uma identidade visual única para sua loja personalizando a aparência do bot.
+
+<Callout type="warn" icon={<Lock />}>
+**Recurso Exclusivo do Plano Essencial**
+
+As configurações de personalização estão disponíveis apenas para usuários do **Plano Essencial** ou superior. 
+
+Quer saber mais sobre os planos disponíveis? [Clique aqui para ver os planos](/docs/plans)
+</Callout>
+
+## Acessando as Configurações
+
+Para configurar a personalização, primeiro acesse o menu principal:
+
+<DiscordSlashCommand
+  name="configuracoes"
+  description="[⚙️] Acesse as configurações gerais"
+/>
+
+<Steps>
+<Step>
+## Selecione Personalização
+
+Após executar o comando `/configuracoes`, será exibido o menu principal de configurações.
+
+![Menu principal de configurações](/images/configs/menu-configuracoes.png)
+
+No **select menu**, escolha a opção **"Configurações de Personalização"**.
+
+</Step>
+
+<Step>
+## Menu de Personalização
+
+Você será direcionado para o menu específico de configuração de personalização.
+
+![Menu de configuração de personalização](/images/configs/menu-personalizacao.png)
+
+Aqui você verá todas as opções de personalização disponíveis.
+
+</Step>
+</Steps>
+
+## Opções de Personalização
+
+### <Droplet className="inline w-5 h-5" /> Cor
+
+Define a cor principal das embeds (mensagens) do bot.
+
+**O que esta configuração altera:**
+- Cor lateral das embeds de produtos
+- Cor das mensagens de confirmação
+- Cor dos menus interativos
+- Cor das notificações
+
+**Como configurar:**
+
+1. Clique na opção **"Cor"**
+2. Digite o código hexadecimal da cor desejada
+3. A cor será aplicada após salvar
+
+**Formato aceito:**
+```
+#FF5733
+#00BFFF
+#9B59B6
+#2ECC71
+```
+
+<Callout type="info">
+A cor deve estar em formato hexadecimal e começar com `#` seguido de 6 caracteres (0-9, A-F).
+</Callout>
+
+### Exemplos de Cores
+
+**Cores profissionais:**
+```
+#5865F2 - Azul Discord (padrão)
+#2ECC71 - Verde (sucesso, natureza)
+#E91E63 - Rosa (moderno, vibrante)
+#9B59B6 - Roxo (premium, elegante)
+#F39C12 - Laranja (energia, criativo)
+#E74C3C - Vermelho (urgência, paixão)
+```
+
+**Exemplos visuais:**
+
+
+
+**Dicas de escolha:**
+- **Azul:** Transmite confiança e profissionalismo
+- **Verde:** Associado a crescimento e sucesso
+- **Roxo:** Sofisticação e exclusividade
+- **Laranja:** Criatividade e energia
+- **Rosa:** Modernidade e ousadia
+- **Vermelho:** Urgência e atenção
+
+<Callout type="success">
+Escolha uma cor que combine com a identidade visual da sua marca ou servidor!
+</Callout>
+
+### Como Encontrar Códigos Hexadecimais
+
+Use ferramentas online para escolher cores:
+
+**Ferramentas recomendadas:**
+- [HTML Color Picker](https://www.w3schools.com/colors/colors_picker.asp)
+- [Coolors](https://coolors.co/)
+- [Adobe Color](https://color.adobe.com/)
+- [Flat UI Colors](https://flatuicolors.com/)
+
+**Passo a passo:**
+1. Acesse uma das ferramentas
+2. Escolha a cor desejada
+3. Copie o código hexadecimal (ex: `#5865F2`)
+4. Cole no bot
+
+## Sistema de Draft
+
+<Callout type="warn" icon={<Clock />}>
+**Importante:** As alterações ficam salvas como rascunho por **24 horas**.
+
+Se você não clicar em "Salvar Alterações" dentro deste período, todas as modificações serão perdidas!
+</Callout>
+
+### Como Funciona
+
+1. Configure a cor desejada
+2. A mudança fica temporariamente salva (draft)
+3. Você tem até 24 horas para revisar
+4. Clique em **"Salvar Alterações"** para aplicar definitivamente
+
+**Exemplo de uso:**
+```
+10:00 - Você testa a cor #5865F2
+10:15 - Não gostou, testa #2ECC71
+10:30 - Aprovou! Clica em "Salvar Alterações"
+✅ A nova cor é aplicada
+```
+
+### <Save className="inline w-5 h-5" /> Salvando as Alterações
+
+Após configurar a cor desejada, clique no botão **"Salvar Alterações"**.
+
+O que acontece ao salvar:
+- ✅ A cor é aplicada imediatamente
+- ✅ Todas as novas mensagens usam a nova cor
+- ✅ Mensagens antigas mantêm a cor anterior
+- ✅ O draft é limpo
+
+<Callout type="success">
+Personalização salva com sucesso! A nova cor já está ativa.
+</Callout>
+
+<Callout type="info">
+**Nota:** Mensagens já enviadas não serão atualizadas. A nova cor será aplicada apenas em mensagens futuras.
+</Callout>
+
+## Validação de Cores
+
+O bot valida automaticamente se a cor está no formato correto:
+
+**Formatos aceitos:**
+```
+✅ #FF5733
+✅ #00BFFF
+✅ #2ecc71 (minúsculas também funcionam)
+```
+
+**Formatos NÃO aceitos:**
+```
+❌ FF5733 (falta o #)
+❌ #F57 (formato curto - use 6 caracteres)
+❌ rgb(255, 87, 51) (use hexadecimal)
+❌ azul (use código hexadecimal)
+```
+
+<Callout type="warn" icon={<AlertCircle />}>
+Se você inserir uma cor em formato inválido, o bot mostrará um erro e pedirá para tentar novamente.
+</Callout>
+
+## Novidades em Breve
+
+<Callout type="info" icon={<Wrench />}>
+**Estamos trabalhando em mais opções de personalização!**
+
+A equipe está desenvolvendo novos recursos que estarão disponíveis em breve:
+- 🖼️ Logo personalizada
+- 📝 Rodapé customizado
+- 😀 Emojis personalizados
+- 🎨 Temas predefinidos
+- 🌈 Gradientes de cor
+- E muito mais!
+
+Fique atento às atualizações!
+</Callout>
+
+## Exemplos de Uso
+
+### Loja de Gaming
+```
+Cor: #FF0080 (rosa vibrante)
+Transmite: Energia e modernidade
+Combina com: Servidores de games, comunidades jovens
+```
+
+### Loja Premium/VIP
+```
+Cor: #FFD700 (dourado) ou #9B59B6 (roxo)
+Transmite: Luxo e exclusividade
+Combina com: Produtos premium, acesso VIP
+```
+
+### Loja Profissional
+```
+Cor: #5865F2 (azul Discord) ou #2C3E50 (azul escuro)
+Transmite: Confiança e seriedade
+Combina com: Serviços profissionais, B2B
+```
+
+### Loja Ecológica/Natural
+```
+Cor: #2ECC71 (verde) ou #27AE60 (verde escuro)
+Transmite: Natureza e sustentabilidade
+Combina com: Produtos ecológicos, comunidades sustentáveis
+```
+
+## Dicas de Personalização
+
+**Boas práticas:**
+
+- **Contraste adequado:** Certifique-se de que a cor é visível no fundo escuro do Discord
+- **Identidade visual:** Use a mesma cor do logo/marca do servidor
+- **Teste antes:** Visualize como fica antes de salvar definitivamente
+- **Simplicidade:** Cores muito chamativas podem cansar os olhos
+- **Consistência:** Mantenha a mesma cor para criar identidade
+
+**Cores que funcionam bem no Discord:**
+```
+✅ Tons médios (nem muito claros, nem muito escuros)
+✅ Cores saturadas (vibrantes)
+✅ Cores do logo da sua marca
+```
+
+**Cores que podem ter problemas:**
+```
+❌ #000000 (preto - pode ser invisível)
+❌ #FFFFFF (branco - muito forte)
+❌ Cores muito escuras (baixo contraste)
+```
+
+## Solução de Problemas
+
+### Cor não foi aplicada
+
+1. Verifique se você clicou em "Salvar Alterações"
+2. Confirme se o código hexadecimal estava correto
+3. Aguarde alguns segundos e teste enviando uma nova mensagem
+
+### Cor ficou diferente do esperado
+
+1. Verifique se copiou o código correto
+2. Teste a cor em um site de visualização antes
+3. Lembre-se que o Discord pode exibir cores ligeiramente diferentes
+
+### Quero voltar à cor padrão
+
+1. Acesse o menu de personalização novamente
+2. Configure a cor como `#5865F2` (azul padrão do Discord)
+3. Salve as alterações
+
+### Draft expirou
+
+1. Acesse o menu novamente
+2. Configure a cor desejada
+3. Salve dentro de 24 horas
+
+## Próximos Passos
+
+Depois de personalizar a cor, você pode:
+
+- [Configurar Canais](/docs/configs/channels) - Defina onde as mensagens serão enviadas
+- [Configurar Permissões](/docs/configs/perms) - Gerencie quem pode usar cada funcionalidade
+- [Voltar às Configurações](/docs/configs) - Ver todas as categorias de configuração
+
+<Callout type="success">
+Com a personalização configurada, seu bot terá uma identidade visual única e profissional!
+</Callout>

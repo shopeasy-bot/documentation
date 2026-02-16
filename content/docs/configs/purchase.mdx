@@ -1,0 +1,395 @@
+---
+title: Compras
+icon: BiShoppingBag
+description: Configure o fluxo de compra e experiência do cliente
+---
+import { ShoppingCart, Shield, FileText, Clock, Save, AlertCircle, Users } from "lucide-react";
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Configurações de Compra
+
+Personalize todo o processo de compra da sua loja, desde o cargo de cliente até os termos de uso.
+
+## Acessando as Configurações
+
+Para configurar as opções de compra, primeiro acesse o menu principal:
+
+<DiscordSlashCommand
+  name="configuracoes"
+  description="[⚙️] Acesse as configurações gerais"
+/>
+
+<Steps>
+<Step>
+## Selecione Configurações de Compra
+
+Após executar o comando `/configuracoes`, será exibido o menu principal de configurações.
+
+![Menu principal de configurações](/images/configs/menu-configuracoes.png)
+
+No **select menu**, escolha a opção **"Configurações de Compra"**.
+
+</Step>
+
+<Step>
+## Menu de Compra
+
+Você será direcionado para o menu específico de configuração de compra.
+
+![Menu de configuração de compra](/images/configs/menu-compra.png)
+
+Aqui você verá todas as opções relacionadas ao processo de compra.
+
+</Step>
+</Steps>
+
+## Opções de Configuração
+
+### <Users className="inline w-5 h-5" /> Cargo Clientes
+
+Define o cargo que será automaticamente atribuído ao comprador após a aprovação da compra.
+
+**O que esta configuração faz:**
+- Atribui automaticamente um cargo ao cliente após compra aprovada
+- Identifica quem já comprou na sua loja
+- Permite criar benefícios exclusivos para compradores
+- Facilita o suporte (saber quem é cliente)
+
+**Como configurar:**
+
+1. Clique na opção **"Cargo Clientes"**
+2. Será exibido um **select menu** com todos os cargos do servidor
+3. Selecione o cargo desejado
+4. Salve as alterações
+
+<Callout type="info">
+O cargo será atribuído automaticamente quando o pagamento for confirmado.
+</Callout>
+
+**Exemplos de uso:**
+```
+✅ @Cliente
+✅ @Comprador
+✅ @Membro Premium
+✅ @Verificado
+```
+
+<Callout type="success">
+**Dica:** Crie um cargo específico para clientes e configure benefícios exclusivos, como acesso a canais especiais ou suporte prioritário!
+</Callout>
+
+**Casos de uso:**
+
+- **Identificação:** Saber rapidamente quem já é cliente
+- **Suporte prioritário:** Criar canal exclusivo para @Cliente
+- **Promoções:** Enviar ofertas especiais apenas para compradores
+- **Comunidade:** Canal exclusivo para clientes interagirem
+- **Credibilidade:** Mostrar aos outros membros quem já confia na loja
+
+---
+
+### <FileText className="inline w-5 h-5" /> Termos de Compra
+
+Define os termos e condições que serão exibidos ao cliente antes de finalizar a compra.
+
+**O que são os termos:**
+- Regras e políticas da sua loja
+- Informações sobre reembolso
+- Garantias oferecidas
+- Direitos e deveres do comprador
+- Avisos importantes
+
+**Onde são exibidos:**
+- Dentro do carrinho de compra
+- Antes do cliente finalizar o pagamento
+- Cliente precisa aceitar para continuar
+
+**Como configurar:**
+
+1. Clique no botão **"Alterar"** em Termos de Compra
+2. Digite os termos da sua loja
+3. Revise o texto
+4. Salve as alterações
+
+<Callout type="warn">
+Se não houver termos configurados, será exibido: **"Sem termos definidos ainda..."**
+</Callout>
+
+**Exemplo de termos:**
+```
+📋 TERMOS DE COMPRA
+
+1. GARANTIA
+✅ Garantia de 7 dias para produtos digitais
+✅ Reembolso disponível em caso de problemas técnicos
+
+2. ENTREGA
+✅ Produtos entregues automaticamente após confirmação
+✅ Prazo máximo: 24 horas
+
+3. SUPORTE
+✅ Suporte disponível 24/7 via ticket
+✅ Tempo de resposta: até 2 horas
+
+4. POLÍTICA DE REEMBOLSO
+❌ Não aceitamos reembolso após entrega
+✅ Reembolso aceito apenas em caso de erro do sistema
+
+5. IMPORTANTE
+⚠️ Ao finalizar a compra, você concorda com estes termos
+⚠️ Mantenha seu comprovante de pagamento
+
+📞 Dúvidas? Abra um ticket!
+```
+
+**Outro exemplo (mais simples):**
+```
+TERMOS E CONDIÇÕES
+
+• Não fazemos reembolso após a entrega do produto
+• Garantia de 7 dias contra defeitos
+• Suporte disponível via ticket
+• Entrega automática em até 24h
+• Ao comprar, você concorda com estes termos
+```
+
+<Callout type="success">
+**Dica:** Seja claro e objetivo nos termos. Clientes devem entender facilmente as regras!
+</Callout>
+
+**O que incluir nos termos:**
+
+✅ **DEVE incluir:**
+- Política de reembolso
+- Tempo de entrega
+- Garantias oferecidas
+- Como funciona o suporte
+- Avisos importantes
+
+❌ **Evite:**
+- Textos muito longos
+- Linguagem jurídica complicada
+- Informações desnecessárias
+- Letras minúsculas difíceis de ler
+
+---
+
+### <Clock className="inline w-5 h-5" /> Duração do Carrinho
+
+Define quanto tempo o carrinho (ticket de compra) ficará aberto antes de ser fechado automaticamente.
+
+**O que esta configuração faz:**
+- Fecha automaticamente carrinhos inativos
+- Evita acúmulo de tickets abertos
+- Libera espaço no servidor
+- Mantém organização
+
+**Tempo padrão:** 15 minutos
+
+**Como configurar:**
+
+1. Clique no botão **"Alterar"** em Duração do Carrinho
+2. Digite o tempo desejado em minutos
+3. Salve as alterações
+
+**Tempos recomendados:**
+
+```
+⚡ 5 minutos - Para vendas rápidas e automatizadas
+⏱️ 15 minutos - Padrão recomendado (equilibrado)
+🕐 30 minutos - Para produtos que precisam de mais análise
+⏳ 60 minutos - Para compras complexas ou de alto valor
+```
+
+<Callout type="info">
+O contador começa assim que o carrinho é criado. Caso o cliente esteja ativo, o tempo pode ser renovado.
+</Callout>
+
+**Quando o carrinho fecha:**
+- Cliente é notificado que o tempo expirou
+- Canal do carrinho é fechado/arquivado
+- Cliente pode abrir um novo carrinho se desejar
+
+<Callout type="warn">
+⚠️ Se o tempo for muito curto, clientes podem não ter tempo de completar a compra!
+</Callout>
+
+**Recomendações por tipo de produto:**
+
+| Tipo de Produto | Tempo Recomendado | Motivo |
+|-----------------|-------------------|--------|
+| Keys/Códigos | 5-10 minutos | Compra rápida e direta |
+| VIP/Cargos | 15 minutos | Tempo para ler benefícios |
+| Produtos complexos | 30-45 minutos | Cliente pode ter dúvidas |
+| Serviços personalizados | 60 minutos | Pode precisar de negociação |
+
+**Exemplo de configuração:**
+```
+Loja de keys Minecraft: 10 minutos
+Loja de VIPs: 15 minutos
+Loja de serviços: 30 minutos
+Loja de produtos customizados: 60 minutos
+```
+
+## Sistema de Draft
+
+<Callout type="warn" icon={<AlertCircle />}>
+**Importante:** As alterações ficam salvas como rascunho por **24 horas**.
+
+Se você não clicar em "Salvar Alterações" dentro deste período, todas as modificações serão perdidas!
+</Callout>
+
+### Como Funciona
+
+1. Configure cargo de clientes, termos e duração
+2. As mudanças ficam temporariamente salvas (draft)
+3. Você tem até 24 horas para revisar e fazer mais alterações
+4. Clique em **"Salvar Alterações"** para aplicar definitivamente
+
+**Exemplo de uso:**
+```
+10:00 - Você configura o cargo de clientes
+10:15 - Você define os termos de compra
+10:30 - Você ajusta a duração do carrinho para 20 minutos
+10:45 - Você clica em "Salvar Alterações"
+✅ Todas as configurações são aplicadas de uma vez
+```
+
+### <Save className="inline w-5 h-5" /> Salvando as Alterações
+
+Após configurar todas as opções desejadas, clique no botão **"Salvar Alterações"**.
+
+O que acontece ao salvar:
+- ✅ O cargo será atribuído nas próximas compras
+- ✅ Os termos serão exibidos nos carrinhos
+- ✅ A duração será aplicada aos novos carrinhos
+- ✅ O draft é limpo
+
+<Callout type="success">
+Configurações de compra salvas com sucesso! As mudanças já estão ativas.
+</Callout>
+
+<Callout type="info">
+**Nota:** Carrinhos já abertos mantêm as configurações antigas. As novas configurações se aplicam apenas a carrinhos futuros.
+</Callout>
+
+## Fluxo da Compra
+
+Entenda como o cliente experimenta o processo de compra:
+
+```
+1️⃣ Cliente clica em "Comprar" no produto
+    ↓
+2️⃣ Carrinho (ticket) é criado
+    ↓
+3️⃣ Bot exibe os TERMOS DE COMPRA
+    ↓
+4️⃣ Cliente aceita os termos
+    ↓
+5️⃣ Cliente escolhe método de pagamento
+    ↓
+6️⃣ Cliente realiza o pagamento
+    ↓
+7️⃣ Pagamento é confirmado
+    ↓
+8️⃣ CARGO DE CLIENTE é atribuído automaticamente
+    ↓
+9️⃣ Produto é entregue
+    ↓
+🔟 Carrinho permanece aberto até DURAÇÃO expirar
+```
+
+## Configuração Inicial Recomendada
+
+Para começar, configure desta forma:
+
+### Configuração Básica
+```
+✅ Cargo Clientes: @Cliente
+✅ Termos: Termos básicos com política de reembolso
+✅ Duração: 15 minutos
+```
+
+### Configuração Avançada
+```
+✅ Cargo Clientes: @Comprador Verificado
+✅ Termos: Termos completos com todas as políticas
+✅ Duração: 30 minutos
+✅ Benefícios exclusivos para @Comprador Verificado
+```
+
+## Dicas de Configuração
+
+**Boas práticas:**
+
+- **Cargo visível:** Use um cargo com cor para destacar clientes
+- **Termos claros:** Evite textos longos e confusos
+- **Tempo adequado:** Não muito curto nem muito longo
+- **Revise regularmente:** Atualize os termos conforme necessário
+- **Teste o fluxo:** Faça uma compra teste para verificar tudo
+
+**Cargo de Cliente:**
+```
+✅ Nome claro (@Cliente, @Comprador)
+✅ Cor destacada (para ser visível)
+✅ Sem permissões especiais (apenas identificação)
+✅ Posicionado adequadamente na hierarquia
+```
+
+**Termos de Compra:**
+```
+✅ Máximo 2000 caracteres
+✅ Use emojis para destacar seções
+✅ Seja direto e honesto
+✅ Inclua informações de contato
+```
+
+**Duração do Carrinho:**
+```
+✅ Considere o tipo de produto
+✅ Pense na experiência do cliente
+✅ Monitore se clientes reclamam do tempo
+✅ Ajuste conforme necessário
+```
+
+## Solução de Problemas
+
+### Cargo não foi atribuído após compra
+
+Verifique:
+1. Se você salvou as configurações
+2. Se o cargo ainda existe no servidor
+3. Se o bot tem permissão para atribuir cargos
+4. Se o cargo não está acima do cargo do bot na hierarquia
+
+### Termos não aparecem no carrinho
+
+1. Confirme se você salvou as alterações
+2. Verifique se digitou algo nos termos
+3. Teste criando um novo carrinho
+
+### Carrinho fecha muito rápido
+
+1. Aumente a duração do carrinho
+2. Recomendamos mínimo de 10-15 minutos
+3. Avise os clientes sobre o tempo disponível
+
+### Draft expirou
+
+1. Acesse o menu novamente
+2. Reconfigure tudo
+3. Salve dentro de 24 horas
+
+## Próximos Passos
+
+Depois de configurar as opções de compra, você pode:
+
+- [Configurar Canais](/docs/configs/channels) - Defina onde as notificações serão enviadas
+- [Configurar Permissões](/docs/configs/perms) - Gerencie quem pode usar cada funcionalidade
+- [Configurar Personalização](/docs/configs/customization) - Customize a aparência do bot
+- [Voltar às Configurações](/docs/configs) - Ver todas as categorias de configuração
+
+<Callout type="success">
+Com as configurações de compra bem ajustadas, seus clientes terão uma experiência profissional e transparente!
+</Callout>

@@ -1,6 +1,8 @@
 {
   "pages": [
      "index",
+      "plans",
+     "configs",
      "products"
   ],
   "defaultOpen": true
