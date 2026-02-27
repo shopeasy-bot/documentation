@@ -16,7 +16,7 @@
     },
     {
       "name": "Essencial",
-      "price": "R$ 3,90",
+      "price": "R$ 4,90",
       "period": "/mês",
       "description": "Recursos extras para quem já vende e quer mais controle.",
       "popular": true,
@@ -30,7 +30,7 @@
     },
     {
       "name": "Completo",
-      "price": "R$ 6,90",
+      "price": "R$ 8,90",
       "period": "/mês",
       "description": "Tudo liberado para quem quer o máximo do ShopEasy.",
       "popular": false,
