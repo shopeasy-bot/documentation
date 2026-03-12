@@ -87,7 +87,7 @@ export default function PlansPage() {
               href={
                 plan.price === "Grátis"
                   ? "/invite"
-                  : "https://lojinha.shopeasy.site"
+                  : "https://shopeasy.site/login"
               }
               target={plan.price === "Grátis" ? "_self" : "_blank"}
               className={cn(
@@ -101,7 +101,7 @@ export default function PlansPage() {
               <span className="relative z-10">
                 {plan.price === "Grátis"
                   ? "Começar Grátis"
-                  : "Comprar na Lojinha"}
+                  : "Adquirir"}
               </span>
             </Link>
           </div>
