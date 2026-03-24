@@ -4,10 +4,9 @@ import { cn } from "@/lib/cn"
 import { JetBrains_Mono, Poppins } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
-import { FiFileText, FiTerminal, FiZap } from "react-icons/fi"
+import { FiFileText } from "react-icons/fi"
 import AnimatedShinyText from "@/components/ui/animaty-text"
-import { FaPlus } from "react-icons/fa"
-import { Badge } from "@/components/ui/badge"
+import { FaPlus, FaYoutube } from "react-icons/fa"
 
 const poppins = Poppins({ subsets: ["latin"], weight: "500" })
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], weight: "500" })
@@ -17,35 +16,51 @@ export default function HomePage() {
     <main className="flex flex-1 flex-col z-10 items-center justify-center text-center gap-16 px-4">
       <FlareDecoration />
 
-      <div className="motion-preset-expand motion-delay-[100ms]">
-        <div className="relative">
-          <div className="absolute inset-0 bg-emerald-500/20 rounded-full blur-lg"></div>
-          <Badge
-            variant="outline"
-            className="relative bg-emerald-500/10 border-emerald-500/30 text-emerald-400 px-6 py-2 text-sm font-medium backdrop-blur-sm hover:bg-emerald-500/20 transition-all duration-300"
-          >
-            <FiZap className="w-4 h-4 mr-2 animate-pulse" />
-          Agora com IA
-          </Badge>
-        </div>
-      </div>
-
-      <div className="flex flex-col md:flex-row justify-center items-center gap-4 motion-preset-expand motion-delay-[200ms]">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-4 motion-preset-expand motion-delay-[100ms]">
         <div className="relative">
           <div className="absolute inset-0 bg-emerald-500/20 rounded-full blur-xl"></div>
           <Image src={"/shopeasy.svg"} alt="logo" width={124} height={124} className="relative z-10" />
         </div>
-        <h1
-          className={`${poppins.className} text-4xl lg:text-7xl uppercase bg-gradient-to-r 
-            dark:from-white from-black dark:to-neutral-400 to-neutral-500 bg-clip-text text-transparent
-            tracking-tight leading-none
-          `}
-        >
-          SHOPEASY
-        </h1>
+        <div className="flex flex-col items-center md:items-start gap-3">
+          <h1
+            className={`${poppins.className} text-4xl lg:text-7xl uppercase bg-gradient-to-r 
+              dark:from-white from-black dark:to-neutral-400 to-neutral-500 bg-clip-text text-transparent
+              tracking-tight leading-none
+            `}
+          >
+            SHOPEASY
+          </h1>
+
+          {/* YouTube tutorial — ticker pill com flip de texto no hover */}
+          <Link
+            href="https://youtu.be/-bWY9WApNgU?si=A_PU75zHDMeZzykl"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${jetbrains.className} group flex items-center gap-2.5 px-4 py-1.5 rounded-full
+              border border-neutral-200/30 dark:border-neutral-700/50
+              bg-neutral-100/5 dark:bg-neutral-900/30
+              backdrop-blur-sm
+              hover:border-red-500/40 dark:hover:border-red-500/40
+              hover:bg-red-500/5
+              transition-all duration-300 ease-out
+              text-neutral-500 dark:text-neutral-400
+              text-xs tracking-wide
+            `}
+          >
+            <FaYoutube className="w-3.5 h-3.5 text-red-500 flex-shrink-0" />
+            <span className="relative h-4 overflow-hidden flex items-center">
+              <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">
+                novo tutorial disponível
+              </span>
+              <span className="absolute inset-0 inline-block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-red-500 dark:text-red-400">
+                assistir agora →
+              </span>
+            </span>
+          </Link>
+        </div>
       </div>
 
-      <div className="max-w-4xl motion-preset-expand motion-delay-[300ms]">
+      <div className="max-w-4xl motion-preset-expand motion-delay-[200ms]">
         <p className="text-lg lg:text-2xl font-light text-neutral-600 dark:text-neutral-300 leading-relaxed">
           Automatize suas vendas no Discord com o{" "}
           <span className="font-bold bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">
@@ -53,12 +68,12 @@ export default function HomePage() {
           </span>
           <br />
           <span className="text-base lg:text-xl text-neutral-500 dark:text-neutral-400">
-                      A solução completa para gerenciar sua loja no Discord. Configure em minutos, venda em segundos.
+            A solução completa para gerenciar sua loja no Discord. Configure em minutos, venda em segundos.
           </span>
         </p>
       </div>
 
-      <div className="flex flex-col w-fit motion-preset-expand motion-delay-[400ms]">
+      <div className="flex flex-col w-fit motion-preset-expand motion-delay-[300ms]">
         <div className="flex flex-col lg:flex-row gap-6 items-center lg:items-start">
           <Link
             href="/invite"
@@ -98,7 +113,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-   
+
       <GridDecoration
         width={60}
         height={60}
