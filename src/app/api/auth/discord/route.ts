@@ -1,6 +1,11 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 
-export async function GET() {
+const planSlugs: Record<string, string> = {
+  essencial: "essential",
+  completo: "complete",
+}
+
+export async function GET(req: NextRequest) {
   const apiUrl = process.env.API_URL
 
   if (!apiUrl) {
@@ -10,8 +15,14 @@ export async function GET() {
     )
   }
 
+  const rawPlan = req.nextUrl.searchParams.get("plan") ?? ""
+  const plan = planSlugs[rawPlan.toLowerCase()] ?? rawPlan
+
+  const url = new URL(`${apiUrl}/auth/url`)
+  if (plan) url.searchParams.set("plan", plan)
+
   try {
-    const response = await fetch(`${apiUrl}/auth/url`, {
+    const response = await fetch(url.toString(), {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })

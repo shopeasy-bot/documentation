@@ -87,7 +87,7 @@ export default function PlansPage() {
               href={
                 plan.price === "Grátis"
                   ? "/invite"
-                  : "https://shopeasy.site/login"
+                  : `/login?plan=${plan.name.toLowerCase()}`
               }
               target={plan.price === "Grátis" ? "_self" : "_blank"}
               className={cn(
@@ -99,9 +99,7 @@ export default function PlansPage() {
             >
               <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(255,255,255,0.4),rgba(255,255,255,0))] group-hover:translate-x-full duration-700" />
               <span className="relative z-10">
-                {plan.price === "Grátis"
-                  ? "Começar Grátis"
-                  : "Adquirir"}
+                {plan.price === "Grátis" ? "Começar Grátis" : "Adquirir"}
               </span>
             </Link>
           </div>

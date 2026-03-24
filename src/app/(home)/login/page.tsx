@@ -14,7 +14,10 @@ export default function RedirectPage() {
   useEffect(() => {
     async function fetchAuthUrl() {
       try {
-        const response = await fetch("/api/auth/discord")
+        const searchParams = new URLSearchParams(window.location.search)
+        const plan = searchParams.get("plan")
+
+const response = await fetch(`/api/auth/discord?plan=${plan ?? ""}`)
         const data = await response.json()
 
         if (!response.ok || !data.url) {
@@ -24,9 +27,7 @@ export default function RedirectPage() {
         }
 
         setStatus("redirecting")
-
         await new Promise((resolve) => setTimeout(resolve, 2000))
-
         window.location.href = data.url
       } catch {
         setStatus("error")
