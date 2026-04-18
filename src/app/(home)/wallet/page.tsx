@@ -1,6 +1,21 @@
 import { GridDecoration } from "@/components/decoration/Grid"
 import { FlareDecoration } from "@/components/decoration/Flare"
 import { JetBrains_Mono, Poppins } from "next/font/google"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Wallet - ShopEasy",
+  description: "Gerencie sua carteira ShopEasy. Acompanhe saldo, histórico de transações e conecte métodos de pagamento.",
+  openGraph: {
+    title: "Wallet - ShopEasy",
+    description: "Gerencie sua carteira ShopEasy. Acompanhe saldo, histórico de transações e conecte métodos de pagamento.",
+    url: `${process.env.NEXT_PUBLIC_SITE_URL}/wallet`,
+  },
+  twitter: {
+    title: "Wallet - ShopEasy",
+    description: "Gerencie sua carteira ShopEasy. Acompanhe saldo, histórico de transações e conecte métodos de pagamento.",
+  },
+}
 import { FiCreditCard, FiTrendingUp, FiShield, FiLink } from "react-icons/fi"
 import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"

@@ -6,6 +6,21 @@ import Link from "next/link";
 import { FiCheck, FiX } from "react-icons/fi";
 import { Badge } from "@/components/ui/badge";
 import settings from "@/../settings.json";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Planos - ShopEasy",
+  description: "Escolha o plano ideal para sua loja no Discord. Do gratuito ao premium, com recursos para todo tamanho de negócio.",
+  openGraph: {
+    title: "Planos - ShopEasy",
+    description: "Escolha o plano ideal para sua loja no Discord. Do gratuito ao premium, com recursos para todo tamanho de negócio.",
+    url: `${process.env.NEXT_PUBLIC_SITE_URL}/plans`,
+  },
+  twitter: {
+    title: "Planos - ShopEasy",
+    description: "Escolha o plano ideal para sua loja no Discord. Do gratuito ao premium, com recursos para todo tamanho de negócio.",
+  },
+};
 
 const poppins = Poppins({ subsets: ["latin"], weight: "500" });
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], weight: "500" });

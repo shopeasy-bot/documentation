@@ -7,6 +7,21 @@ import Link from "next/link"
 import { FiFileText } from "react-icons/fi"
 import AnimatedShinyText from "@/components/ui/animaty-text"
 import { FaPlus, FaYoutube } from "react-icons/fa"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "ShopEasy - Bot de Vendas Gratuito para Discord",
+  description: "Crie sua loja virtual no Discord em minutos. Bot de vendas gratuito, sem taxas, com suporte a PIX, cartão e criptomoedas.",
+  openGraph: {
+    title: "ShopEasy - Bot de Vendas Gratuito para Discord",
+    description: "Crie sua loja virtual no Discord em minutos. Bot de vendas gratuito, sem taxas, com suporte a PIX, cartão e criptomoedas.",
+    url: process.env.NEXT_PUBLIC_SITE_URL,
+  },
+  twitter: {
+    title: "ShopEasy - Bot de Vendas Gratuito para Discord",
+    description: "Crie sua loja virtual no Discord em minutos. Bot de vendas gratuito, sem taxas, com suporte a PIX, cartão e criptomoedas.",
+  },
+}
 
 const poppins = Poppins({ subsets: ["latin"], weight: "500" })
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], weight: "500" })

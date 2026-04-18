@@ -3,6 +3,21 @@ import { FlareDecoration } from "@/components/decoration/Flare";
 import { cn } from "@/lib/cn";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Termos de Uso - ShopEasy",
+  description: "Leia os termos de uso e políticas do ShopEasy. Saiba seus direitos e responsabilidades ao usar nossa plataforma.",
+  openGraph: {
+    title: "Termos de Uso - ShopEasy",
+    description: "Leia os termos de uso e políticas do ShopEasy. Saiba seus direitos e responsabilidades ao usar nossa plataforma.",
+    url: `${process.env.NEXT_PUBLIC_SITE_URL}/terms`,
+  },
+  twitter: {
+    title: "Termos de Uso - ShopEasy",
+    description: "Leia os termos de uso e políticas do ShopEasy. Saiba seus direitos e responsabilidades ao usar nossa plataforma.",
+  },
+};
 
 const poppins = Poppins({ subsets: ["latin"], weight: "500" });
 
