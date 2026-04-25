@@ -7,7 +7,7 @@ description: Endpoints para ler e atualizar as configurações do servidor
 import { TypeTable } from 'fumadocs-ui/components/type-table';
 import { Callout } from 'fumadocs-ui/components/callout';
 
-## Buscar Configurações
+## 🔍 Buscar Configurações
 
 <div className="flex items-center gap-2 my-4 font-mono text-sm">
   <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
@@ -40,7 +40,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
 
 ---
 
-## Atualizar Configurações
+## ✏️ Atualizar Configurações
 
 <div className="flex items-center gap-2 my-4 font-mono text-sm">
   <span className="bg-yellow-500/15 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded font-bold">PATCH</span>
@@ -49,79 +49,44 @@ import { Callout } from 'fumadocs-ui/components/callout';
 
 Todos os campos são opcionais. Envie apenas o que deseja alterar.
 
-### Identidade
+### 🎨 Identidade
 
 <TypeTable
   type={{
-    name: {
-      description: "Nome da loja.",
-      type: "string",
-    },
-    description: {
-      description: "Descrição da loja.",
-      type: "string",
-    },
-    colorHex: {
-      description: "Cor principal dos embeds (ex: `#00ff00`).",
-      type: "string",
-    },
-    logoUrl: {
-      description: "URL da logo.",
-      type: "string",
-    },
-    bannerUrl: {
-      description: "URL do banner.",
-      type: "string",
-    },
+    name: { description: "Nome da loja.", type: "string" },
+    description: { description: "Descrição da loja.", type: "string" },
+    colorHex: { description: "Cor principal dos embeds (ex: `#00ff00`).", type: "string" },
+    logoUrl: { description: "URL da logo.", type: "string" },
+    bannerUrl: { description: "URL do banner.", type: "string" },
   }}
 />
 
-### Canais
+### 📢 Canais
 
 <TypeTable
   type={{
-    "channels.sales": {
-      description: "Canal onde as vendas são notificadas.",
-      type: "string (ID do canal)",
-    },
-    "channels.orders": {
-      description: "Canal onde os pedidos são enviados.",
-      type: "string (ID do canal)",
-    },
-    "channels.logs": {
-      description: "Canal de logs internos.",
-      type: "string (ID do canal)",
-    },
+    "channels.sales": { description: "Canal onde as vendas são notificadas.", type: "string (ID do canal)" },
+    "channels.orders": { description: "Canal onde os pedidos são enviados.", type: "string (ID do canal)" },
+    "channels.logs": { description: "Canal de logs internos.", type: "string (ID do canal)" },
   }}
 />
 
-### Cargos
+### 🛡️ Cargos
 
 <TypeTable
   type={{
-    "roles.admin": {
-      description: "Cargo com acesso administrativo ao bot.",
-      type: "string (ID do cargo)",
-    },
-    "roles.customer": {
-      description: "Cargo atribuído automaticamente aos compradores.",
-      type: "string (ID do cargo)",
-    },
+    "roles.admin": { description: "Cargo com acesso administrativo ao bot.", type: "string (ID do cargo)" },
+    "roles.customer": { description: "Cargo atribuído automaticamente aos compradores.", type: "string (ID do cargo)" },
   }}
 />
 
-### Provedores de Pagamento
+### 💳 Provedores de Pagamento
 
 <TypeTable
   type={{
-    providers: {
-      description: "Lista de provedores de pagamento ativos.",
-      type: "string[]",
-    },
+    providers: { description: "Lista de provedores de pagamento ativos.", type: "string[]" },
   }}
 />
-
-**Valores disponíveis para `providers`:**
 
 | Valor | Descrição |
 |-------|-----------|

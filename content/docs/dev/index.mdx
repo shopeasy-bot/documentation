@@ -1,14 +1,21 @@
 ---
-title: Desenvolvedores
+title: Início
 icon: TbApi
-description: Documentação técnica e referência da API REST do ShopEasy
+description: Referência completa da API REST do ShopEasy para desenvolvedores
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Card, Cards } from 'fumadocs-ui/components/card';
-import { ShoppingBag, Tag, Settings, BookOpen } from "lucide-react";
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { ShoppingBag, Tag, Settings, BookOpen, Zap, Lock, Globe } from "lucide-react";
 
-Integre e automatize todas as operações da sua loja via API REST.
+Bem-vindo à **API REST do ShopEasy**. Integre e automatize todas as operações da sua loja diretamente pelo código.
+
+<Cards className="mt-2 mb-6">
+  <Card icon={<Globe className="text-primary" />} title="REST API" description="Endpoints HTTP simples e previsíveis" />
+  <Card icon={<Lock className="text-primary" />} title="Bearer Auth" description="Autenticação via token seguro" />
+  <Card icon={<Zap className="text-primary" />} title="Tempo real" description="Respostas instantâneas, sem polling" />
+</Cards>
 
 ## Base URL
 
@@ -24,36 +31,50 @@ Todas as rotas exigem um **Bearer Token** no header `Authorization`.
 Authorization: Bearer SEU_TOKEN_AQUI
 ```
 
-Crie sua chave de API nas configurações do bot com o comando `/keys`.
+Gere sua chave de API pelo bot com o comando `/keys`.
 
 <Callout type="warn">
   Nunca exponha sua chave de API publicamente. Trate-a como uma senha.
 </Callout>
+
+## Códigos de resposta
+
+<TypeTable
+  type={{
+    "200 OK": { description: "Requisição bem-sucedida.", type: "Sucesso" },
+    "201 Created": { description: "Recurso criado com sucesso.", type: "Sucesso" },
+    "400 Bad Request": { description: "Dados inválidos ou ausentes no body.", type: "Erro do cliente" },
+    "401 Unauthorized": { description: "Token ausente ou inválido.", type: "Erro do cliente" },
+    "403 Forbidden": { description: "Sem permissão para o recurso.", type: "Erro do cliente" },
+    "404 Not Found": { description: "Recurso não encontrado.", type: "Erro do cliente" },
+    "500 Internal Server Error": { description: "Erro interno no servidor.", type: "Erro do servidor" },
+  }}
+/>
 
 ## Recursos
 
 <Cards className="mt-4">
   <Card
     icon={<ShoppingBag className="text-primary" />}
-    title="Produtos"
+    title="📦 Produtos"
     description="Criar, listar e gerenciar produtos da loja"
     href="/docs/dev/api/produtos"
   />
   <Card
     icon={<Tag className="text-primary" />}
-    title="Cupons"
+    title="🏷️ Cupons"
     description="Gerenciar cupons de desconto"
     href="/docs/dev/api/cupons"
   />
   <Card
     icon={<Settings className="text-primary" />}
-    title="Configurações"
+    title="⚙️ Configurações"
     description="Ler e atualizar configurações do servidor"
     href="/docs/dev/api/configuracoes"
   />
   <Card
     icon={<BookOpen className="text-primary" />}
-    title="Catálogo"
+    title="📚 Catálogo"
     description="Gerenciar catálogos de produtos"
     href="/docs/dev/api/catalogo"
   />

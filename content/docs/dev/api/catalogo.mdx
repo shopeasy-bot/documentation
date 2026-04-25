@@ -11,7 +11,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
   Os endpoints de catálogo exigem o plano **Essential** ou superior.
 </Callout>
 
-## Listar Catálogos
+## 📋 Listar Catálogos
 
 <div className="flex items-center gap-2 my-4 font-mono text-sm">
   <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
@@ -22,16 +22,8 @@ import { Callout } from 'fumadocs-ui/components/callout';
 
 <TypeTable
   type={{
-    page: {
-      description: "Número da página.",
-      type: "number",
-      default: "1",
-    },
-    limit: {
-      description: "Quantidade de itens por página.",
-      type: "number",
-      default: "20",
-    },
+    page: { description: "Número da página.", type: "number", default: "1" },
+    limit: { description: "Quantidade de itens por página.", type: "number", default: "20" },
   }}
 />
 
@@ -52,7 +44,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
 
 ---
 
-## Buscar Catálogo
+## 🔍 Buscar Catálogo
 
 <div className="flex items-center gap-2 my-4 font-mono text-sm">
   <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
@@ -68,7 +60,7 @@ Também é possível buscar pela referência:
 
 ---
 
-## Criar Catálogo
+## ✨ Criar Catálogo
 
 <div className="flex items-center gap-2 my-4 font-mono text-sm">
   <span className="bg-green-500/15 text-green-400 border border-green-500/30 px-2 py-0.5 rounded font-bold">POST</span>
@@ -79,28 +71,11 @@ Também é possível buscar pela referência:
 
 <TypeTable
   type={{
-    reference: {
-      description: "Identificador único do catálogo.",
-      type: "string",
-      required: true,
-    },
-    createdBy: {
-      description: "ID Discord do criador.",
-      type: "string",
-      required: true,
-    },
-    title: {
-      description: "Nome do catálogo.",
-      type: "string",
-    },
-    description: {
-      description: "Descrição do catálogo.",
-      type: "string",
-    },
-    products: {
-      description: "Array de IDs de produtos incluídos no catálogo.",
-      type: "string[]",
-    },
+    reference: { description: "Identificador único do catálogo.", type: "string", required: true },
+    createdBy: { description: "ID Discord do criador.", type: "string", required: true },
+    title: { description: "Nome do catálogo.", type: "string" },
+    description: { description: "Descrição do catálogo.", type: "string" },
+    products: { description: "Array de IDs de produtos incluídos no catálogo.", type: "string[]" },
   }}
 />
 
@@ -117,7 +92,7 @@ Também é possível buscar pela referência:
 
 ---
 
-## Atualizar Catálogo
+## ✏️ Atualizar Catálogo
 
 <div className="flex items-center gap-2 my-4 font-mono text-sm">
   <span className="bg-yellow-500/15 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded font-bold">PATCH</span>
@@ -126,28 +101,16 @@ Também é possível buscar pela referência:
 
 <TypeTable
   type={{
-    title: {
-      description: "Nome do catálogo.",
-      type: "string",
-    },
-    description: {
-      description: "Descrição do catálogo.",
-      type: "string",
-    },
-    products: {
-      description: "Lista completa de IDs de produtos (substitui a atual).",
-      type: "string[]",
-    },
-    status: {
-      description: "Status do catálogo.",
-      type: '"ACTIVED" | "DEACTIVATED"',
-    },
+    title: { description: "Nome do catálogo.", type: "string" },
+    description: { description: "Descrição do catálogo.", type: "string" },
+    products: { description: "Lista completa de IDs de produtos (substitui a atual).", type: "string[]" },
+    status: { description: "Status do catálogo.", type: '"ACTIVED" | "DEACTIVATED"' },
   }}
 />
 
 ---
 
-## Deletar Catálogo
+## 🗑️ Deletar Catálogo
 
 <div className="flex items-center gap-2 my-4 font-mono text-sm">
   <span className="bg-red-500/15 text-red-400 border border-red-500/30 px-2 py-0.5 rounded font-bold">DELETE</span>
@@ -156,7 +119,7 @@ Também é possível buscar pela referência:
 
 ---
 
-## Contar Catálogos
+## 🔢 Contar Catálogos
 
 <div className="flex items-center gap-2 my-4 font-mono text-sm">
   <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
