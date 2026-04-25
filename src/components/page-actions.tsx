@@ -77,7 +77,8 @@ export function ViewOptions({
   markdownUrl: string;
 }) {
   const items = useMemo(() => {
-    const fullMarkdownUrl = new URL(markdownUrl, window.location.origin).toString();
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://shopeasy.site';
+    const fullMarkdownUrl = new URL(markdownUrl, origin).toString();
 
 const q = `Leia a documentação oficial do Shopeasy, um bot para Discord, disponível em ${fullMarkdownUrl}. Use este conteúdo como referência principal para responder perguntas sobre o funcionamento, configuração e uso do Shopeasy.`;
     

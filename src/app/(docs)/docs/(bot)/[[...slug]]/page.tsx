@@ -1,4 +1,4 @@
-import { botSource } from "@/lib/sourcer";
+import { botSource, getPageImage } from "@/lib/sourcer";
 import {
   DocsBody,
   DocsDescription,
@@ -9,6 +9,28 @@ import { notFound } from "next/navigation";
 import { getMDXComponents } from "@/mdx-components";
 import { createRelativeLink } from "fumadocs-ui/mdx";
 import { ViewOptions } from "@/components/page-actions";
+import type { Metadata } from "next";
+
+export async function generateMetadata(
+  props: PageProps<"/docs/[[...slug]]">,
+): Promise<Metadata> {
+  const params = await props.params;
+  const page = botSource.getPage(params.slug);
+  if (!page) return {};
+
+  const image = getPageImage(page);
+  return {
+    title: page.data.title,
+    description: page.data.description,
+    openGraph: {
+      images: [{ url: image.url, width: 1430, height: 660 }],
+    },
+  };
+}
+
+export function generateStaticParams() {
+  return botSource.generateParams();
+}
 
 export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
   const params = await props.params;

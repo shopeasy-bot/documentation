@@ -29,6 +29,11 @@ export function getPageImage(page: InferPageType<typeof botSource>) {
   return { segments, url: `/docs-og/${segments.join('/')}` };
 }
 
+export function getDevPageImage(page: InferPageType<typeof devSource>) {
+  const segments = ['dev', ...page.slugs, 'image.png'];
+  return { segments, url: `/docs-og/${segments.join('/')}` };
+}
+
 export async function getLLMText(page: InferPageType<typeof botSource>) {
   const processed = await page.data.getText('processed');
   return `# ${page.data.title}\n\n${processed}`;
