@@ -3,7 +3,8 @@
      "index",
       "plans",
      "configs",
-     "products"
+     "products",
+     "api"
   ],
   "defaultOpen": true
 }

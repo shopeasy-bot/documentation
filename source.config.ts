@@ -16,18 +16,16 @@ export const blogCollection = defineCollections({
   type: "doc"
 });
 
-export const docs = defineDocs({
-  dir: 'content/docs',
+const docsSchema = {
   docs: {
     schema: frontmatterSchema,
-    postprocess: {
-      includeProcessedMarkdown: true,
-    },
+    postprocess: { includeProcessedMarkdown: true },
   },
-  meta: {
-    schema: metaSchema,
-  },
-});
+  meta: { schema: metaSchema },
+};
+
+export const botDocs = defineDocs({ dir: 'content/docs/bot', ...docsSchema });
+export const devDocs = defineDocs({ dir: 'content/docs/dev', ...docsSchema });
 
 export default defineConfig({
   mdxOptions: {

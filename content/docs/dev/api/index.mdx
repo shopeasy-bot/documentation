@@ -1,0 +1,107 @@
+---
+title: Visão Geral
+icon: TbApi
+description: Introdução à API REST do ShopEasy
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Card, Cards } from 'fumadocs-ui/components/card';
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { ShoppingBag, Tag, Settings, BookOpen } from "lucide-react";
+
+A API REST do ShopEasy permite integrar e automatizar todas as operações da sua loja diretamente pelo código.
+
+## Base URL
+
+```
+https://api.shopeasy.site
+```
+
+## Autenticação
+
+Todas as rotas exigem um **Bearer Token** no header `Authorization`.
+
+```http
+Authorization: Bearer SEU_TOKEN_AQUI
+```
+
+Crie sua chave de API nas configurações do bot com o comando `/keys`.
+
+<Callout type="warn">
+  Nunca exponha sua chave de API publicamente. Trate-a como uma senha.
+</Callout>
+
+## Estrutura das Rotas
+
+A maioria dos endpoints é escopada por servidor Discord:
+
+```
+/guilds/{guildId}/products
+/guilds/{guildId}/coupons
+/guilds/{guildId}/configs
+/guilds/{guildId}/catalogs
+```
+
+## Respostas
+
+<TypeTable
+  type={{
+    "200": {
+      description: "Requisição bem-sucedida.",
+      type: "OK",
+    },
+    "201": {
+      description: "Recurso criado com sucesso.",
+      type: "Created",
+    },
+    "400": {
+      description: "Dados inválidos ou ausentes no body.",
+      type: "Bad Request",
+    },
+    "401": {
+      description: "Token ausente ou inválido.",
+      type: "Unauthorized",
+    },
+    "403": {
+      description: "Sem permissão para o recurso.",
+      type: "Forbidden",
+    },
+    "404": {
+      description: "Recurso não encontrado.",
+      type: "Not Found",
+    },
+    "500": {
+      description: "Erro interno no servidor.",
+      type: "Internal Server Error",
+    },
+  }}
+/>
+
+## Recursos
+
+<Cards className="mt-4">
+  <Card
+    icon={<ShoppingBag className="text-primary" />}
+    title="Produtos"
+    description="Criar, listar e gerenciar produtos da loja"
+    href="/docs/dev/api/produtos"
+  />
+  <Card
+    icon={<Tag className="text-primary" />}
+    title="Cupons"
+    description="Gerenciar cupons de desconto"
+    href="/docs/dev/api/cupons"
+  />
+  <Card
+    icon={<Settings className="text-primary" />}
+    title="Configurações"
+    description="Ler e atualizar configurações do servidor"
+    href="/docs/dev/api/configuracoes"
+  />
+  <Card
+    icon={<BookOpen className="text-primary" />}
+    title="Catálogo"
+    description="Gerenciar catálogos de produtos"
+    href="/docs/dev/api/catalogo"
+  />
+</Cards>

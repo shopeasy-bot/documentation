@@ -2,7 +2,7 @@ import { NavTitle } from '@/components/nav/title';
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { FaBook, FaCreditCard } from 'react-icons/fa';
 import { FaShield } from 'react-icons/fa6';
-import { FiLogIn } from 'react-icons/fi';
+import { FiLogIn, FiRss } from 'react-icons/fi';
 import Link from 'next/link';
 
 export const baseOptions: BaseLayoutProps = {
@@ -20,6 +20,11 @@ export const baseOptions: BaseLayoutProps = {
     {
       text: <span className="flex gap-2 items-center"><FaCreditCard/>Planos</span>,
       url: "/plans",
+      active: "nested-url",
+    },
+    {
+      text: <span className="flex gap-2 items-center"><FiRss/>Blog</span>,
+      url: "/blog",
       active: "nested-url",
     },
     {

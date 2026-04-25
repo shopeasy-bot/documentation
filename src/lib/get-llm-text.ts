@@ -1,10 +1,9 @@
-import { source } from '@/lib/sourcer';
+import { botSource, devSource } from '@/lib/sourcer';
 import type { InferPageType } from 'fumadocs-core/source';
 
-export async function getLLMText(page: InferPageType<typeof source>) {
+type AnyPage = InferPageType<typeof botSource> | InferPageType<typeof devSource>;
+
+export async function getLLMText(page: AnyPage) {
   const processed = await page.data.getText('processed');
-
-  return `# ${page.data.title} (${page.url})
-
-${processed}`;
+  return `# ${page.data.title} (${page.url})\n\n${processed}`;
 }

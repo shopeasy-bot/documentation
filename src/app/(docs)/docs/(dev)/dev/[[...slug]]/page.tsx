@@ -1,4 +1,4 @@
-import { getPageImage, source } from "@/lib/sourcer";
+import { devSource } from "@/lib/sourcer";
 import {
   DocsBody,
   DocsDescription,
@@ -10,9 +10,9 @@ import { getMDXComponents } from "@/mdx-components";
 import { createRelativeLink } from "fumadocs-ui/mdx";
 import { ViewOptions } from "@/components/page-actions";
 
-export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
+export default async function Page(props: PageProps<"/docs/dev/[[...slug]]">) {
   const params = await props.params;
-  const page = source.getPage(params.slug);
+  const page = devSource.getPage(params.slug);
   if (!page) notFound();
 
   const MDX = page.data.body;
@@ -23,16 +23,13 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
       <DocsDescription>{page.data.description}</DocsDescription>
 
       <div className="flex flex-row gap-2 items-center border-b pt-2 pb-6">
-        <ViewOptions
-          
-          markdownUrl={`${page.url}.mdx`}
-        />
+        <ViewOptions markdownUrl={`${page.url}.mdx`} />
       </div>
 
       <DocsBody>
         <MDX
           components={getMDXComponents({
-            a: createRelativeLink(source, page),
+            a: createRelativeLink(devSource, page),
           })}
         />
       </DocsBody>

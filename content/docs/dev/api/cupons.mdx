@@ -1,0 +1,155 @@
+---
+title: Cupons
+icon: RiCoupon2Line
+description: Endpoints para gerenciar cupons de desconto
+---
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## Listar Cupons
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
+  <code>/guilds/\{guildId\}/coupons</code>
+</div>
+
+### Query Params
+
+<TypeTable
+  type={{
+    page: {
+      description: "Número da página.",
+      type: "number",
+      default: "1",
+    },
+    limit: {
+      description: "Quantidade de itens por página.",
+      type: "number",
+      default: "20",
+    },
+  }}
+/>
+
+### Resposta
+
+```json
+[
+  {
+    "id": "clx...",
+    "reference": "DESCONTO10",
+    "discount": 10,
+    "valorMin": 50.00,
+    "valorMax": null,
+    "amount": null,
+    "uses": 0,
+    "status": "ACTIVED"
+  }
+]
+```
+
+---
+
+## Buscar Cupom
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
+  <code>/guilds/\{guildId\}/coupons/\{id\}</code>
+</div>
+
+---
+
+## Criar Cupom
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-green-500/15 text-green-400 border border-green-500/30 px-2 py-0.5 rounded font-bold">POST</span>
+  <code>/guilds/\{guildId\}/coupons</code>
+</div>
+
+### Body
+
+<TypeTable
+  type={{
+    reference: {
+      description: "Código do cupom (ex: `DESCONTO10`).",
+      type: "string",
+      required: true,
+    },
+    createdBy: {
+      description: "ID Discord do criador.",
+      type: "string",
+      required: true,
+    },
+  }}
+/>
+
+<Callout type="info">
+  Após criar o cupom, use o `PATCH` para definir desconto, limites e regras.
+</Callout>
+
+### Exemplo
+
+```json
+{
+  "reference": "VERAO25",
+  "createdBy": "123456789012345678"
+}
+```
+
+---
+
+## Atualizar Cupom
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-yellow-500/15 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded font-bold">PATCH</span>
+  <code>/guilds/\{guildId\}/coupons/\{id\}</code>
+</div>
+
+Todos os campos são opcionais.
+
+<TypeTable
+  type={{
+    discount: {
+      description: "Percentual de desconto (0–100).",
+      type: "number",
+    },
+    valorMin: {
+      description: "Valor mínimo do pedido para o cupom ser aplicável.",
+      type: "number",
+    },
+    valorMax: {
+      description: "Valor máximo do pedido para o cupom ser aplicável.",
+      type: "number",
+    },
+    amount: {
+      description: "Quantidade total máxima de usos do cupom.",
+      type: "number",
+    },
+    uses: {
+      description: "Limite de usos por usuário.",
+      type: "number",
+    },
+  }}
+/>
+
+---
+
+## Deletar Cupom
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-red-500/15 text-red-400 border border-red-500/30 px-2 py-0.5 rounded font-bold">DELETE</span>
+  <code>/guilds/\{guildId\}/coupons/\{id\}</code>
+</div>
+
+---
+
+## Contar Cupons
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
+  <code>/guilds/\{guildId\}/coupons/count</code>
+</div>
+
+```json
+{ "count": 8 }
+```

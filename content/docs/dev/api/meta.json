@@ -1,0 +1,12 @@
+{
+  "title": "API",
+  "icon": "TbApi",
+  "pages": [
+    "index",
+    "produtos",
+    "cupons",
+    "configuracoes",
+    "catalogo"
+  ],
+  "defaultOpen": false
+}

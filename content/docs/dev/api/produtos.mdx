@@ -1,0 +1,239 @@
+---
+title: Produtos
+icon: MdOutlineShoppingBag
+description: Endpoints para gerenciar produtos da loja
+---
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+
+## Listar Produtos
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
+  <code>/guilds/\{guildId\}/products</code>
+</div>
+
+### Query Params
+
+<TypeTable
+  type={{
+    page: {
+      description: "Número da página.",
+      type: "number",
+      default: "1",
+    },
+    limit: {
+      description: "Quantidade de itens por página.",
+      type: "number",
+      default: "20",
+    },
+  }}
+/>
+
+### Resposta
+
+```json
+[
+  {
+    "id": "clx...",
+    "reference": "camiseta-preta",
+    "title": "Camiseta Preta",
+    "description": "Camiseta 100% algodão",
+    "price": "49.90",
+    "status": "ACTIVED",
+    "category": "Roupas",
+    "sell": true,
+    "promotion": false
+  }
+]
+```
+
+---
+
+## Buscar Produto
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
+  <code>/guilds/\{guildId\}/products/\{id\}</code>
+</div>
+
+Também é possível buscar pela referência:
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
+  <code>/guilds/\{guildId\}/products/by-reference/\{reference\}</code>
+</div>
+
+---
+
+## Criar Produto
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-green-500/15 text-green-400 border border-green-500/30 px-2 py-0.5 rounded font-bold">POST</span>
+  <code>/guilds/\{guildId\}/products</code>
+</div>
+
+### Body
+
+<TypeTable
+  type={{
+    reference: {
+      description: "Identificador único do produto.",
+      type: "string",
+      required: true,
+    },
+    createdBy: {
+      description: "ID Discord do criador.",
+      type: "string",
+      required: true,
+    },
+    title: {
+      description: "Nome do produto.",
+      type: "string",
+    },
+    description: {
+      description: "Descrição do produto.",
+      type: "string",
+    },
+    price: {
+      description: "Preço em reais.",
+      type: "number",
+    },
+    category: {
+      description: "Categoria do produto.",
+      type: "string",
+    },
+    banners: {
+      description: "Array de URLs de imagem.",
+      type: "string[]",
+    },
+    sell: {
+      description: "Disponível para venda.",
+      type: "boolean",
+      default: "true",
+    },
+    coupon: {
+      description: "Aceita cupons de desconto.",
+      type: "boolean",
+      default: "true",
+    },
+    promotion: {
+      description: "Produto em promoção.",
+      type: "boolean",
+      default: "false",
+    },
+    promotivoValue: {
+      description: "Valor promocional.",
+      type: "number",
+    },
+    colorHex: {
+      description: "Cor do embed Discord (ex: `#00ff00`).",
+      type: "string",
+    },
+    instructions: {
+      description: "Instruções exibidas após a compra.",
+      type: "string",
+    },
+  }}
+/>
+
+### Exemplo
+
+```json
+{
+  "reference": "camiseta-preta",
+  "createdBy": "123456789012345678",
+  "title": "Camiseta Preta",
+  "price": 49.90,
+  "sell": true,
+  "coupon": true
+}
+```
+
+---
+
+## Atualizar Produto
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-yellow-500/15 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded font-bold">PATCH</span>
+  <code>/guilds/\{guildId\}/products/\{id\}</code>
+</div>
+
+Todos os campos são opcionais. Envie apenas os que deseja alterar.
+
+<TypeTable
+  type={{
+    title: {
+      description: "Nome do produto.",
+      type: "string",
+    },
+    description: {
+      description: "Descrição do produto.",
+      type: "string",
+    },
+    price: {
+      description: "Preço em reais.",
+      type: "number",
+    },
+    status: {
+      description: "Status do produto.",
+      type: '"ACTIVED" | "DEACTIVATED" | "BANNED"',
+    },
+    sell: {
+      description: "Disponível para venda.",
+      type: "boolean",
+    },
+    promotion: {
+      description: "Produto em promoção.",
+      type: "boolean",
+    },
+    promotivoValue: {
+      description: "Valor promocional.",
+      type: "number",
+    },
+    stockMode: {
+      description: "Modo de controle de estoque.",
+      type: '"AUTOMATIC" | "MANUAL"',
+    },
+    stockCount: {
+      description: "Quantidade em estoque.",
+      type: "number",
+    },
+    colorHex: {
+      description: "Cor do embed Discord.",
+      type: "string",
+    },
+    instructions: {
+      description: "Instruções pós-compra.",
+      type: "string",
+    },
+  }}
+/>
+
+---
+
+## Deletar Produto
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-red-500/15 text-red-400 border border-red-500/30 px-2 py-0.5 rounded font-bold">DELETE</span>
+  <code>/guilds/\{guildId\}/products/\{id\}</code>
+</div>
+
+---
+
+## Contar Produtos
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
+  <code>/guilds/\{guildId\}/products/count</code>
+</div>
+
+```json
+{ "count": 42 }
+```
+
+<Callout type="info">
+  Produtos com `status: "BANNED"` não aparecem para clientes, mas ficam nos registros históricos.
+</Callout>

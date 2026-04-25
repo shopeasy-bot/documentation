@@ -1,38 +1,40 @@
-import { docs, blogCollection } from 'fumadocs-mdx:collections/server';
+import { botDocs, devDocs, blogCollection } from 'fumadocs-mdx:collections/server';
 import { type InferPageType, loader } from 'fumadocs-core/source';
 import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
 import icons from "./icons";
 import { createElement } from 'react';
 import { toFumadocsSource } from 'fumadocs-mdx/runtime/server';
 
-// See https://fumadocs.dev/docs/headless/source-api for more info
-export const source = loader({
-  baseUrl: '/docs',
-  source: docs.toFumadocsSource(),
+const iconPlugin = {
   plugins: [lucideIconsPlugin()],
-    icon(key) {
-    if (key && key in icons) {
-      return createElement(icons[key]);
-    }
+  icon(key: string | undefined) {
+    if (key && key in icons) return createElement(icons[key]);
   },
+};
+
+export const botSource = loader({
+  baseUrl: '/docs',
+  source: botDocs.toFumadocsSource(),
+  ...iconPlugin,
 });
 
-export function getPageImage(page: InferPageType<typeof source>) {
+export const devSource = loader({
+  baseUrl: '/docs/dev',
+  source: devDocs.toFumadocsSource(),
+  ...iconPlugin,
+});
+
+export function getPageImage(page: InferPageType<typeof botSource>) {
   const segments = [...page.slugs, 'image.png'];
-
-  return {
-    segments,
-    url: `/docs-og/${segments.join('/')}`,
-  };
+  return { segments, url: `/docs-og/${segments.join('/')}` };
 }
 
-export async function getLLMText(page: InferPageType<typeof source>) {
+export async function getLLMText(page: InferPageType<typeof botSource>) {
   const processed = await page.data.getText('processed');
-
-  return `# ${page.data.title}
-
-${processed}`;
+  return `# ${page.data.title}\n\n${processed}`;
 }
+
+export const source = botSource;
 
 export const blog = loader({
   baseUrl: "/blog",

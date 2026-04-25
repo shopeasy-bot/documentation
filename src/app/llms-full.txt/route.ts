@@ -1,11 +1,15 @@
-import { source } from '@/lib/sourcer';
+import { botSource, devSource } from '@/lib/sourcer';
 import { getLLMText } from '@/lib/get-llm-text';
 
 export const revalidate = false;
 
 export async function GET() {
-  const scan = source.getPages().map(getLLMText);
-  const scanned = await Promise.all(scan);
-
-  return new Response(scanned.join('\n\n'));
+  const pages = [
+    ...botSource.getPages(),
+    ...devSource.getPages(),
+  ];
+  const scanned = await Promise.all(pages.map(getLLMText));
+  return new Response(scanned.join('\n\n'), {
+    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+  });
 }

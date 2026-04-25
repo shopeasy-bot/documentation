@@ -1,0 +1,168 @@
+---
+title: Catálogo
+icon: BiBookContent
+description: Endpoints para gerenciar catálogos de produtos
+---
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+<Callout type="warn">
+  Os endpoints de catálogo exigem o plano **Essential** ou superior.
+</Callout>
+
+## Listar Catálogos
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
+  <code>/guilds/\{guildId\}/catalogs</code>
+</div>
+
+### Query Params
+
+<TypeTable
+  type={{
+    page: {
+      description: "Número da página.",
+      type: "number",
+      default: "1",
+    },
+    limit: {
+      description: "Quantidade de itens por página.",
+      type: "number",
+      default: "20",
+    },
+  }}
+/>
+
+### Resposta
+
+```json
+[
+  {
+    "id": "clx...",
+    "reference": "catalogo-verao",
+    "title": "Coleção Verão",
+    "description": "Produtos da coleção de verão",
+    "products": ["id1", "id2"],
+    "status": "ACTIVED"
+  }
+]
+```
+
+---
+
+## Buscar Catálogo
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
+  <code>/guilds/\{guildId\}/catalogs/\{id\}</code>
+</div>
+
+Também é possível buscar pela referência:
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
+  <code>/guilds/\{guildId\}/catalogs/by-reference/\{reference\}</code>
+</div>
+
+---
+
+## Criar Catálogo
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-green-500/15 text-green-400 border border-green-500/30 px-2 py-0.5 rounded font-bold">POST</span>
+  <code>/guilds/\{guildId\}/catalogs</code>
+</div>
+
+### Body
+
+<TypeTable
+  type={{
+    reference: {
+      description: "Identificador único do catálogo.",
+      type: "string",
+      required: true,
+    },
+    createdBy: {
+      description: "ID Discord do criador.",
+      type: "string",
+      required: true,
+    },
+    title: {
+      description: "Nome do catálogo.",
+      type: "string",
+    },
+    description: {
+      description: "Descrição do catálogo.",
+      type: "string",
+    },
+    products: {
+      description: "Array de IDs de produtos incluídos no catálogo.",
+      type: "string[]",
+    },
+  }}
+/>
+
+### Exemplo
+
+```json
+{
+  "reference": "catalogo-verao",
+  "createdBy": "123456789012345678",
+  "title": "Coleção Verão",
+  "products": ["clx_produto_1", "clx_produto_2"]
+}
+```
+
+---
+
+## Atualizar Catálogo
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-yellow-500/15 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded font-bold">PATCH</span>
+  <code>/guilds/\{guildId\}/catalogs/\{id\}</code>
+</div>
+
+<TypeTable
+  type={{
+    title: {
+      description: "Nome do catálogo.",
+      type: "string",
+    },
+    description: {
+      description: "Descrição do catálogo.",
+      type: "string",
+    },
+    products: {
+      description: "Lista completa de IDs de produtos (substitui a atual).",
+      type: "string[]",
+    },
+    status: {
+      description: "Status do catálogo.",
+      type: '"ACTIVED" | "DEACTIVATED"',
+    },
+  }}
+/>
+
+---
+
+## Deletar Catálogo
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-red-500/15 text-red-400 border border-red-500/30 px-2 py-0.5 rounded font-bold">DELETE</span>
+  <code>/guilds/\{guildId\}/catalogs/\{id\}</code>
+</div>
+
+---
+
+## Contar Catálogos
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
+  <code>/guilds/\{guildId\}/catalogs/count</code>
+</div>
+
+```json
+{ "count": 5 }
+```

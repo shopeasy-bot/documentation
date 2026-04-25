@@ -1,0 +1,60 @@
+---
+title: Desenvolvedores
+icon: TbApi
+description: Documentação técnica e referência da API REST do ShopEasy
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Card, Cards } from 'fumadocs-ui/components/card';
+import { ShoppingBag, Tag, Settings, BookOpen } from "lucide-react";
+
+Integre e automatize todas as operações da sua loja via API REST.
+
+## Base URL
+
+```
+https://api.shopeasy.site
+```
+
+## Autenticação
+
+Todas as rotas exigem um **Bearer Token** no header `Authorization`.
+
+```http
+Authorization: Bearer SEU_TOKEN_AQUI
+```
+
+Crie sua chave de API nas configurações do bot com o comando `/keys`.
+
+<Callout type="warn">
+  Nunca exponha sua chave de API publicamente. Trate-a como uma senha.
+</Callout>
+
+## Recursos
+
+<Cards className="mt-4">
+  <Card
+    icon={<ShoppingBag className="text-primary" />}
+    title="Produtos"
+    description="Criar, listar e gerenciar produtos da loja"
+    href="/docs/dev/api/produtos"
+  />
+  <Card
+    icon={<Tag className="text-primary" />}
+    title="Cupons"
+    description="Gerenciar cupons de desconto"
+    href="/docs/dev/api/cupons"
+  />
+  <Card
+    icon={<Settings className="text-primary" />}
+    title="Configurações"
+    description="Ler e atualizar configurações do servidor"
+    href="/docs/dev/api/configuracoes"
+  />
+  <Card
+    icon={<BookOpen className="text-primary" />}
+    title="Catálogo"
+    description="Gerenciar catálogos de produtos"
+    href="/docs/dev/api/catalogo"
+  />
+</Cards>
