@@ -7,7 +7,7 @@ import { GridDecoration } from '@/components/decoration/Grid';
 import { cn } from '@/lib/cn';
 import { FlareDecoration } from '@/components/decoration/Flare';
 import { SidebarBanner } from '@/components/sidebar/banner';
-import { DocsModeToggle } from '@/components/docs-mode-toggle';
+// import { DocsModeToggle } from '@/components/docs-mode-toggle';
 
 const docsOptions: DocsLayoutProps = {
   ...baseOptions,
@@ -19,7 +19,7 @@ const docsOptions: DocsLayoutProps = {
     lang: "pt-br",
     banner: [
       <SidebarBanner key="banner" />,
-      <DocsModeToggle key="mode-toggle" />,
+      // <DocsModeToggle key="mode-toggle" />,
     ],
   },
   themeSwitch: { enabled: false },

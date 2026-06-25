@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 
 const planSlugs: Record<string, string> = {
   essencial: "essential",
+  profissional: "professional",
   completo: "complete",
 }
 

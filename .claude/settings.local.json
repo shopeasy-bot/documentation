@@ -7,7 +7,9 @@
       "Bash(cp -r content/docs/products content/docs/bot/)",
       "Bash(cp -r content/docs/api content/docs/dev/)",
       "Bash(rm \"src/app/\\(docs\\)/docs/layout.tsx\" \"src/app/\\(docs\\)/docs/[[...slug]]/page.tsx\" middleware.ts)",
-      "Bash(rmdir \"src/app/\\(docs\\)/docs/[[...slug]]\")"
+      "Bash(rmdir \"src/app/\\(docs\\)/docs/[[...slug]]\")",
+      "WebFetch(domain:squarecloud.app)",
+      "Bash(npx prisma *)"
     ]
   }
 }

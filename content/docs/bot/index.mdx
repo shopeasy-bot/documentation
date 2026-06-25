@@ -3,50 +3,94 @@ title: Bem-Vindo
 icon: PiHandWavingBold
 description: Página inicial da documentação do ShopEasy
 ---
-import { Rocket, UserPlus, Settings, Home, Code, HelpCircle, ShoppingCart, ShieldCheck, BadgePercent, CreditCard, MousePointerClick } from "lucide-react";
+
+import { Rocket, Settings, ShoppingCart, ShieldCheck, BadgePercent, CreditCard, Zap, Package } from "lucide-react";
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
 
+Bem-vindo à documentação oficial do **ShopEasy** — o bot de vendas completo para Discord. Configure sua loja, gerencie produtos e receba pagamentos sem sair do servidor.
 
-Seja bem vindo a documentação oficial do ShopEasy, seu assistente de vendas do discord! O ShopEasy oferece uma solução completa de vendas para vendedores de todos tamanhos! Configura alguns de nossos recursos:
-
-
-<Cards className="lg:grid-cols-3 mt-4">
-
+<Cards className="lg:grid-cols-3 mt-6">
   <Card
     icon={<ShieldCheck className="text-primary" />}
     title="Segurança integrada"
-    description="Controle total, proteção contra fraudes e automação confiável."
+    description="Proteção contra fraudes e automação de entregas confiável."
   />
   <Card
     icon={<BadgePercent className="text-primary" />}
     title="0% de comissão"
-    description="Fique com 100% do que você vende. Nós não cobramos taxas."
+    description="Fique com 100% do valor das suas vendas. Sem taxas escondidas."
   />
   <Card
     icon={<CreditCard className="text-primary" />}
     title="Pagamentos integrados"
-    description="Pix, MercadoPago e outros métodos disponíveis."
+    description="PIX, cartão, criptomoedas e carteira interna em um só lugar."
+  />
+</Cards>
+
+## Primeiros passos
+
+<Steps>
+  <Step>
+    ### Adicione o bot ao servidor
+
+    Use o comando de convite e adicione o ShopEasy ao seu servidor do Discord com as permissões recomendadas.
+  </Step>
+  <Step>
+    ### Configure os canais
+
+    Use `/configuracoes` e defina os canais onde os produtos, pedidos e logs serão enviados.
+  </Step>
+  <Step>
+    ### Cadastre seus produtos
+
+    Use `/produto criar` para adicionar o primeiro produto à sua loja com referência, preço e estoque.
+  </Step>
+  <Step>
+    ### Ative um método de pagamento
+
+    Configure PIX, Mercado Pago, Stripe ou outro gateway nas configurações de compra.
+  </Step>
+</Steps>
+
+<Callout type="success">
+  Sua loja estará no ar em minutos. Sem código, sem complicação.
+</Callout>
+
+## Explore a documentação
+
+<Cards className="lg:grid-cols-2 mt-4">
+  <Card
+    icon={<Settings className="text-primary" />}
+    title="Configurações"
+    description="Canais, permissões, pagamentos e personalização"
+    href="/docs/configs"
+  />
+  <Card
+    icon={<Package className="text-primary" />}
+    title="Produtos"
+    description="Cadastro, configuração e controle de estoque"
+    href="/docs/products"
   />
 </Cards>
 
 ## Dúvidas Frequentes
 
 <Accordions>
-
   <Accordion title="Como posso começar a usar o ShopEasy?" id="como-comecar">
-    Para começar a usar o ShopEasy, basta adicionar o bot ao seu servidor do Discord e seguir o passo a passo de configuração via comandos.
+    Adicione o bot ao seu servidor do Discord e use `/configuracoes` para configurar canais, permissões e métodos de pagamento. Em poucos minutos sua loja já está no ar.
   </Accordion>
 
   <Accordion title="Quais métodos de pagamento são aceitos?" id="metodos-pagamento">
-    Atualmente suportamos Pix.
+    PIX (manual e automático), Mercado Pago, PagSeguro, Asaas, EFI Bank, Stripe (cartão), NowPayments (criptomoedas) e carteira interna.
   </Accordion>
 
   <Accordion title="O ShopEasy cobra alguma taxa sobre as vendas?" id="comissao">
-    Não! O ShopEasy é 100% gratuito e não cobra comissão sobre suas vendas.
+    Não. Nenhum plano cobra comissão sobre vendas — o valor é 100% seu.
   </Accordion>
 
   <Accordion title="É possível personalizar minha loja?" id="personalizacao">
-    Sim! Você pode alterar nome, descrição, imagem e até os produtos da sua loja diretamente.
+    Sim. Você pode definir nome, descrição, cores, banners e mensagens personalizadas. Em planos superiores, é possível ter um bot exclusivo com a identidade da sua marca.
   </Accordion>
-
 </Accordions>

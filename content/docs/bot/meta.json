@@ -1,10 +1,11 @@
 {
   "pages": [
-     "index",
-      "plans",
-     "configs",
-     "products",
-     "api"
+    "index",
+    "plans",
+    "comprar-plano",
+    "configs",
+    "products",
+    "api"
   ],
   "defaultOpen": true
 }

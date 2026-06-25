@@ -6,11 +6,13 @@
       "period": "",
       "description": "Para começar a vender no Discord sem complicação.",
       "popular": false,
+      "enterprise": false,
       "features": [
         { "label": "Vendas ilimitadas", "enabled": true },
         { "label": "Funcionalidades básicas", "enabled": true },
         { "label": "Personalização", "enabled": true },
         { "label": "Automações avançadas", "enabled": false },
+        { "label": "Bot exclusivo personalizado", "enabled": false },
         { "label": "Suporte prioritário", "enabled": false }
       ]
     },
@@ -19,26 +21,62 @@
       "price": "R$ 4,90",
       "period": "/mês",
       "description": "Recursos extras para quem já vende e quer mais controle.",
-      "popular": true,
+      "popular": false,
+      "enterprise": false,
       "features": [
         { "label": "Vendas ilimitadas", "enabled": true },
         { "label": "Funcionalidades essenciais", "enabled": true },
         { "label": "Personalização", "enabled": true },
         { "label": "Automações avançadas", "enabled": true },
+        { "label": "Bot exclusivo personalizado", "enabled": false },
         { "label": "Suporte prioritário", "enabled": false }
       ]
     },
     {
-      "name": "Completo",
+      "name": "Profissional",
       "price": "R$ 8,90",
       "period": "/mês",
-      "description": "Tudo liberado para quem quer o máximo do ShopEasy.",
+      "description": "Para lojas em crescimento que precisam de mais agilidade.",
+      "popular": true,
+      "enterprise": false,
+      "features": [
+        { "label": "Vendas ilimitadas", "enabled": true },
+        { "label": "Funcionalidades profissionais", "enabled": true },
+        { "label": "Personalização", "enabled": true },
+        { "label": "Automações avançadas", "enabled": true },
+        { "label": "Bot exclusivo personalizado", "enabled": false },
+        { "label": "Suporte prioritário", "enabled": true }
+      ]
+    },
+    {
+      "name": "Completo",
+      "price": "R$ 14,90",
+      "period": "/mês",
+      "description": "Tudo liberado, incluindo um bot 100% exclusivo com a cara da sua marca.",
       "popular": false,
+      "enterprise": false,
       "features": [
         { "label": "Vendas ilimitadas", "enabled": true },
         { "label": "Funcionalidades completas", "enabled": true },
         { "label": "Personalização", "enabled": true },
         { "label": "Automações avançadas", "enabled": true },
+        { "label": "Bot exclusivo personalizado", "enabled": true },
+        { "label": "Suporte prioritário", "enabled": true }
+      ]
+    },
+    {
+      "name": "Enterprise",
+      "price": "Sob consulta",
+      "period": "",
+      "description": "Soluções personalizadas para operações de grande escala.",
+      "popular": false,
+      "enterprise": true,
+      "features": [
+        { "label": "Tudo do plano Completo", "enabled": true },
+        { "label": "Soluções e integrações personalizadas", "enabled": true },
+        { "label": "Bot exclusivo personalizado", "enabled": true },
+        { "label": "Infraestrutura dedicada", "enabled": true },
+        { "label": "Gerente de conta dedicado", "enabled": true },
         { "label": "Suporte prioritário", "enabled": true }
       ]
     }

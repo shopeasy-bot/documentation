@@ -3,6 +3,7 @@ import './global.css';
 import { RootProvider } from 'fumadocs-ui/provider';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
+import { UserProvider } from '@/context/user';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -97,7 +98,9 @@ export default function Layout({ children }: { children: ReactNode }) {
                forcedTheme: "dark",
             }}>
               
+            <UserProvider>
             {children}
+          </UserProvider>
                <Analytics />
             </RootProvider>
       </body>
