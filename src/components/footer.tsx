@@ -21,7 +21,6 @@ const sections = [
     links: [
       { label: "Termos de uso", href: "/terms" },
       { label: "Suporte", href: "/support" },
-      { label: "Login", href: "/login" },
     ],
   },
 ];
