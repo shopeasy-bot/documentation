@@ -1,6 +1,7 @@
 import { GridDecoration } from "@/components/decoration/Grid"
 import { FlareDecoration } from "@/components/decoration/Flare"
 import { cn } from "@/lib/cn"
+
 import { JetBrains_Mono, Poppins } from "next/font/google"
 import Link from "next/link"
 import { FiHome, FiSearch } from "react-icons/fi"
