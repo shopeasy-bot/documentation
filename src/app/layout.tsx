@@ -4,6 +4,8 @@ import { RootProvider } from 'fumadocs-ui/provider';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { UserProvider } from '@/context/user';
+import { CrispChat } from '@/components/crisp';
+import { HelpFab } from '@/components/help-fab';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -102,6 +104,8 @@ export default function Layout({ children }: { children: ReactNode }) {
             {children}
           </UserProvider>
                <Analytics />
+               <CrispChat />
+               <HelpFab />
             </RootProvider>
       </body>
     </html>
