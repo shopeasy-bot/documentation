@@ -1,7 +1,7 @@
 import { GridDecoration } from "@/components/decoration/Grid";
 import { FlareDecoration } from "@/components/decoration/Flare";
 import { CrispTrigger } from "@/components/crisp";
-import { WHATSAPP_SUPPORT_URL, WHATSAPP_GROUP_URL } from "@/lib/contacts";
+import { WHATSAPP_COMMUNITY_URL, WHATSAPP_SUPPORT_URL } from "@/lib/contacts";
 import { cn } from "@/lib/cn";
 import { JetBrains_Mono, Poppins } from "next/font/google";
 import Link from "next/link";
@@ -130,7 +130,7 @@ export default function ComunicadoPage() {
         </Link>
 
         <Link
-          href={WHATSAPP_GROUP_URL}
+          href={WHATSAPP_COMMUNITY_URL}
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
@@ -143,14 +143,14 @@ export default function ComunicadoPage() {
           </div>
           <div className="flex flex-col gap-1 flex-1">
             <h3 className={`${poppins.className} text-sm font-semibold text-neutral-800 dark:text-neutral-100`}>
-              Grupo no WhatsApp
+              Canal no WhatsApp
             </h3>
             <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
-              Nossa nova comunidade, novidades e conversa entre vendedores.
+              Nossa comunidade para avisos, novidades e atualizações.
             </p>
           </div>
           <span className={`${jetbrains.className} text-xs text-indigo-400 group-hover:underline`}>
-            Entrar no grupo →
+            Acessar o canal →
           </span>
         </Link>
       </div>
@@ -170,7 +170,7 @@ export default function ComunicadoPage() {
               <Link href="/blog" className="text-emerald-400 hover:underline">
                 blog
               </Link>{" "}
-              e no grupo do WhatsApp.
+              e no canal do WhatsApp.
             </p>
           </div>
         </section>

@@ -1,7 +1,7 @@
 import { GridDecoration } from "@/components/decoration/Grid"
 import { FlareDecoration } from "@/components/decoration/Flare"
 import { CrispTrigger } from "@/components/crisp"
-import { WHATSAPP_SUPPORT_URL } from "@/lib/contacts"
+import { CONTACT_EMAIL, WHATSAPP_SUPPORT_URL } from "@/lib/contacts"
 import { cn } from "@/lib/cn"
 import { JetBrains_Mono, Poppins } from "next/font/google"
 import Link from "next/link"
@@ -53,7 +53,7 @@ const channels = [
     icon: <FiMail className="w-5 h-5" />,
     title: "E-mail",
     description: "Para questões comerciais ou parcerias, entre em contato por e-mail.",
-    href: "mailto:contato@shopeasy.site",
+    href: `mailto:${CONTACT_EMAIL}`,
     label: "Enviar e-mail",
     color: "border-neutral-500/20 hover:border-neutral-500/40 hover:bg-neutral-500/5",
     iconColor: "bg-neutral-500/10 border-neutral-500/20 text-neutral-400",

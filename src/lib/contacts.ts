@@ -1,3 +1,4 @@
-// TODO: substituir pelos links reais antes de publicar
-export const WHATSAPP_SUPPORT_URL = "https://wa.me/PLACEHOLDER_NUMERO_WHATSAPP";
-export const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/PLACEHOLDER_LINK_GRUPO";
+export const WHATSAPP_SUPPORT_URL = "https://wa.me/555197183614";
+export const WHATSAPP_COMMUNITY_URL =
+  "https://whatsapp.com/channel/0029VbDi1MPEquiUygNLXF0M";
+export const CONTACT_EMAIL = "contato@shopeasy.solutions";
