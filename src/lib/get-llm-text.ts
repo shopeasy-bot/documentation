@@ -7,3 +7,5 @@ export async function getLLMText(page: AnyPage) {
   const processed = await page.data.getText('processed');
   return `# ${page.data.title} (${page.url})\n\n${processed}`;
 }
+
+
