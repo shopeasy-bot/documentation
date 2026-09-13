@@ -4,6 +4,12 @@ const withMDX = createMDX();
 
 const config = {
   reactStrictMode: true,
+  output: 'standalone',
+  experimental: {
+    webpackMemoryOptimizations: true,
+    cpus: 1,
+    workerThreads: false,
+  },
   async rewrites() {
     return [
       {
