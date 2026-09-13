@@ -18,9 +18,11 @@ export async function GET(req: NextRequest) {
 
   const rawPlan = req.nextUrl.searchParams.get("plan") ?? ""
   const plan = planSlugs[rawPlan.toLowerCase()] ?? rawPlan
+  const next = req.nextUrl.searchParams.get("next") ?? ""
 
   const url = new URL(`${apiUrl}/auth/url`)
   if (plan) url.searchParams.set("plan", plan)
+  else if (next) url.searchParams.set("next", next)
 
   try {
     const response = await fetch(url.toString(), {

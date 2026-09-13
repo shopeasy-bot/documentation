@@ -16,8 +16,13 @@ export default function RedirectPage() {
       try {
         const searchParams = new URLSearchParams(window.location.search)
         const plan = searchParams.get("plan")
+        const next = searchParams.get("next")
 
-const response = await fetch(`/api/auth/discord?plan=${plan ?? ""}`)
+        const query = new URLSearchParams()
+        if (plan) query.set("plan", plan)
+        if (next) query.set("next", next)
+
+        const response = await fetch(`/api/auth/discord?${query.toString()}`)
         const data = await response.json()
 
         if (!response.ok || !data.url) {
