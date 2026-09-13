@@ -1,0 +1,31 @@
+name: Deploy to SquareCloud
+
+# The production container is capped at 1200MB RAM, and `next build` alone
+# peaks around 6.5GB locally — it can never run inside that container.
+# This builds on the (much roomier) GitHub Actions runner instead, then
+# ships the pre-built .next/standalone bundle (server.js + pruned
+# node_modules) to SquareCloud, which just starts it — no build on their end.
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - run: npm ci
+
+      - run: npm run package:squarecloud
+
+      - uses: squarecloudofc/github-action@v2
+        with:
+          token: ${{ secrets.SQUARE_TOKEN }}
+          command: commit ${{ secrets.SQUARE_APPLICATION_ID }} --restart
+          workdir: .next/standalone
