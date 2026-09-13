@@ -17,6 +17,10 @@
 .env*.local
 .env
 
+# deploy artifacts
+squarecloud-deploy.zip
+.source.zip
+
 # misc
 .DS_Store
 *.pem
