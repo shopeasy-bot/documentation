@@ -6,7 +6,8 @@
     "produtos",
     "cupons",
     "configuracoes",
-    "catalogo"
+    "catalogo",
+    "notificacoes"
   ],
   "defaultOpen": false
 }

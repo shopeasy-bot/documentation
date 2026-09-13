@@ -1,0 +1,240 @@
+---
+title: Notificações de Vendas
+icon: TbBell
+description: Autorização de Web Push e envio de notificações de vendas para usuários do site
+---
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+Sistema de **notificações de vendas via Web Push**: um usuário com permissão
+suficiente em um servidor Discord autoriza, pelo site, receber uma notificação
+no navegador toda vez que uma venda for confirmada naquele servidor.
+
+<Callout type="info">
+  Estas rotas usam **dois esquemas de autenticação diferentes**, dependendo de
+  quem chama:
+
+  - As rotas em `/guilds/{'{'}guildId{'}'}/sale-notifications` usam o **Bearer
+    Token** normal da API (o mesmo usado em todas as outras rotas guild-scoped)
+    e são chamadas pelo **bot**.
+  - As rotas em `/notifications/*` usam a **sessão do dashboard** (cookie
+    `se_session`, obtido via login com Discord OAuth no site) e são chamadas
+    pelo **site**, nunca pelo bot.
+</Callout>
+
+## Fluxo de autorização
+
+1. Um usuário com permissão suficiente usa o menu **Integrações → Notificações
+   de vendas** no bot e clica em "Gerar link de autorização".
+2. O bot chama `POST /guilds/{guildId}/sale-notifications` (Bearer Token) e
+   recebe um token de uso único, válido por 15 minutos.
+3. O bot monta o link `https://shopeasy.site/notifications/authorize/{token}`
+   e envia ao usuário.
+4. Ao abrir o link, o site chama `GET /notifications/authorize/{token}`
+   (público) para mostrar qual servidor está pedindo autorização. Se o usuário
+   não estiver logado, é enviado para o login com Discord antes de continuar.
+5. Ao clicar em "Autorizar", o site chama
+   `POST /notifications/authorize/{token}/confirm` (sessão do dashboard). A
+   API confirma que o token pertence à conta logada, não expirou e ainda não
+   foi usado.
+6. O navegador pede permissão de notificação e cria uma *push subscription*,
+   enviada para `POST /notifications/subscribe`.
+7. A partir daí, toda venda confirmada naquele servidor dispara um Web Push
+   para todas as subscriptions ativas dos usuários autorizados.
+
+A autorização pode ser revogada a qualquer momento — pelo Discord
+(`DELETE /guilds/{guildId}/sale-notifications/{userId}`) ou pelo site
+(`POST /notifications/revoke`). Revogar remove as subscriptions associadas e
+nenhum novo push é enviado depois disso.
+
+---
+
+## Rotas do bot (Bearer Token)
+
+### 🔑 Gerar/renovar autorização
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-green-500/15 text-green-400 border border-green-500/30 px-2 py-0.5 rounded font-bold">POST</span>
+  <code>/guilds/\{guildId\}/sale-notifications</code>
+</div>
+
+<TypeTable
+  type={{
+    userId: { description: "ID do usuário do Discord que está autorizando.", type: "string" },
+  }}
+/>
+
+Gera um novo token de autorização (invalida qualquer token pendente anterior
+para o mesmo usuário/servidor). O token bruto só é retornado **uma vez**, nesta
+resposta — a API guarda apenas o hash dele.
+
+```json
+{
+  "token": "a1b2c3...",
+  "expiresAt": "2026-09-12T15:30:00.000Z"
+}
+```
+
+### 📋 Status da autorização
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
+  <code>/guilds/\{guildId\}/sale-notifications/\{userId\}</code>
+</div>
+
+```json
+{
+  "status": "ACTIVE",
+  "subscriptionCount": 2,
+  "expiresAt": null
+}
+```
+
+`status` é um de `NONE`, `PENDING`, `ACTIVE`, `REVOKED` ou `EXPIRED`.
+
+### 🚫 Revogar (pelo Discord)
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-red-500/15 text-red-400 border border-red-500/30 px-2 py-0.5 rounded font-bold">DELETE</span>
+  <code>/guilds/\{guildId\}/sale-notifications/\{userId\}</code>
+</div>
+
+Marca a autorização como `REVOKED` e remove as subscriptions associadas.
+
+---
+
+## Rotas do site (sessão do dashboard)
+
+<Callout type="warn">
+  Estas rotas exigem o cookie `se_session` (login via Discord OAuth no site) e
+  nunca aceitam `userId`/`guildId` de autorização vindos livremente do corpo da
+  requisição para decidir *quem* está autorizado — o usuário é sempre o da
+  sessão.
+</Callout>
+
+### 👀 Pré-visualizar link de autorização
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded font-bold">GET</span>
+  <code>/notifications/authorize/\{token\}</code>
+</div>
+
+Rota pública (não exige sessão) e com rate limit próprio — usada pela página do
+site para mostrar qual servidor está solicitando autorização antes do login.
+Retorna `404`/`410` se o token não existir/tiver expirado ou já sido usado.
+
+```json
+{
+  "guildId": "123456789",
+  "guildName": "Minha Loja",
+  "expiresAt": "2026-09-12T15:30:00.000Z"
+}
+```
+
+### ✅ Confirmar autorização
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-green-500/15 text-green-400 border border-green-500/30 px-2 py-0.5 rounded font-bold">POST</span>
+  <code>/notifications/authorize/\{token\}/confirm</code>
+</div>
+
+Confirma a autorização para o usuário da sessão atual. Retorna `403` se o
+token pertencer a outra conta, `404`/`410` se for inválido, expirado ou já
+usado.
+
+### 🔔 Registrar subscription de push
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-green-500/15 text-green-400 border border-green-500/30 px-2 py-0.5 rounded font-bold">POST</span>
+  <code>/notifications/subscribe</code>
+</div>
+
+<TypeTable
+  type={{
+    guildId: { description: "Servidor para o qual esta subscription recebe notificações.", type: "string" },
+    endpoint: { description: "Endpoint do Push Service do navegador.", type: "string" },
+    "keys.p256dh": { description: "Chave pública da subscription.", type: "string" },
+    "keys.auth": { description: "Segredo de autenticação da subscription.", type: "string" },
+  }}
+/>
+
+Exige uma autorização `ACTIVE` do usuário da sessão para o `guildId` informado.
+Uma mesma conta pode ter várias subscriptions (um navegador/dispositivo cada).
+
+### ❌ Remover subscription
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-red-500/15 text-red-400 border border-red-500/30 px-2 py-0.5 rounded font-bold">DELETE</span>
+  <code>/notifications/subscribe</code>
+</div>
+
+<TypeTable
+  type={{
+    endpoint: { description: "Endpoint da subscription a remover.", type: "string" },
+  }}
+/>
+
+### 🚫 Revogar (pelo site)
+
+<div className="flex items-center gap-2 my-4 font-mono text-sm">
+  <span className="bg-red-500/15 text-red-400 border border-red-500/30 px-2 py-0.5 rounded font-bold">POST</span>
+  <code>/notifications/revoke</code>
+</div>
+
+<TypeTable
+  type={{
+    guildId: { description: "Servidor cuja autorização será revogada.", type: "string" },
+  }}
+/>
+
+---
+
+## Configuração de Web Push (VAPID)
+
+O envio usa o padrão [Web Push](https://developer.mozilla.org/docs/Web/API/Push_API)
+com chaves VAPID. Gere um par de chaves com:
+
+```bash
+npx web-push generate-vapid-keys
+```
+
+<TypeTable
+  type={{
+    VAPID_PUBLIC_KEY: { description: "Chave pública VAPID (API).", type: "string" },
+    VAPID_PRIVATE_KEY: { description: "Chave privada VAPID (API, nunca expor).", type: "string" },
+    VAPID_SUBJECT: { description: "Contato do remetente (ex: mailto:suporte@shopeasy.site).", type: "string" },
+    NEXT_PUBLIC_VAPID_PUBLIC_KEY: { description: "Mesma chave pública, exposta ao navegador (site).", type: "string" },
+  }}
+/>
+
+<Callout type="warn">
+  A chave privada (`VAPID_PRIVATE_KEY`) fica só na API. O site nunca recebe nem
+  armazena nenhuma credencial administrativa da API — apenas a própria sessão
+  do usuário (`se_session`) e a chave pública VAPID, que é segura para expor.
+</Callout>
+
+Se as chaves VAPID não estiverem configuradas, o envio de Web Push fica
+desativado automaticamente (sem erro) — o restante do fluxo de autorização
+continua funcionando normalmente.
+
+## Testando localmente
+
+1. Configure `VAPID_PUBLIC_KEY`/`VAPID_PRIVATE_KEY`/`VAPID_SUBJECT` na `api`.
+2. Configure `NEXT_PUBLIC_VAPID_PUBLIC_KEY` (mesma chave pública) no
+   `documentation`.
+3. Gere um link de autorização pelo comando/menu do bot (ambiente de dev) e
+   abra no navegador local do site.
+4. Após autorizar, force uma venda de teste no fluxo normal de carrinho — a
+   notificação deve chegar no navegador mesmo com a aba fechada, desde que o
+   navegador continue aberto e o Service Worker (`/sw.js`) esteja registrado.
+
+## Revogando uma autorização
+
+- Pelo Discord: menu **Integrações → Notificações de vendas → Revogar**.
+- Pelo site: qualquer chamada a `POST /notifications/revoke` pela própria
+  sessão do usuário.
+
+Depois de revogada, a autorização vira `REVOKED`, as subscriptions associadas
+são removidas e nenhuma nova venda dispara push para aquele usuário/servidor
+até uma nova autorização ser gerada e confirmada.
