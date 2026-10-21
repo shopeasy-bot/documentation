@@ -1,5 +1,6 @@
 import { DocsLayout, DocsLayoutProps } from 'fumadocs-ui/layouts/notebook';
 import type { ReactNode } from 'react';
+import type { Metadata } from 'next';
 import { baseOptions } from '@/app/layout.config';
 import { botSource } from '@/lib/sourcer';
 import { BannerDiscordNav } from '@/components/nav/bannerDiscord';
@@ -27,6 +28,10 @@ const docsOptions: DocsLayoutProps = {
     ...baseOptions.nav,
     mode: "top",
   },
+};
+
+export const metadata: Metadata = {
+  title: { template: '%s | ShopEasy Docs', default: 'ShopEasy Docs' },
 };
 
 export default function Layout({ children }: { children: ReactNode }) {

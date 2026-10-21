@@ -16,7 +16,7 @@ export async function GET(_req: Request, { params }: Ctx) {
   if (!page) notFound();
 
   return new Response(await getLLMText(page), {
-    headers: { 'Content-Type': 'text/markdown' },
+    headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
   });
 }
 

@@ -6,6 +6,7 @@ description: Como funciona o menu de configurações do ShopEasy
 import { ShoppingCart, Hash, Shield, Palette, DollarSign } from "lucide-react";
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Card, Cards } from 'fumadocs-ui/components/card';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
 # Configurações Gerais
 
@@ -22,8 +23,6 @@ O comando `/configuracoes` reúne as configurações principais da loja.
 
 ## Menu de Configurações
 
-![Menu de configurações gerais](/images/configs/menu-configuracoes.png)
-
 No seletor do menu, escolha uma categoria:
 
 | Categoria | O que configura |
@@ -36,6 +35,174 @@ No seletor do menu, escolha uma categoria:
 <Callout type="info">
   A aparência da loja (cor, card de produto e painel de ticket) fica em um comando separado: `/personalizar`. Veja [Personalização](/docs/configs/customization).
 </Callout>
+
+## Experimente o menu
+
+<DiscordMenuSimulator
+  command="/configuracoes"
+  start="main"
+  screens={{
+    main: { title: "Configurações", blocks: [
+      "## ⚙️ Configurações\n> Selecione abaixo a categoria que deseja configurar ou alterar.",
+      { separator: true },
+      "-# Lembre-se de salvar as alterações, elas ficam disponíveis por até 24 horas.",
+      { select: { placeholder: "⚙️ Selecione uma categoria", options: [
+        { label: "🛒 Carrinhos", description: "Ajuste nome, duração e regras dos carrinhos", goto: "carts" },
+        { label: "💰 Vendas", description: "Ajuste termos, cargo de clientes e notificações", goto: "sales" },
+        { label: "📁 Canais e Categorias", description: "Defina onde os canais da loja serão criados", goto: "channels" },
+        { label: "🔐 Permissões", description: "Controle quem pode acessar e gerenciar a loja", goto: "perms" }
+      ] } },
+      { buttons: [
+        { label: "Menu Principal", emoji: "🏠", goto: "main" },
+        { label: "Salvar Alterações", emoji: "💾", style: "success", toast: "-# Simulação: o rascunho seria salvo e aplicado à loja." },
+        { label: "Voltar", emoji: "⬅️", goto: "main" }
+      ] }
+    ] },
+    carts: { title: "Carrinhos", blocks: [
+      "## 🛒 Configurações de Carrinhos",
+      { separator: true },
+      { section: "### 📝 Nome do Carrinho\n>>> 🛒・carrinho-{{nome}}\n-# Variáveis disponíveis: `{{nome}}`, `{{username}}`, `{{id}}`", button: { label: "Alterar", emoji: "⚙️", modal: "cartName" } },
+      { section: "### 🕒 Duração do Carrinho\n>>> 15 Minuto(s)", button: { label: "Alterar", emoji: "⚙️", modal: "cartTime" } },
+      "### 🛒 Opções do Carrinho\n>>> Cupons: **Ativado**\nRestauração: **Desativada**\nRenovação por interação: **Ativada**\nTermos obrigatórios: **Desativados**\nMensagens do cliente: **Ativadas**",
+      { select: { placeholder: "Selecione as opções que ficarão ativadas", multiple: true, defaultValues: ["coupons", "extend", "messages"], options: [
+        { label: "Permitir cupons", value: "coupons", description: "Permite aplicar cupons durante a compra" },
+        { label: "Permitir restauração", value: "restore", description: "Permite restaurar carrinhos expirados" },
+        { label: "Renovar ao interagir", value: "extend", description: "Renova o tempo quando o cliente interagir" },
+        { label: "Exigir termos", value: "terms", description: "Exige aceitar os termos antes do pagamento" },
+        { label: "Permitir mensagens", value: "messages", description: "Permite que o cliente envie mensagens no carrinho" }
+      ] } },
+      { separator: true },
+      "-# Lembre-se de salvar as alterações, elas ficam disponíveis por até 24 horas.",
+      { select: { placeholder: "⚙️ Selecione uma categoria", options: [
+        { label: "🛒 Carrinhos", description: "Ajuste nome, duração e regras dos carrinhos", goto: "carts" },
+        { label: "💰 Vendas", description: "Ajuste termos, cargo de clientes e notificações", goto: "sales" },
+        { label: "📁 Canais e Categorias", description: "Defina onde os canais da loja serão criados", goto: "channels" },
+        { label: "🔐 Permissões", description: "Controle quem pode acessar e gerenciar a loja", goto: "perms" }
+      ] } },
+      { buttons: [
+        { label: "Menu Principal", emoji: "🏠", goto: "main" },
+        { label: "Salvar Alterações", emoji: "💾", style: "success", toast: "-# Simulação: o rascunho seria salvo e aplicado à loja." },
+        { label: "Voltar", emoji: "⬅️", goto: "main" }
+      ] }
+    ] },
+    sales: { title: "Vendas", blocks: [
+      "## 🛒 Configurações de Vendas",
+      { separator: true },
+      "### 👥 Cargo Clientes:",
+      { select: { placeholder: "Clique para selecionar um cargo", options: [ { label: "@Clientes", value: "clientes" }, { label: "@Compradores", value: "compradores" } ] } },
+      { section: "### 📝 Termos de Compra\n>>> Sem termos definidos ainda...", button: { label: "Alterar", emoji: "⚙️", modal: "terms" } },
+      "### 🔔 Formato da Notificação Pública de Venda:",
+      { select: { placeholder: "Selecione o formato da notificação pública", options: [
+        { label: "Notificação com imagem", emoji: "🖼️", description: "Envia a notificação pública com imagem gerada", toast: "-# Formato atual: **Imagem**." },
+        { label: "Notificação normal", emoji: "📝", description: "Envia a notificação pública sem gerar imagem", toast: "-# Formato atual: **Notificação normal**." }
+      ] } },
+      { separator: true },
+      "-# Lembre-se de salvar as alterações, elas ficam disponíveis por até 24 horas.",
+      { select: { placeholder: "⚙️ Selecione uma categoria", options: [
+        { label: "🛒 Carrinhos", description: "Ajuste nome, duração e regras dos carrinhos", goto: "carts" },
+        { label: "💰 Vendas", description: "Ajuste termos, cargo de clientes e notificações", goto: "sales" },
+        { label: "📁 Canais e Categorias", description: "Defina onde os canais da loja serão criados", goto: "channels" },
+        { label: "🔐 Permissões", description: "Controle quem pode acessar e gerenciar a loja", goto: "perms" }
+      ] } },
+      { buttons: [
+        { label: "Menu Principal", emoji: "🏠", goto: "main" },
+        { label: "Salvar Alterações", emoji: "💾", style: "success", toast: "-# Simulação: o rascunho seria salvo e aplicado à loja." },
+        { label: "Voltar", emoji: "⬅️", goto: "main" }
+      ] }
+    ] },
+    channels: { title: "Canais", blocks: [
+      { section: "## ⚙️ Configurações Canais", button: { label: "Gerar canais com IA", emoji: "🧠", style: "primary", modal: "ia" } },
+      { separator: true },
+      "### 🔔 Notificações Publicas:",
+      { select: { placeholder: "Selecione um canal", options: [ { label: "#vendas" }, { label: "#anúncios" } ] } },
+      "### 🔔 Notificações Privadas:",
+      { select: { placeholder: "Selecione um canal", options: [ { label: "#logs-loja" }, { label: "#staff" } ] } },
+      "### ❤️ Avaliações:",
+      { select: { placeholder: "Selecione um canal", options: [ { label: "#avaliações" }, { label: "#feedback" } ] } },
+      "### 🛒 Categoria carrinhos:",
+      { select: { placeholder: "Selecione um canal", options: [ { label: "📁 CARRINHOS" }, { label: "📁 LOJA" } ] } },
+      { separator: true },
+      "-# Lembre-se de salvar as alterações, elas ficam disponíveis por até 24 horas.",
+      { select: { placeholder: "⚙️ Selecione uma categoria", options: [
+        { label: "🛒 Carrinhos", description: "Ajuste nome, duração e regras dos carrinhos", goto: "carts" },
+        { label: "💰 Vendas", description: "Ajuste termos, cargo de clientes e notificações", goto: "sales" },
+        { label: "📁 Canais e Categorias", description: "Defina onde os canais da loja serão criados", goto: "channels" },
+        { label: "🔐 Permissões", description: "Controle quem pode acessar e gerenciar a loja", goto: "perms" }
+      ] } },
+      { buttons: [
+        { label: "Menu Principal", emoji: "🏠", goto: "main" },
+        { label: "Salvar Alterações", emoji: "💾", style: "success", toast: "-# Simulação: o rascunho seria salvo e aplicado à loja." },
+        { label: "Voltar", emoji: "⬅️", goto: "main" }
+      ] }
+    ] },
+    perms: { title: "Permissões", blocks: [
+      "## ⚙️ Configuração de Permissões\n> Selecione um cargo abaixo para começar a configurar as permissões.",
+      { separator: true },
+      { select: { placeholder: "⚙️ Selecione um cargo para configurar", options: [ { label: "@Suporte", goto: "permsRole" }, { label: "@Gerente", goto: "permsRole" } ] } },
+      { separator: true },
+      "-# Lembre-se de salvar as alterações, elas ficam disponíveis por até 24 horas.",
+      { select: { placeholder: "⚙️ Selecione uma categoria", options: [
+        { label: "🛒 Carrinhos", description: "Ajuste nome, duração e regras dos carrinhos", goto: "carts" },
+        { label: "💰 Vendas", description: "Ajuste termos, cargo de clientes e notificações", goto: "sales" },
+        { label: "📁 Canais e Categorias", description: "Defina onde os canais da loja serão criados", goto: "channels" },
+        { label: "🔐 Permissões", description: "Controle quem pode acessar e gerenciar a loja", goto: "perms" }
+      ] } },
+      { buttons: [
+        { label: "Menu Principal", emoji: "🏠", goto: "main" },
+        { label: "Salvar Alterações", emoji: "💾", style: "success", toast: "-# Simulação: o rascunho seria salvo e aplicado à loja." },
+        { label: "Voltar", emoji: "⬅️", goto: "main" }
+      ] }
+    ] },
+    permsRole: { title: "Cargo", blocks: [
+      "## ⚙️ Configuração de Permissões\n> Cargo selecionado: <@&Suporte>",
+      { separator: true },
+      { select: { placeholder: "⚙️ Selecione um cargo para configurar", options: [ { label: "@Suporte" }, { label: "@Gerente" } ] } },
+      { separator: true, hidden: true },
+      "> **Permissões disponíveis:**",
+      { select: { placeholder: "Selecione as permissões do cargo", multiple: true, options: [
+        { label: "Produtos", value: "manage_products", emoji: "📦" },
+        { label: "Carrinhos", value: "manage_carts", emoji: "🛒" },
+        { label: "Configurações", value: "manage_config", emoji: "⚙️" },
+        { label: "Vendas", value: "view_orders", emoji: "📊" },
+        { label: "Processar Pagamentos", value: "process_payments", emoji: "💳" },
+        { label: "Gerenciar Pagamentos", value: "manager_payments", emoji: "🏦" },
+        { label: "Gerenciar Cargos", value: "manage_roles", emoji: "🛡️" },
+        { label: "Gerenciar Bot", value: "manager_bot", emoji: "🤖" },
+        { label: "Administrador", value: "full_access", emoji: "👑" }
+      ] } },
+      "-# Nenhuma permissão configurada para este cargo",
+      { separator: true },
+      "-# Lembre-se de salvar as alterações, elas ficam disponíveis por até 24 horas.",
+      { select: { placeholder: "⚙️ Selecione uma categoria", options: [
+        { label: "🛒 Carrinhos", description: "Ajuste nome, duração e regras dos carrinhos", goto: "carts" },
+        { label: "💰 Vendas", description: "Ajuste termos, cargo de clientes e notificações", goto: "sales" },
+        { label: "📁 Canais e Categorias", description: "Defina onde os canais da loja serão criados", goto: "channels" },
+        { label: "🔐 Permissões", description: "Controle quem pode acessar e gerenciar a loja", goto: "perms" }
+      ] } },
+      { buttons: [
+        { label: "Menu Principal", emoji: "🏠", goto: "main" },
+        { label: "Salvar Alterações", emoji: "💾", style: "success", toast: "-# Simulação: o rascunho seria salvo e aplicado à loja." },
+        { label: "Voltar", emoji: "⬅️", goto: "main" }
+      ] }
+    ] }
+  }}
+  modals={{
+    cartName: { title: "⚙️ Configurações Compra", fields: [ { label: "Nome do carrinho", description: "Use {{nome}}, {{username}} ou {{id}} para personalizar por usuário.", value: "🛒・carrinho-{{nome}}", maxLength: 100 } ], goto: "carts" },
+    cartTime: { title: "⚙️ Configurações Compra", fields: [ { label: "Tempo carrinho", kind: "select", options: ["10 Minutos", "15 Minutos", "30 Minutos", "1 Hora", "2 Horas", "3 Horas", "4 Horas", "5 Horas", "10 Horas", "15 Horas", "24 Horas", "3 Dias"] } ], goto: "carts" },
+    terms: { title: "⚙️ Configurações Compra", fields: [ { label: "Termos", style: "paragraph", maxLength: 1000 } ], goto: "sales" },
+    ia: { title: "🤖 Gerar canais com IA", fields: [ { label: "Qual o tema/nicho da sua loja?", style: "paragraph", maxLength: 300, placeholder: "Ex: loja de contas de jogos, loja de roupas streetwear..." } ], toast: "-# Simulação: o bot criaria os canais para o nicho informado (requer plano pago)." }
+  }}
+/>
+
+<Callout type="idea">
+  Os canais e cargos do simulador são exemplos. No Discord, os seletores listam os canais e cargos do seu servidor.
+</Callout>
+
+<Accordions>
+  <Accordion title="Ver captura de tela do menu real">
+    ![Menu de configurações gerais](/images/configs/menu-configuracoes.png)
+  </Accordion>
+</Accordions>
 
 ## Rascunho e salvamento
 

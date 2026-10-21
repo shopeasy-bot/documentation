@@ -23,10 +23,21 @@ import { Callout } from 'fumadocs-ui/components/callout';
   ]}
 />
 
-| Opção | Obrigatória | Descrição |
-| --- | :---: | --- |
-| `referencia` | Sim | Identificador único do produto (SKU) |
-| `canal` | Não | Canal de texto onde a mensagem será publicada. Se omitido, usa o canal atual |
+<TypeTable
+  type={{
+    referencia: {
+      description: "Identificador único do produto (SKU).",
+      type: "texto",
+      typeDescription: "De 3 a 20 caracteres: letras, números e hífen (-).",
+      required: true,
+    },
+    canal: {
+      description: "Canal de texto onde a mensagem será publicada.",
+      type: "canal de texto",
+      default: "canal atual",
+    },
+  }}
+/>
 
 <Steps>
 <Step>

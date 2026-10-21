@@ -10,6 +10,82 @@ import { Callout } from 'fumadocs-ui/components/callout';
 
 Esta página mostra a compra do ponto de vista do cliente e o que acontece por trás.
 
+## Experimente o carrinho
+
+Simulação do canal de carrinho do ponto de vista do cliente, com um produto de exemplo de R$ 10,00 e pagamento por PIX.
+
+<DiscordMenuSimulator
+  command="Comprar"
+  ephemeral={false}
+  start="cart"
+  screens={{
+    cart: { title: "Carrinho", blocks: [
+      "## 🛒 Carrinho de Compras",
+      { separator: true },
+      "> Ola <@cliente>, seja bem vindo ao seu carrinho de compras, a baixo você pode gerenciar os produtos!",
+      { separator: true },
+      "## 🚚 Produtos no carrinho:",
+      { separator: true },
+      "### Conta Premium\n> 💲 **Unitário:** R$ 10,00\n> 🛒 **Subtotal:** R$ 10,00\n-# 1 no carrinho · 25 disponíveis",
+      { buttons: [
+        { label: "−", style: "danger", toast: "-# Diminui a quantidade, respeitando o mínimo do produto." },
+        { label: "1", toast: "-# Abre um formulário para digitar a quantidade." },
+        { label: "+", style: "success", toast: "-# Aumenta a quantidade, respeitando o máximo e o estoque." },
+        { label: "🗑️", style: "danger", toast: "-# Remove o produto do carrinho." }
+      ] },
+      { separator: true },
+      { buttons: [
+        { label: "Cupom", emoji: "🏷️", toast: "-# Abre o formulário para digitar o código do cupom (se a loja permitir cupons)." },
+        { label: "Continuar", emoji: "➡️", style: "success", goto: "payment" },
+        { label: "Cancelar", emoji: "✖️", style: "danger", toast: "-# O bot pede confirmação e apaga o carrinho." }
+      ] }
+    ] },
+    payment: { title: "Pagamento", blocks: [
+      "## 🛒 Carrinho de compras",
+      { separator: true },
+      "### 🏦 Informações de Pagamento",
+      { select: { placeholder: "💳 Clique para selecionar um metodo de pagamento", options: [
+        { label: "PIX", emoji: "💠", description: "Pague via PIX ou carteira", toast: "-# Método selecionado: **PIX**. Clique em **Continuar Pagamento**." },
+        { label: "Cartao", emoji: "💳", description: "Pague com cartao de credito ou debito", toast: "-# Exemplo: só aparece se a loja tiver um gateway de cartão ativo." }
+      ] } },
+      { separator: true },
+      "## ℹ️ Resumo da compra\n> 💲 **SubTotal:** R$ 10,00\n> 🕒 **Finaliza:** em 15 minutos\n### Total: R$ 10,00",
+      { buttons: [
+        { label: "Continuar Pagamento", style: "success", goto: "pix" },
+        { label: "Ler Termos", disabled: true },
+        { label: "Voltar", style: "danger", goto: "cart" }
+      ] }
+    ] },
+    pix: { title: "PIX", blocks: [
+      "# 💲 Pagamento via PIX\n-# Complete seu pagamento para receber seus produtos",
+      { separator: true },
+      "### ℹ️ Informações do Pagamento\n>>> **💲 Valor Total:**\nR$ 10,00\n\n**🕒 Expira em:**\nem 15 minutos\n\n**🆔 ID do pagamento**\n123456789",
+      { separator: true },
+      "### 📋 Escaneie o QR Code\n-# Abra o app do seu banco e escaneie o código abaixo:",
+      "`[ QR Code gerado pelo bot ]`",
+      "### 📁 Ou use o Pix Copia e Cola\n-# Clique no botão abaixo para copiar o código:",
+      { buttons: [
+        { label: "Copiar Código PIX", toast: "-# O bot envia o código Copia e Cola para facilitar a cópia no celular." },
+        { label: "Tutorial", toast: "-# Mostra o passo a passo para pagar com PIX." }
+      ] },
+      { buttons: [
+        { label: "Já Realizei o Pagamento", style: "success", goto: "approved" },
+        { label: "Cancelar Pedido", style: "danger", goto: "cart" }
+      ] }
+    ] },
+    approved: { title: "Aprovado", accent: "#23a55a", blocks: [
+      "# ✅ Pagamento Aprovado",
+      { separator: true },
+      "### ℹ️ Informações do Pagamento\n>>> **💲 Valor Total:**\nR$ 10,00\n\n**🆔 ID do pagamento**\n123456789",
+      "-# Simulação: na loja real, os produtos são entregues por mensagem direta e o canal do carrinho é apagado após 2 minutos."
+    ] }
+  }}
+/>
+
+<Callout type="info">
+  Nos gateways automáticos, a aprovação é detectada sozinha. No PIX Manual, **Já Realizei o Pagamento** envia o pedido para a equipe conferir.
+</Callout>
+
 ## Fluxo completo
 
 <Steps>

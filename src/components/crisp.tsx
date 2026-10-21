@@ -34,6 +34,21 @@ export function CrispChat() {
   );
 }
 
+/**
+ * Abre o chat do Crisp. Opcionalmente já preenche a mensagem e envia
+ * a página atual como dado da sessão, para o suporte saber de onde o leitor veio.
+ */
+export function openCrispChat({ message, page }: { message?: string; page?: string } = {}) {
+  const crisp = window.$crisp;
+  if (!crisp) return;
+  if (page) {
+    crisp.push(["set", "session:data", [[["pagina", page]]]]);
+    if (page.startsWith("/docs")) crisp.push(["set", "session:segments", [["docs"]]]);
+  }
+  if (message) crisp.push(["set", "message:text", [message]]);
+  crisp.push(["do", "chat:open"]);
+}
+
 export function CrispTrigger({
   className,
   children,
@@ -50,7 +65,7 @@ export function CrispTrigger({
       type="button"
       aria-label={ariaLabel}
       onClick={() => {
-        window.$crisp?.push(["do", "chat:open"]);
+        openCrispChat();
         onClick?.();
       }}
       className={className}

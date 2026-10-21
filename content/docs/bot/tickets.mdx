@@ -63,6 +63,16 @@ Se `canal` não for informado, o painel é enviado no canal atual. A aparência 
 2. Preencha o **Assunto** (até 100 caracteres) e, se quiser, a **Descrição** (até 1000 caracteres).
 3. O bot cria o canal e mostra o botão **Ir ao Canal**.
 
+Este é o formulário que o cliente vê. Experimente preencher:
+
+<DiscordModal
+  title="🎫 Abrir Ticket"
+  fields={[
+    { label: "Assunto", placeholder: "Descreva brevemente o motivo do ticket", maxLength: 100 },
+    { label: "Descrição (opcional)", style: "paragraph", placeholder: "Forneça mais detalhes sobre sua solicitação...", maxLength: 1000, required: false }
+  ]}
+/>
+
 O canal fica visível apenas para o cliente, o bot e os cargos de suporte.
 
 ## Dentro do ticket

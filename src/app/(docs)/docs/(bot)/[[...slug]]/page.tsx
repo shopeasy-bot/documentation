@@ -8,7 +8,9 @@ import {
 import { notFound } from "next/navigation";
 import { getMDXComponents } from "@/mdx-components";
 import { createRelativeLink } from "fumadocs-ui/mdx";
-import { ViewOptions } from "@/components/page-actions";
+import { LLMCopyButton, ViewOptions } from "@/components/page-actions";
+import { JsonLd } from "@/components/json-ld";
+import { docsJsonLd, docsMetadata, markdownUrl } from "@/lib/docs-seo";
 import type { Metadata } from "next";
 
 export async function generateMetadata(
@@ -18,14 +20,7 @@ export async function generateMetadata(
   const page = botSource.getPage(params.slug);
   if (!page) return {};
 
-  const image = getPageImage(page);
-  return {
-    title: page.data.title,
-    description: page.data.description,
-    openGraph: {
-      images: [{ url: image.url, width: 1430, height: 660 }],
-    },
-  };
+  return docsMetadata(page, getPageImage(page), "Guia do Bot");
 }
 
 export function generateStaticParams() {
@@ -38,14 +33,17 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
   if (!page) notFound();
 
   const MDX = page.data.body;
+  const jsonLd = docsJsonLd(page, botSource, { name: "Documentação", url: "/docs" }, getPageImage(page));
 
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>
+      <JsonLd data={jsonLd} />
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
 
       <div className="flex flex-row gap-2 items-center border-b pt-2 pb-6">
-        <ViewOptions markdownUrl={`${page.url}.mdx`} />
+        <LLMCopyButton markdownUrl={markdownUrl(page)} />
+        <ViewOptions markdownUrl={markdownUrl(page)} />
       </div>
 
       <DocsBody>

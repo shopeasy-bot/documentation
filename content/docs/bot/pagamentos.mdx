@@ -36,6 +36,190 @@ O ShopEasy organiza os pagamentos em **métodos** (PIX, Cartão, Cripto e Saldo)
   As taxas acima são as exibidas no menu do bot. Confirme sempre os valores atuais no site de cada gateway.
 </Callout>
 
+## Experimente o menu
+
+Simulação de um servidor no plano **Básico**, usando o bot público. Escolha um método e depois um gateway para ver o status e os botões de cada um.
+
+<DiscordMenuSimulator
+  command="/pagamento configurar"
+  start="main"
+  screens={{
+    main: { title: "Pagamentos", blocks: [
+      "## 🏦 Configuração Pagamentos\n> Configure como o checkout vai receber cada tipo de pagamento.",
+      { separator: true },
+      "-# Ao conectar um metodo de pagamento você está concordando com termos da ShopEasy",
+      { select: { placeholder: "💳 Selecione um metodo para configurar", options: [
+        { label: "PIX", emoji: "💠", description: "Nenhum provedor configurado", goto: "pix" },
+        { label: "Cartao", emoji: "💳", description: "Nenhum provedor configurado", goto: "card" },
+        { label: "Cripto", emoji: "🪙", description: "Nenhum provedor configurado", goto: "crypto" },
+        { label: "Saldo", emoji: "👛", description: "Desativado", goto: "saldo" }
+      ] } },
+      { buttons: [ { label: "Termos E Responsabilidades", emoji: "🛡️", style: "success", toast: "-# O ShopEasy atua apenas como intermediário tecnológico. Os pagamentos vão direto para a conta do gateway conectado." } ] }
+    ] },
+    pix: { title: "PIX", blocks: [
+      "## 💠 PIX\n> Gateway atual: **Nenhum**",
+      { separator: true },
+      "## PIX Manual\nChave PIX semiautomatica, sem intermediador.\n\n>>> Taxa: **Sem taxa**\nTipo: **Manual**\nStatus: **Pendente**\nCheckout: **Nao selecionado**" + "\nComprovante: **Obrigatorio**",
+      { buttons: [
+        { label: "Conectar", emoji: "🔗", style: "success", modal: "pixManual" },
+        { label: "Usar no checkout", emoji: "✔️", disabled: true }
+      ] },
+      { buttons: [ { label: "Exigir comprovante: Ativado", emoji: "✅", style: "success", toast: "-# Com o comprovante desativado, o cliente só confirma o pagamento, sem enviar imagem." } ] },
+      { separator: true },
+      { select: { placeholder: "Selecione o gateway", options: [
+        { label: "PIX Manual", description: "Taxa: Sem taxa | Pendente", goto: "pix" },
+        { label: "Mercado Pago", description: "Taxa: 0,99% | Requer plano", goto: "mp" },
+        { label: "PagSeguro", description: "Taxa: 1,09% | Exclusivo", goto: "pagseguro" },
+        { label: "Asaas", description: "Taxa: 1,99% | Exclusivo", goto: "pagseguro" },
+        { label: "EFI Pay", description: "Taxa: 0,99% | Requer plano", goto: "mp" },
+        { label: "Bravex Pay", description: "Taxa: Depósito: R$0,50 + 1,50% | Saque: R$1,00 + 1% | Pendente", goto: "bravex" },
+        { label: "Carteira", description: "Taxa: Taxa indefinida | Pendente", goto: "wallet" }
+      ] } },
+      { buttons: [ { label: "Voltar", emoji: "⬅️", style: "danger", goto: "main" } ] }
+    ] },
+    pixReady: { title: "PIX Manual", blocks: [
+      "## 💠 PIX\n> Gateway atual: **Nenhum**",
+      { separator: true },
+      "## PIX Manual\nChave PIX semiautomatica, sem intermediador.\n\n>>> Taxa: **Sem taxa**\nTipo: **Manual**\nStatus: **Conectado**\nCheckout: **Nao selecionado**" + "\nComprovante: **Obrigatorio**",
+      { buttons: [
+        { label: "Editar", emoji: "⚙️", modal: "pixManual" },
+        { label: "Usar no checkout", emoji: "✔️", goto: "pixActive" }
+      ] },
+      { buttons: [ { label: "Exigir comprovante: Ativado", emoji: "✅", style: "success" } ] },
+      { separator: true },
+      { select: { placeholder: "Selecione o gateway", options: [
+        { label: "PIX Manual", description: "Taxa: Sem taxa | Conectado", goto: "pixReady" },
+        { label: "Mercado Pago", description: "Taxa: 0,99% | Requer plano", goto: "mp" },
+        { label: "PagSeguro", description: "Taxa: 1,09% | Exclusivo", goto: "pagseguro" },
+        { label: "Asaas", description: "Taxa: 1,99% | Exclusivo", goto: "pagseguro" },
+        { label: "EFI Pay", description: "Taxa: 0,99% | Requer plano", goto: "mp" },
+        { label: "Bravex Pay", description: "Taxa: Depósito: R$0,50 + 1,50% | Saque: R$1,00 + 1% | Pendente", goto: "bravex" },
+        { label: "Carteira", description: "Taxa: Taxa indefinida | Pendente", goto: "wallet" }
+      ] } },
+      { buttons: [ { label: "Voltar", emoji: "⬅️", style: "danger", goto: "main" } ] }
+    ] },
+    pixActive: { title: "No checkout", blocks: [
+      "## 💠 PIX\n> Gateway atual: **PIX Manual**",
+      { separator: true },
+      "## PIX Manual\nChave PIX semiautomatica, sem intermediador.\n\n>>> Taxa: **Sem taxa**\nTipo: **Manual**\nStatus: **Ativo no checkout**\nCheckout: **Selecionado**\nComprovante: **Obrigatorio**",
+      { buttons: [
+        { label: "Editar", emoji: "⚙️", modal: "pixManual" },
+        { label: "No checkout", emoji: "✅", style: "success", disabled: true }
+      ] },
+      { buttons: [ { label: "Exigir comprovante: Ativado", emoji: "✅", style: "success" } ] },
+      { separator: true },
+      { select: { placeholder: "Selecione o gateway", options: [
+        { label: "PIX Manual", description: "Taxa: Sem taxa | Conectado", goto: "pixReady" },
+        { label: "Mercado Pago", description: "Taxa: 0,99% | Requer plano", goto: "mp" },
+        { label: "PagSeguro", description: "Taxa: 1,09% | Exclusivo", goto: "pagseguro" },
+        { label: "Asaas", description: "Taxa: 1,99% | Exclusivo", goto: "pagseguro" },
+        { label: "EFI Pay", description: "Taxa: 0,99% | Requer plano", goto: "mp" },
+        { label: "Bravex Pay", description: "Taxa: Depósito: R$0,50 + 1,50% | Saque: R$1,00 + 1% | Pendente", goto: "bravex" },
+        { label: "Carteira", description: "Taxa: Taxa indefinida | Pendente", goto: "wallet" }
+      ] } },
+      { buttons: [ { label: "Voltar", emoji: "⬅️", style: "danger", goto: "main" } ] }
+    ] },
+    mp: { title: "Requer plano", blocks: [
+      "## 💠 PIX\n> Gateway atual: **Nenhum**",
+      { separator: true },
+      "## Mercado Pago\nPIX automatico via Mercado Pago.\n🔒 Disponível a partir do plano **Profissional**.\n\n>>> Taxa: **0,99%**\nTipo: **Automatico**\nStatus: **Requer plano**\nCheckout: **Nao selecionado**",
+      { buttons: [ { label: "Exclusivo", emoji: "🔒", disabled: true }, { label: "Usar no checkout", emoji: "✔️", disabled: true } ] },
+      { separator: true },
+      { select: { placeholder: "Selecione o gateway", options: [
+        { label: "PIX Manual", description: "Taxa: Sem taxa | Pendente", goto: "pix" },
+        { label: "Mercado Pago", description: "Taxa: 0,99% | Requer plano", goto: "mp" },
+        { label: "PagSeguro", description: "Taxa: 1,09% | Exclusivo", goto: "pagseguro" },
+        { label: "Asaas", description: "Taxa: 1,99% | Exclusivo", goto: "pagseguro" },
+        { label: "EFI Pay", description: "Taxa: 0,99% | Requer plano", goto: "mp" },
+        { label: "Bravex Pay", description: "Taxa: Depósito: R$0,50 + 1,50% | Saque: R$1,00 + 1% | Pendente", goto: "bravex" },
+        { label: "Carteira", description: "Taxa: Taxa indefinida | Pendente", goto: "wallet" }
+      ] } },
+      { buttons: [ { label: "Voltar", emoji: "⬅️", style: "danger", goto: "main" } ] }
+    ] },
+    pagseguro: { title: "Exclusivo", blocks: [
+      "## 💠 PIX\n> Gateway atual: **Nenhum**",
+      { separator: true },
+      "## PagSeguro\nPIX automatico via PagSeguro.\n🔒 Disponivel apenas para bots **exclusivos**.\n\n>>> Taxa: **1,09%**\nTipo: **Automatico**\nStatus: **Exclusivo**\nCheckout: **Nao selecionado**",
+      { buttons: [ { label: "Exclusivo", emoji: "🔒", disabled: true }, { label: "Usar no checkout", emoji: "✔️", disabled: true } ] },
+      { separator: true },
+      { select: { placeholder: "Selecione o gateway", options: [
+        { label: "PIX Manual", description: "Taxa: Sem taxa | Pendente", goto: "pix" },
+        { label: "Mercado Pago", description: "Taxa: 0,99% | Requer plano", goto: "mp" },
+        { label: "PagSeguro", description: "Taxa: 1,09% | Exclusivo", goto: "pagseguro" },
+        { label: "Asaas", description: "Taxa: 1,99% | Exclusivo", goto: "pagseguro" },
+        { label: "EFI Pay", description: "Taxa: 0,99% | Requer plano", goto: "mp" },
+        { label: "Bravex Pay", description: "Taxa: Depósito: R$0,50 + 1,50% | Saque: R$1,00 + 1% | Pendente", goto: "bravex" },
+        { label: "Carteira", description: "Taxa: Taxa indefinida | Pendente", goto: "wallet" }
+      ] } },
+      { buttons: [ { label: "Voltar", emoji: "⬅️", style: "danger", goto: "main" } ] }
+    ] },
+    bravex: { title: "Bravex Pay", blocks: [
+      "## 💠 PIX\n> Gateway atual: **Nenhum**",
+      { separator: true },
+      "## Bravex Pay\nPIX automático via BravexPay.\n\n>>> Taxa: **Depósito: R$0,50 + 1,50% | Saque: R$1,00 + 1%**\nTipo: **Automatico**\nStatus: **Pendente**\nCheckout: **Nao selecionado**",
+      { buttons: [ { label: "Conectar", emoji: "🔗", style: "success", toast: "-# Abre o formulário com **Client ID** e **Client Secret** da conta Bravex." }, { label: "Usar no checkout", emoji: "✔️", disabled: true } ] },
+      { separator: true },
+      { select: { placeholder: "Selecione o gateway", options: [
+        { label: "PIX Manual", description: "Taxa: Sem taxa | Pendente", goto: "pix" },
+        { label: "Mercado Pago", description: "Taxa: 0,99% | Requer plano", goto: "mp" },
+        { label: "PagSeguro", description: "Taxa: 1,09% | Exclusivo", goto: "pagseguro" },
+        { label: "Asaas", description: "Taxa: 1,99% | Exclusivo", goto: "pagseguro" },
+        { label: "EFI Pay", description: "Taxa: 0,99% | Requer plano", goto: "mp" },
+        { label: "Bravex Pay", description: "Taxa: Depósito: R$0,50 + 1,50% | Saque: R$1,00 + 1% | Pendente", goto: "bravex" },
+        { label: "Carteira", description: "Taxa: Taxa indefinida | Pendente", goto: "wallet" }
+      ] } },
+      { buttons: [ { label: "Voltar", emoji: "⬅️", style: "danger", goto: "main" } ] }
+    ] },
+    wallet: { title: "Carteira", blocks: [
+      "## 💠 PIX\n> Gateway atual: **Nenhum**",
+      { separator: true },
+      "## Carteira\nPagamento pela carteira integrada.\n\n>>> Taxa: **Taxa indefinida**\nTipo: **Carteira**\nStatus: **Pendente**\nCheckout: **Nao selecionado**",
+      { buttons: [ { label: "Conectar", emoji: "🔗", style: "success", toast: "-# Abre o formulário com a **API Key** da carteira, obtida em `/carteira`." }, { label: "Usar no checkout", emoji: "✔️", disabled: true } ] },
+      { separator: true },
+      { select: { placeholder: "Selecione o gateway", options: [
+        { label: "PIX Manual", description: "Taxa: Sem taxa | Pendente", goto: "pix" },
+        { label: "Mercado Pago", description: "Taxa: 0,99% | Requer plano", goto: "mp" },
+        { label: "PagSeguro", description: "Taxa: 1,09% | Exclusivo", goto: "pagseguro" },
+        { label: "Asaas", description: "Taxa: 1,99% | Exclusivo", goto: "pagseguro" },
+        { label: "EFI Pay", description: "Taxa: 0,99% | Requer plano", goto: "mp" },
+        { label: "Bravex Pay", description: "Taxa: Depósito: R$0,50 + 1,50% | Saque: R$1,00 + 1% | Pendente", goto: "bravex" },
+        { label: "Carteira", description: "Taxa: Taxa indefinida | Pendente", goto: "wallet" }
+      ] } },
+      { buttons: [ { label: "Voltar", emoji: "⬅️", style: "danger", goto: "main" } ] }
+    ] },
+    card: { title: "Cartao", blocks: [
+      "## 💳 Cartao\n> Gateway atual: **Nenhum**",
+      { separator: true },
+      "## Stripe\nCartao de credito e debito.\n🔒 Disponivel apenas para bots **exclusivos**.\n\n>>> Taxa: **3,49%**\nTipo: **Automatico**\nStatus: **Exclusivo**\nCheckout: **Nao selecionado**",
+      { buttons: [ { label: "Exclusivo", emoji: "🔒", disabled: true }, { label: "Usar no checkout", emoji: "✔️", disabled: true } ] },
+      { separator: true },
+      { buttons: [ { label: "Voltar", emoji: "⬅️", style: "danger", goto: "main" } ] }
+    ] },
+    crypto: { title: "Cripto", blocks: [
+      "## 🪙 Cripto\n> Gateway atual: **Nenhum**",
+      { separator: true },
+      "## NowPayments\nPagamentos em criptomoedas.\n🔒 Disponivel apenas para bots **exclusivos**.\n\n>>> Taxa: **0,5%**\nTipo: **Automatico**\nStatus: **Exclusivo**\nCheckout: **Nao selecionado**",
+      { buttons: [ { label: "Exclusivo", emoji: "🔒", disabled: true }, { label: "Usar no checkout", emoji: "✔️", disabled: true } ] },
+      { separator: true },
+      { buttons: [ { label: "Voltar", emoji: "⬅️", style: "danger", goto: "main" } ] }
+    ] },
+    saldo: { title: "Saldo", blocks: [
+      "## 👛 Saldo\n> Permite que o cliente pague usando o saldo (créditos) da conta na loja.",
+      { separator: true },
+      ">>> Tipo: **Carteira**\nStatus: **Desativado**",
+      "-# Disponível a partir do plano **Profissional**.",
+      { buttons: [ { label: "Saldo: Desativado", toast: "-# No plano Básico, o bot pede um plano **Profissional** para ativar o saldo." }, { label: "Voltar", emoji: "⬅️", style: "danger", goto: "main" } ] }
+    ] }
+  }}
+  modals={{
+    pixManual: { title: "💳 Autenticando Pagamento", goto: "pixReady", fields: [
+      { label: "Nome da conta", description: "Nome do titular da chave PIX", placeholder: "Ex: João da Silva", maxLength: 20 },
+      { label: "Chave PIX", description: "Chave PIX para recebimento", placeholder: "Recomendamos chave aleatória", maxLength: 40 },
+      { label: "Tipo da chave", description: "Selecione o tipo da chave PIX", kind: "select", options: ["CPF", "Aleatória", "E-mail", "Telefone"] }
+    ] }
+  }}
+/>
+
 ## Configurando um gateway
 
 <Steps>

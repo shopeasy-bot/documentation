@@ -5,6 +5,7 @@ description: Configure título, preço, imagens, cargos e mensagens dos produtos
 ---
 import { Image, DollarSign, Package, FileText, Palette, ListTree, MessageSquare, Settings, Sparkles, Trash2, AlertCircle } from "lucide-react";
 import { Callout } from 'fumadocs-ui/components/callout';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
 # Configuração de Produtos
 
@@ -25,7 +26,84 @@ Informe a referência para abrir o produto direto. Sem referência, o bot mostra
 
 ## Menu de Configuração
 
-![Menu de configuração do produto](/images/products/menu-configuracao.png)
+## Experimente o menu
+
+Produto de exemplo. Abra uma opção do seletor: título, descrição e valor abrem o formulário; depois de enviar, o rascunho fica ativo e **Salvar Alterações** é liberado.
+
+<DiscordMenuSimulator
+  command="/produto configurar"
+  start="start"
+  screens={{
+    start: { title: "Produto", blocks: [
+      "## ⚙️ Edição de Produto\n> Selecione uma opção abaixo para editar ou configurar.",
+      { separator: true },
+      "## Sem titulo configurado..\n> Sem descrição configurada...",
+      { section: "### R$ 10,00\n-# **25** unidades disponíveis", button: { label: "Comprar", emoji: "🛒", disabled: true } },
+      { separator: true },
+      { select: { placeholder: "🔧 O que deseja alterar?", options: [
+        { label: "✏️ Alterar título", description: "Renomeie o produto como quiser", modal: "title" },
+        { label: "📝 Alterar descrição", description: "Detalhe o que o produto oferece", modal: "description" },
+        { label: "💰 Alterar valor", description: "Defina o preço de venda do produto", modal: "price" },
+        { label: "🎨 Alterar cor", description: "Personalize a cor da borda lateral", toast: "-# Escolha uma das 25 cores prontas ou informe um código hexadecimal." },
+        { label: "📦 Configurar estoque", description: "Gerencie a quantidade disponível", toast: "-# Abre o menu de estoque. Veja a página **Estoque**." },
+        { label: "🖼️ Configurar imagens", description: "Adicione ou troque as fotos do produto", toast: "-# Envie arquivos, adicione por link ou escolha da galeria (até 5 imagens)." },
+        { label: "📋 Vincular catálogo", description: "Associe este produto a um catálogo", toast: "-# Requer um plano pago." },
+        { label: "💬 Configurar mensagens", description: "Gerencie as mensagens vinculadas ao produto", toast: "-# Lista as mensagens publicadas, com **Abrir mensagem** e **Desvincular**." },
+        { label: "⚙️ Configurações extras", description: "Cargo de acesso e cargo recebido na compra", toast: "-# Até 5 cargos de acesso e um cargo entregue na compra." },
+        { label: "🗑️ Excluir produto", description: "Exclui permanentemente este produto", toast: "-# O bot pede confirmação: esta ação é permanente e não poderá ser desfeita." }
+      ] } },
+      { buttons: [
+        { label: "Gerar com IA", emoji: "🧠", style: "primary", modal: "ia" },
+        { label: "Desativar", emoji: "⏸️", style: "danger", toast: "-# Produtos desativados não podem ser comprados." }
+      ] },
+      { buttons: [
+        { label: "Menu Principal", emoji: "🏠", disabled: true },
+        { label: "Salvar Alterações", emoji: "💾", style: "success", disabled: true, toast: "-# Simulação: o rascunho seria aplicado e as mensagens do produto atualizadas." },
+        { label: "Voltar", emoji: "⬅️", goto: "start" }
+      ] }
+    ] },
+    draft: { title: "Rascunho", blocks: [
+      "## ⚙️ Edição de Produto\n> Selecione uma opção abaixo para editar ou configurar.",
+      { separator: true },
+      "## Conta Premium\n> Acesso completo por 30 dias.",
+      { section: "### R$ 19,90\n-# **25** unidades disponíveis", button: { label: "Comprar", emoji: "🛒", disabled: true } },
+      { separator: true },
+      { select: { placeholder: "🔧 O que deseja alterar?", options: [
+        { label: "✏️ Alterar título", description: "Renomeie o produto como quiser", modal: "title" },
+        { label: "📝 Alterar descrição", description: "Detalhe o que o produto oferece", modal: "description" },
+        { label: "💰 Alterar valor", description: "Defina o preço de venda do produto", modal: "price" },
+        { label: "🎨 Alterar cor", description: "Personalize a cor da borda lateral", toast: "-# Escolha uma das 25 cores prontas ou informe um código hexadecimal." },
+        { label: "📦 Configurar estoque", description: "Gerencie a quantidade disponível", toast: "-# Abre o menu de estoque. Veja a página **Estoque**." },
+        { label: "🖼️ Configurar imagens", description: "Adicione ou troque as fotos do produto", toast: "-# Envie arquivos, adicione por link ou escolha da galeria (até 5 imagens)." },
+        { label: "📋 Vincular catálogo", description: "Associe este produto a um catálogo", toast: "-# Requer um plano pago." },
+        { label: "💬 Configurar mensagens", description: "Gerencie as mensagens vinculadas ao produto", toast: "-# Lista as mensagens publicadas, com **Abrir mensagem** e **Desvincular**." },
+        { label: "⚙️ Configurações extras", description: "Cargo de acesso e cargo recebido na compra", toast: "-# Até 5 cargos de acesso e um cargo entregue na compra." },
+        { label: "🗑️ Excluir produto", description: "Exclui permanentemente este produto", toast: "-# O bot pede confirmação: esta ação é permanente e não poderá ser desfeita." }
+      ] } },
+      { buttons: [
+        { label: "Gerar com IA", emoji: "🧠", style: "primary", modal: "ia" },
+        { label: "Desativar", emoji: "⏸️", style: "danger", toast: "-# Produtos desativados não podem ser comprados." }
+      ] },
+      { buttons: [
+        { label: "Menu Principal", emoji: "🏠", disabled: true },
+        { label: "Salvar Alterações", emoji: "💾", style: "success", disabled: false, toast: "-# Simulação: o rascunho seria aplicado e as mensagens do produto atualizadas." },
+        { label: "Voltar", emoji: "⬅️", goto: "start" }
+      ] }
+    ] }
+  }}
+  modals={{
+    title: { title: "📦 Configurando Produto", goto: "draft", fields: [ { label: "Título", description: "Nome exibido no embed e na listagem do produto", maxLength: 40, value: "Conta Premium" } ] },
+    description: { title: "📦 Configurando Produto", goto: "draft", fields: [ { label: "Descrição", description: "Descrição do produto", style: "paragraph", maxLength: 2000, value: "Acesso completo por 30 dias." } ] },
+    price: { title: "📦 Configurando Produto", goto: "draft", fields: [ { label: "Preço", description: "Valor de venda do produto (ex: 19,90)", value: "19,90" } ] },
+    ia: { title: "📦 Configurando Produto", goto: "draft", fields: [ { label: "Qual vai ser o prompt para personalizar?", style: "paragraph", maxLength: 300, placeholder: "Ex: conta premium de streaming por 30 dias" } ], toast: "-# Simulação: a IA preencheria título, descrição e preço (requer plano pago)." }
+  }}
+/>
+
+<Accordions>
+  <Accordion title="Ver captura de tela do menu real">
+    ![Menu de configuração do produto](/images/products/menu-configuracao.png)
+  </Accordion>
+</Accordions>
 
 Escolha uma opção no seletor **O que deseja alterar?**:
 
