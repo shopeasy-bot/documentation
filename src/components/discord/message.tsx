@@ -237,12 +237,12 @@ export function DiscordContainer({
   return (
     <div
       className={cn(
-        "relative flex max-w-[600px] flex-col gap-2 rounded-lg border border-dc-border bg-dc-container py-3 pl-5 pr-4",
+        "relative flex max-w-[600px] flex-col gap-2 overflow-hidden rounded-lg border border-dc-border bg-dc-container py-3 pl-5 pr-4",
         className,
       )}
     >
       <span
-        className="absolute inset-y-0 left-0 w-1 rounded-l-lg"
+        className="absolute inset-y-0 left-0 w-1"
         style={{ backgroundColor: accent }}
         aria-hidden
       />

@@ -33,13 +33,6 @@ Produto de exemplo. Abra uma opção do seletor: título, descrição e valor ab
 <DiscordMenuSimulator
   command="/produto configurar"
   start="start"
-  channel="staff"
-  tour={[
-    { target: "🔧 O que deseja alterar?", text: "Abra o seletor **O que deseja alterar?**." },
-    { target: "✏️ Alterar título", text: "Escolha **✏️ Alterar título**." },
-    { target: "📦 Configurando Produto", text: "Dê um nome ao produto e clique em **Enviar**.", on: "submit" },
-    { target: "Salvar Alterações", text: "Clique em **Salvar Alterações**: o produto e as mensagens publicadas são atualizados." }
-  ]}
   screens={{
     start: { title: "Produto", blocks: [
       "## ⚙️ Edição de Produto\n> Selecione uma opção abaixo para editar ou configurar.",

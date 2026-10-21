@@ -41,14 +41,6 @@ No seletor do menu, escolha uma categoria:
 <DiscordMenuSimulator
   command="/configuracoes"
   start="main"
-  channel="staff"
-  tour={[
-    { target: "⚙️ Selecione uma categoria", text: "Abra o seletor de categorias do menu." },
-    { target: "🛒 Carrinhos", text: "Escolha **🛒 Carrinhos**." },
-    { target: "Alterar", text: "Clique em **Alterar** ao lado de Nome do Carrinho." },
-    { target: "⚙️ Configurações Compra", text: "Edite o nome (as variáveis como {{nome}} viram o nome do cliente) e clique em **Enviar**.", on: "submit" },
-    { target: "Salvar Alterações", text: "Clique em **Salvar Alterações**. Sem salvar, o rascunho expira em 24 horas." }
-  ]}
   screens={{
     main: { title: "Configurações", blocks: [
       "## ⚙️ Configurações\n> Selecione abaixo a categoria que deseja configurar ou alterar.",

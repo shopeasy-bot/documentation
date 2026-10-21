@@ -11,7 +11,6 @@
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.137.0",
     "@radix-ui/react-popover": "^1.1.15",
     "@skyra/discord-components-core": "^4.0.2",
     "@skyra/discord-components-react": "^4.0.2",

@@ -28,7 +28,6 @@ import { DcActionRow, DcButton, DiscordModal, DiscordSelect } from "./components
 import { DiscordMenuSimulator } from "./components/discord/menu-simulator";
 import { CommandExplorer } from "./components/command-explorer";
 import { PlanComparator } from "./components/plan-comparator";
-import { DocsHero, SpotlightCard, SpotlightGrid } from "./components/home/docs-hero";
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -65,9 +64,6 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     DiscordMenuSimulator,
     CommandExplorer,
     PlanComparator,
-    DocsHero,
-    SpotlightGrid,
-    SpotlightCard,
     pre: ({ ref: _ref, ...props }) => (
       <CodeBlock {...props}>
         <Pre>{props.children}</Pre>
