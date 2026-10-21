@@ -142,7 +142,7 @@ function Phone() {
       <div className="relative h-[26rem] overflow-hidden rounded-[2rem] bg-gradient-to-b from-emerald-950 via-neutral-950 to-neutral-950 px-3 pt-3">
         <div className="mx-auto h-5 w-20 rounded-full bg-black" />
         <p className="mt-6 text-center text-4xl font-light text-white">12:00</p>
-        <p className="text-center text-[11px] text-neutral-400">terça-feira, 21 de outubro</p>
+        <p className="text-center text-[11px] text-neutral-400">novembro de 2026</p>
         <div className="mt-6 flex flex-col gap-2">
           {NOTIFICATIONS.map(([title, text, time]) => (
             <div key={title} className="rounded-2xl bg-white/10 p-2.5 text-left backdrop-blur">

@@ -32,7 +32,9 @@ export function PlatformBadge({ name }: { name: Platform }) {
 
 interface ReleaseProps {
   /** Data no formato AAAA-MM-DD. */
-  date: string;
+  date?: string;
+  /** Texto no lugar da data, para versões sem dia definido. Ex.: "Novembro de 2026". */
+  when?: string;
   version?: string;
   platforms?: Platform[];
   /** Destaque curto, ex.: "Lançamento". */
@@ -41,11 +43,11 @@ interface ReleaseProps {
 }
 
 /** Uma entrada do histórico de atualizações. Use o título como `##` logo antes. */
-export function Release({ date, version, platforms = [], tag, children }: ReleaseProps) {
+export function Release({ date, when, version, platforms = [], tag, children }: ReleaseProps) {
   return (
     <section className="-mt-2 mb-12 border-s ps-5">
       <div className="mb-4 flex flex-wrap items-center gap-2 text-sm text-fd-muted-foreground">
-        <time dateTime={date}>{formatDate(date)}</time>
+        {date ? <time dateTime={date}>{formatDate(date)}</time> : <span>{when}</span>}
         {version && (
           <span className="rounded-md bg-fd-primary/10 px-2 py-0.5 font-mono text-xs font-medium text-fd-primary">
             {version}

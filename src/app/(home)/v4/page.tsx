@@ -10,7 +10,7 @@ import { FiArrowRight, FiBookOpen } from "react-icons/fi";
 import type { Metadata } from "next";
 
 const title = "ShopEasy v4";
-const description = "Sua loja no Discord, no navegador e no celular. Conheça tudo o que chegou na versão 4.";
+const description = "Sua loja no Discord, no navegador e no celular. Conheça o que vem na versão 4, que chega em novembro.";
 
 export const metadata: Metadata = {
   title: `${title} - ShopEasy`,
@@ -76,7 +76,7 @@ export default function V4Page() {
           className="[mask-image:radial-gradient(ellipse_at_top,white,transparent_70%)] opacity-40"
         />
         <div className="flex flex-col items-center gap-5 text-center">
-          <Eyebrow>Lançamento · 21 de outubro de 2026</Eyebrow>
+          <Eyebrow>Chega em novembro de 2026</Eyebrow>
           <h1 className={cn(poppins.className, "flex flex-col items-center leading-none")}>
             <span className="text-2xl font-medium text-neutral-300 sm:text-3xl">ShopEasy</span>
             <span
@@ -115,7 +115,7 @@ export default function V4Page() {
       {/* Novidades */}
       <section aria-labelledby="novidades" className="flex w-full max-w-6xl flex-col gap-10 px-4 py-20">
         <div className="flex flex-col gap-3">
-          <Eyebrow>O que chegou</Eyebrow>
+          <Eyebrow>O que vem na v4</Eyebrow>
           <h2 id="novidades" className={cn(poppins.className, "max-w-2xl text-4xl font-semibold sm:text-5xl")}>
             Três jeitos de cuidar da sua loja.
           </h2>
@@ -208,11 +208,11 @@ export default function V4Page() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <MysteryCard code="Arquivo 01" platform="Bot" reveal="2026-11-04" hint="Uma nova forma de vender para quem ainda nem entrou no seu servidor." />
-            <MysteryCard code="Arquivo 02" reveal="2026-11-18" />
-            <MysteryCard code="Arquivo 03" platform="Dashboard" reveal="2026-12-02" hint="Relatórios que respondem antes de você perguntar." />
-            <MysteryCard code="Arquivo 04" reveal="2026-12-09" />
-            <MysteryCard code="Arquivo 05" platform="App mobile" reveal="2026-12-16" hint="O app vai ganhar algo que hoje só existe no Discord." />
+            <MysteryCard code="Arquivo 01" platform="Bot" reveal="2026-12-07" hint="Uma nova forma de vender para quem ainda nem entrou no seu servidor." />
+            <MysteryCard code="Arquivo 02" reveal="2026-12-21" />
+            <MysteryCard code="Arquivo 03" platform="Dashboard" reveal="2027-01-11" hint="Relatórios que respondem antes de você perguntar." />
+            <MysteryCard code="Arquivo 04" reveal="2027-01-25" />
+            <MysteryCard code="Arquivo 05" platform="App mobile" reveal="2027-02-08" hint="O app vai ganhar algo que hoje só existe no Discord." />
             <MysteryCard code="Arquivo 06" period="2027" />
           </div>
         </div>
@@ -221,10 +221,10 @@ export default function V4Page() {
       {/* Final */}
       <section className="flex flex-col items-center gap-6 px-4 py-24 text-center">
         <h2 className={cn(poppins.className, "max-w-2xl text-4xl font-semibold sm:text-5xl")}>
-          Já está na sua loja.
+          Chega em novembro.
         </h2>
         <p className="max-w-md text-neutral-400">
-          Quem usa o ShopEasy recebe a v4 automaticamente. Não precisa reinstalar nada.
+          No lançamento, quem usa o ShopEasy recebe a v4 automaticamente. Não precisa reinstalar nada.
         </p>
         <div className="flex flex-wrap justify-center gap-3">
           <Link
