@@ -4,7 +4,7 @@ import { cn } from "@/lib/cn"
 import { JetBrains_Mono, Poppins } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
-import { FiAlertCircle, FiFileText, FiPackage, FiTag, FiShield, FiSettings, FiZap, FiPercent, FiUsers, FiTrendingUp } from "react-icons/fi"
+import { FiFileText, FiPackage, FiTag, FiShield, FiSettings, FiZap, FiPercent, FiUsers, FiTrendingUp } from "react-icons/fi"
 import AnimatedShinyText from "@/components/ui/animaty-text"
 import { FaPlus } from "react-icons/fa"
 import { FaPix, FaCreditCard, FaCcStripe, FaBitcoin, FaWallet, FaAndroid, FaDiscord, FaArrowRight } from "react-icons/fa6"
@@ -155,7 +155,6 @@ export default function HomePage() {
               SHOPEASY
             </h1>
 
-            <div className="flex flex-wrap items-center justify-center gap-2 md:justify-start">
             <Link
               href="/v4"
               className={`${jetbrains.className} group flex items-center gap-2.5 px-4 py-1.5 rounded-full
@@ -179,32 +178,6 @@ export default function HomePage() {
                 </span>
               </span>
             </Link>
-
-            {/* YouTube tutorial — ticker pill com flip de texto no hover */}
-            <Link
-              href="/comunicado"
-              className={`${jetbrains.className} group flex items-center gap-2.5 px-4 py-1.5 rounded-full
-                border border-neutral-200/30 dark:border-neutral-700/50
-                bg-neutral-100/5 dark:bg-neutral-900/30
-                backdrop-blur-sm
-                hover:border-amber-500/40 dark:hover:border-amber-500/40
-                hover:bg-amber-500/5
-                transition-all duration-300 ease-out
-                text-neutral-500 dark:text-neutral-400
-                text-xs tracking-wide
-              `}
-            >
-              <FiAlertCircle className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
-              <span className="relative h-4 overflow-hidden flex items-center">
-                <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">
-                  nossa comunidade agora está no WhatsApp
-                </span>
-                <span className="absolute inset-0 inline-block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-amber-500 dark:text-amber-400">
-                  saiba mais →
-                </span>
-              </span>
-            </Link>
-            </div>
           </div>
         </div>
 
