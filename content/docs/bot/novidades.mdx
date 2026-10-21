@@ -1,0 +1,84 @@
+---
+title: Novidades
+icon: BiGift
+description: Tudo o que mudou no ShopEasy — bot, dashboard, app mobile e API — e o que vem por aí.
+---
+
+Acompanhe aqui cada atualização do ShopEasy. Cada versão tem um link próprio: clique no título para copiar e compartilhar.
+
+## Vem aí
+
+Algumas novidades já estão em desenvolvimento, mas ainda não podemos contar tudo.
+
+<Spoilers>
+  <Spoiler platform="bot" eta="Novembro" hint="Uma nova forma de vender para quem ainda não entrou no seu servidor." />
+  <Spoiler platform="dashboard" eta="Novembro" hint="Relatórios que respondem antes de você perguntar." />
+  <Spoiler platform="mobile" eta="Dezembro" hint="O app vai ganhar algo que hoje só existe no Discord." />
+  <Spoiler platform="api" eta="2027" hint="Mais liberdade para quem constrói em cima do ShopEasy." />
+</Spoilers>
+
+## ShopEasy 3.0: sua loja em todo lugar
+
+<Release date="2026-10-21" version="v3.0" tag="Lançamento" platforms={["bot", "dashboard", "mobile"]}>
+
+A maior atualização do ShopEasy até agora. A loja deixa de viver só no Discord: agora você acompanha e gerencia tudo pelo navegador e pelo celular.
+
+### Bot
+
+- **Menus mais rápidos:** as telas de `/configuracoes` e `/produto configurar` abrem e salvam até 2x mais rápido.
+- **Carrinho com resumo:** antes de pagar, o cliente vê um resumo com produto, quantidade, cupom e valor final.
+- **Avisos de estoque baixo:** a equipe recebe uma mensagem no canal de logs quando um produto chega ao estoque mínimo.
+
+### Dashboard
+
+- **Nova página inicial:** vendas do dia, faturamento da semana e produtos mais vendidos em um só lugar.
+- **Gerencie produtos pelo navegador:** edite título, preço, estoque e imagens sem abrir o Discord.
+- **Exportação de vendas:** baixe o histórico em planilha, filtrando por período e produto.
+
+### App mobile
+
+- **Lançamento do app ShopEasy** para Android e iOS.
+- **Notificação de venda:** receba um aviso no celular a cada pagamento aprovado.
+- **Aprovação de PIX Manual:** aprove ou recuse pagamentos direto pelo app.
+
+</Release>
+
+## Cupons por produto e melhorias no checkout
+
+<Release date="2026-09-30" version="v2.8" platforms={["bot", "dashboard"]}>
+
+- **Cupons por produto:** limite um cupom a produtos específicos da loja.
+- **Validade de cupom:** defina uma data final; depois dela o cupom deixa de funcionar sozinho.
+- **Checkout mais claro:** a mensagem de pagamento agora mostra o tempo restante do carrinho.
+- **Dashboard:** nova aba de cupons com quantidade de usos e desconto total concedido.
+
+</Release>
+
+## Tickets com avaliação
+
+<Release date="2026-09-09" version="v2.7" platforms={["bot"]}>
+
+- **Avaliação de atendimento:** ao fechar um ticket, o cliente pode dar uma nota de 1 a 5.
+- **Transcrição do ticket:** o histórico da conversa é salvo no canal de logs quando o ticket é fechado.
+- **Correção:** o painel de tickets não perde mais os botões depois de reiniciar o bot.
+
+</Release>
+
+## Chaves de API e webhooks
+
+<Release date="2026-08-18" version="v2.6" platforms={["api", "dashboard"]}>
+
+- **Chaves de API pelo dashboard:** crie e revogue chaves sem precisar falar com o suporte.
+- **Webhooks de venda:** receba um aviso no seu sistema sempre que uma venda for aprovada.
+- **Limites mais altos** de requisições para os planos pagos.
+
+</Release>
+
+## Galeria de imagens
+
+<Release date="2026-07-28" version="v2.5" platforms={["bot"]}>
+
+- **Galeria por produto:** adicione várias imagens e o cliente navega entre elas na mensagem do produto.
+- **Correção:** imagens muito grandes agora são redimensionadas em vez de falharem no envio.
+
+</Release>

@@ -28,6 +28,7 @@ import { DcActionRow, DcButton, DiscordModal, DiscordSelect } from "./components
 import { DiscordMenuSimulator } from "./components/discord/menu-simulator";
 import { CommandExplorer } from "./components/command-explorer";
 import { PlanComparator } from "./components/plan-comparator";
+import { PlatformBadge, Release, Spoiler, Spoilers } from "./components/changelog";
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -64,6 +65,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     DiscordMenuSimulator,
     CommandExplorer,
     PlanComparator,
+    Release, Spoiler, Spoilers, PlatformBadge,
     pre: ({ ref: _ref, ...props }) => (
       <CodeBlock {...props}>
         <Pre>{props.children}</Pre>
