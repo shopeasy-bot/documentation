@@ -140,6 +140,15 @@ export default function HomePage() {
       <section className="relative flex flex-col items-center justify-center text-center gap-16 min-h-[80vh] w-full">
         <FlareDecoration />
 
+        <Link
+          href="/v4"
+          className={`${jetbrains.className} group -mb-8 flex items-center gap-3 rounded-full border border-emerald-500/30 bg-emerald-500/5 py-1 pl-1 pr-4 text-xs text-neutral-600 backdrop-blur-sm transition-colors duration-300 hover:border-emerald-500/60 hover:bg-emerald-500/10 dark:text-neutral-300`}
+        >
+          <span className="rounded-full bg-emerald-500 px-2.5 py-1 font-semibold uppercase tracking-wider text-black">Novo</span>
+          ShopEasy v4 chega em novembro
+          <FaArrowRight className="size-3 text-emerald-500 transition-transform group-hover:translate-x-0.5" />
+        </Link>
+
         <div className="flex flex-col md:flex-row justify-center items-center gap-4 motion-preset-expand motion-delay-[100ms]">
           <div className="relative">
             <div className="absolute inset-0 bg-emerald-500/20 rounded-full blur-xl"></div>

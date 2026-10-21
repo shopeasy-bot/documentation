@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/cn";
 import { BiBarChartAlt2, BiBox, BiCart, BiCog, BiHome, BiPurchaseTag } from "react-icons/bi";
 
@@ -107,8 +108,8 @@ function DiscordCard() {
   return (
     <div className="w-80 rounded-xl border border-white/10 bg-dc-chat p-3 text-left shadow-2xl shadow-black/60">
       <div className="flex gap-3">
-        <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-sm font-bold text-white">
-          S
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-dc-darker">
+          <Image src="/shopeasy.svg" alt="" width={22} height={22} />
         </span>
         <div className="min-w-0 flex-1">
           <p className="flex items-center gap-1.5 text-sm">
@@ -147,8 +148,8 @@ function Phone() {
           {NOTIFICATIONS.map(([title, text, time]) => (
             <div key={title} className="rounded-2xl bg-white/10 p-2.5 text-left backdrop-blur">
               <div className="flex items-center gap-1.5 text-[10px] text-neutral-300">
-                <span className="flex size-4 items-center justify-center rounded bg-emerald-500 text-[8px] font-bold text-white">
-                  S
+                <span className="flex size-4 items-center justify-center rounded bg-neutral-900">
+                  <Image src="/shopeasy.svg" alt="" width={10} height={10} />
                 </span>
                 ShopEasy
                 <span className="ml-auto text-neutral-500">{time}</span>
