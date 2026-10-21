@@ -16,12 +16,12 @@
     "@skyra/discord-components-react": "^4.0.2",
     "@vercel/analytics": "^1.6.1",
     "class-variance-authority": "^0.7.1",
-    "fumadocs-core": "16.0.14",
-    "fumadocs-mdx": "14.0.2",
-    "fumadocs-twoslash": "^3.1.12",
-    "fumadocs-ui": "16.0.14",
+    "fumadocs-core": "^16.17.7",
+    "fumadocs-mdx": "^15.4.9",
+    "fumadocs-twoslash": "^4.0.3",
+    "fumadocs-ui": "^16.17.7",
     "lucide-react": "^0.552.0",
-    "next": "16.0.10",
+    "next": "^16.4.2",
     "qrcode.react": "^4.2.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -29,13 +29,13 @@
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.16",
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/mdx": "^2.0.13",
     "@types/node": "^24.10.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.16",
+    "tailwindcss": "^4.3.3",
     "typescript": "^5.9.3"
   }
 }

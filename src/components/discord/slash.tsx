@@ -1,4 +1,4 @@
-import { cn } from "fumadocs-ui/utils/cn";
+import { cn } from "@/lib/cn";
 import { ggsans } from "./font";
 interface CommandOption {
   name: string;

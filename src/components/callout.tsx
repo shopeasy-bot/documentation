@@ -1,5 +1,5 @@
 import { cva } from "class-variance-authority";
-import { cn } from "fumadocs-ui/utils/cn";
+import { cn } from "@/lib/cn";
 import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { BsExclamationCircle } from "react-icons/bs";
 import { FaRegCircleCheck } from "react-icons/fa6";

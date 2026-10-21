@@ -1,6 +1,6 @@
 import { Analytics } from '@vercel/analytics/next';
 import './global.css';
-import { RootProvider } from 'fumadocs-ui/provider';
+import { RootProvider } from 'fumadocs-ui/provider/next';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { UserProvider } from '@/context/user';

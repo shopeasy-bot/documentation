@@ -6,7 +6,7 @@ import type { MDXComponents } from "mdx/types";
 
 import * as AccordionComponents from "fumadocs-ui/components/accordion";
 import * as bannerComponents from "fumadocs-ui/components/banner";
-import * as githubComponents from "fumadocs-ui/components/github-info";
+import { GithubInfo } from "fumadocs-ui/components/github-info";
 import * as headingComponents from "fumadocs-ui/components/heading";
 import * as imageComponents from "fumadocs-ui/components/image-zoom";
 import * as inlineComponents from "fumadocs-ui/components/inline-toc";
@@ -31,7 +31,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ...bannerComponents,
     ...calloutComponents,
     ...cardComponents,
-    ...githubComponents,
+    GithubInfo,
     ...headingComponents,
     ...imageComponents,
     ...inlineComponents,
