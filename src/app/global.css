@@ -27,6 +27,8 @@
   --animate-dc-in: dc-in 0.22s ease-out;
   --animate-dc-pop: dc-pop 0.18s ease-out;
   --animate-dc-typing: dc-typing 1.2s infinite ease-in-out;
+  --animate-v4-sheen: v4-sheen 7s ease-in-out infinite;
+  --animate-v4-float: v4-float 6s ease-in-out infinite;
 
   @keyframes dc-in {
     from { opacity: 0; transform: translateY(6px); }
@@ -35,6 +37,14 @@
   @keyframes dc-pop {
     from { opacity: 0; transform: scale(0.96); }
     to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes v4-sheen {
+    0%, 55% { background-position: 200% 0; }
+    100% { background-position: -100% 0; }
+  }
+  @keyframes v4-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
   }
   @keyframes dc-typing {
     0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
@@ -45,7 +55,9 @@
 @media (prefers-reduced-motion: reduce) {
   .animate-dc-in,
   .animate-dc-pop,
-  .animate-dc-typing {
+  .animate-dc-typing,
+  .animate-v4-sheen,
+  .animate-v4-float {
     animation: none;
   }
 }

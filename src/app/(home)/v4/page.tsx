@@ -1,10 +1,10 @@
 import { GridDecoration } from "@/components/decoration/Grid";
-import { FlareDecoration } from "@/components/decoration/Flare";
-import { Spoiler } from "@/components/changelog";
+import { MysteryCard } from "@/components/v4/mystery";
+import { ProductShot } from "@/components/v4/product-shot";
 import { cn } from "@/lib/cn";
 import { JetBrains_Mono, Poppins } from "next/font/google";
 import Link from "next/link";
-import type { IconType } from "react-icons";
+import type { ReactNode } from "react";
 import { BiBot, BiDesktop, BiMobileAlt } from "react-icons/bi";
 import { FiArrowRight, FiBookOpen } from "react-icons/fi";
 import type { Metadata } from "next";
@@ -20,148 +20,226 @@ export const metadata: Metadata = {
   twitter: { title, description },
 };
 
-const poppins = Poppins({ subsets: ["latin"], weight: ["500", "600"] });
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], weight: "500" });
 
-const cardClass = cn(
-  "flex flex-col gap-5 p-6 rounded-2xl border backdrop-blur-sm text-left",
-  "border-neutral-200/10 dark:border-neutral-800/50 bg-neutral-100/5 dark:bg-neutral-900/20",
-);
-
-interface Platform {
-  icon: IconType;
-  name: string;
-  summary: string;
-  items: { title: string; text: string }[];
+function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
+  return (
+    <span className={cn(jetbrains.className, "text-xs uppercase tracking-[0.25em] text-emerald-400", className)}>
+      {children}
+    </span>
+  );
 }
 
-const PLATFORMS: Platform[] = [
-  {
-    icon: BiBot,
-    name: "Bot",
-    summary: "Mais rápido para você, mais claro para o cliente.",
-    items: [
-      { title: "Menus mais rápidos", text: "/configuracoes e /produto configurar abrem e salvam até 2x mais rápido." },
-      { title: "Carrinho com resumo", text: "Antes de pagar, o cliente vê produto, quantidade, cupom e valor final." },
-      { title: "Aviso de estoque baixo", text: "A equipe é avisada no canal de logs quando um produto chega ao mínimo." },
-    ],
-  },
-  {
-    icon: BiDesktop,
-    name: "Dashboard",
-    summary: "Toda a loja pelo navegador, sem abrir o Discord.",
-    items: [
-      { title: "Nova página inicial", text: "Vendas do dia, faturamento da semana e produtos mais vendidos." },
-      { title: "Produtos pelo navegador", text: "Edite título, preço, estoque e imagens de qualquer lugar." },
-      { title: "Exportação de vendas", text: "Baixe o histórico em planilha, filtrando por período e produto." },
-    ],
-  },
-  {
-    icon: BiMobileAlt,
-    name: "App mobile",
-    summary: "Sua loja no bolso, para Android e iOS.",
-    items: [
-      { title: "Notificação de venda", text: "Um aviso no celular a cada pagamento aprovado." },
-      { title: "Aprovação de PIX Manual", text: "Aprove ou recuse pagamentos direto pelo app." },
-      { title: "Resumo da loja", text: "Acompanhe vendas e estoque sem precisar do computador." },
-    ],
-  },
-];
+function Tile({
+  icon: Icon,
+  label,
+  title,
+  text,
+  children,
+  className,
+}: {
+  icon: typeof BiBot;
+  label: string;
+  title: string;
+  text: string;
+  children?: ReactNode;
+  className?: string;
+}) {
+  return (
+    <article
+      className={cn(
+        "flex flex-col gap-6 overflow-hidden rounded-3xl border border-white/10 bg-neutral-900/40 p-6 text-left sm:p-8",
+        className,
+      )}
+    >
+      <div className="flex flex-col gap-3">
+        <span className="flex items-center gap-2 text-sm text-neutral-400">
+          <Icon className="size-4 text-emerald-400" /> {label}
+        </span>
+        <h3 className={cn(poppins.className, "text-2xl font-semibold text-neutral-100 sm:text-3xl")}>{title}</h3>
+        <p className="max-w-md text-neutral-400">{text}</p>
+      </div>
+      {children}
+    </article>
+  );
+}
 
 export default function V4Page() {
   return (
-    <main className="relative flex flex-1 flex-col z-10 items-center gap-24 px-4 pt-24 pb-24">
-      <FlareDecoration />
-      <GridDecoration
-        width={60}
-        height={60}
-        className={cn("[mask-image:linear-gradient(-160deg,white,transparent,transparent)] opacity-30")}
-      />
+    <main className="relative flex flex-1 flex-col items-center overflow-x-clip bg-neutral-950 text-neutral-100">
+      {/* Topo */}
+      <section className="relative flex w-full flex-col items-center gap-10 px-4 pt-20 pb-16 sm:pt-28">
+        <GridDecoration
+          width={60}
+          height={60}
+          className="[mask-image:radial-gradient(ellipse_at_top,white,transparent_70%)] opacity-40"
+        />
+        <div className="flex flex-col items-center gap-5 text-center">
+          <Eyebrow>Lançamento · 21 de outubro de 2026</Eyebrow>
+          <h1 className={cn(poppins.className, "flex flex-col items-center leading-none")}>
+            <span className="text-2xl font-medium text-neutral-300 sm:text-3xl">ShopEasy</span>
+            <span
+              className={cn(
+                "animate-v4-sheen bg-[length:250%_100%] bg-clip-text text-[9rem] font-bold tracking-tighter text-transparent sm:text-[13rem]",
+                "bg-[linear-gradient(110deg,#f5f5f5_40%,#34d399_50%,#f5f5f5_60%)]",
+              )}
+            >
+              v4
+            </span>
+          </h1>
+          <p className={cn(poppins.className, "max-w-2xl text-xl text-neutral-300 sm:text-2xl")}>
+            Sua loja em todo lugar. Venda pelo bot, gerencie pelo navegador e acompanhe tudo pelo celular.
+          </p>
+          <div className="mt-2 flex flex-wrap justify-center gap-3">
+            <Link
+              href="/invite"
+              className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-black transition-colors hover:bg-emerald-400"
+            >
+              Adicionar o ShopEasy <FiArrowRight />
+            </Link>
+            <Link
+              href="/docs/novidades"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-medium text-neutral-200 transition-colors hover:bg-white/5"
+            >
+              <FiBookOpen /> Ver todas as mudanças
+            </Link>
+          </div>
+        </div>
 
-      <header className="flex max-w-3xl flex-col items-center gap-6 text-center motion-preset-expand motion-delay-[100ms]">
-        <span className={`${jetbrains.className} text-xs uppercase tracking-widest text-emerald-500 dark:text-emerald-400`}>
-          Lançamento · 21 de outubro de 2026
-        </span>
-        <h1 className={`${poppins.className} text-5xl font-semibold tracking-tight text-neutral-800 sm:text-7xl dark:text-neutral-100`}>
-          ShopEasy <span className="text-emerald-500 dark:text-emerald-400">v4</span>
-        </h1>
-        <p className="max-w-xl text-lg text-neutral-500 dark:text-neutral-400">
-          Sua loja deixa de viver só no Discord. Agora você vende pelo bot, gerencia pelo navegador e acompanha
-          tudo pelo celular.
+        <div className="w-full">
+          <ProductShot />
+        </div>
+      </section>
+
+      {/* Novidades */}
+      <section aria-labelledby="novidades" className="flex w-full max-w-6xl flex-col gap-10 px-4 py-20">
+        <div className="flex flex-col gap-3">
+          <Eyebrow>O que chegou</Eyebrow>
+          <h2 id="novidades" className={cn(poppins.className, "max-w-2xl text-4xl font-semibold sm:text-5xl")}>
+            Três jeitos de cuidar da sua loja.
+          </h2>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-6">
+          <Tile
+            icon={BiDesktop}
+            label="Dashboard"
+            title="A loja inteira no navegador."
+            text="Edite produtos, preços, estoque e imagens sem abrir o Discord. Vendas do dia e da semana na página inicial."
+            className="md:col-span-4"
+          >
+            <div className="mt-auto grid gap-3 sm:grid-cols-3">
+              {[
+                ["Nova página inicial", "Vendas, faturamento e mais vendidos."],
+                ["Produtos pelo navegador", "Título, preço, estoque e imagens."],
+                ["Exportação de vendas", "Planilha por período e produto."],
+              ].map(([t, d]) => (
+                <div key={t} className="rounded-2xl border border-white/5 bg-white/[0.02] p-4">
+                  <p className="text-sm font-medium text-neutral-100">{t}</p>
+                  <p className="mt-1 text-sm text-neutral-500">{d}</p>
+                </div>
+              ))}
+            </div>
+          </Tile>
+
+          <Tile
+            icon={BiBot}
+            label="Bot"
+            title="2x mais rápido."
+            text="Os menus de /configuracoes e /produto configurar abrem e salvam na metade do tempo."
+            className="md:col-span-2"
+          >
+            <p className={cn(poppins.className, "mt-auto text-7xl font-bold text-emerald-400")}>2x</p>
+          </Tile>
+
+          <Tile
+            icon={BiMobileAlt}
+            label="App mobile"
+            title="Aprove PIX do sofá."
+            text="Receba um aviso a cada venda e aprove pagamentos do PIX Manual direto pelo celular."
+            className="md:col-span-2"
+          >
+            <div className="mt-auto rounded-2xl border border-white/10 bg-black/40 p-4">
+              <p className="text-xs text-neutral-500">PIX Manual · Pedido #4821</p>
+              <p className="mt-1 text-lg font-semibold">R$ 19,90</p>
+              <div className="mt-3 grid grid-cols-2 gap-2 text-sm">
+                <span className="rounded-lg bg-emerald-500 py-2 text-center font-medium text-black">Aprovar</span>
+                <span className="rounded-lg border border-white/10 py-2 text-center text-neutral-300">Recusar</span>
+              </div>
+            </div>
+          </Tile>
+
+          <Tile
+            icon={BiBot}
+            label="Bot"
+            title="O cliente sabe o que está pagando."
+            text="Antes do pagamento, o carrinho mostra um resumo com produto, quantidade, cupom e valor final. E a equipe é avisada quando o estoque está acabando."
+            className="md:col-span-4"
+          >
+            <div className="mt-auto max-w-md rounded-xl border-l-4 border-emerald-500 bg-dc-container p-4">
+              <p className="text-sm font-semibold text-dc-header">🛒 Resumo do pedido</p>
+              <dl className="mt-3 grid grid-cols-[1fr_auto] gap-y-1.5 text-sm">
+                <dt className="text-dc-muted">Conta Premium × 2</dt>
+                <dd className="text-dc-text">R$ 39,80</dd>
+                <dt className="text-dc-muted">Cupom BEMVINDO</dt>
+                <dd className="text-emerald-400">− R$ 3,98</dd>
+                <dt className="font-semibold text-dc-header">Total</dt>
+                <dd className="font-semibold text-dc-header">R$ 35,82</dd>
+              </dl>
+            </div>
+          </Tile>
+        </div>
+      </section>
+
+      {/* Mistérios */}
+      <section aria-labelledby="confidencial" className="relative w-full border-y border-white/5 bg-black/40">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-20">
+          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div className="flex flex-col gap-3">
+              <Eyebrow className="text-amber-400">Confidencial</Eyebrow>
+              <h2 id="confidencial" className={cn(poppins.className, "text-4xl font-semibold sm:text-5xl")}>
+                Ainda não podemos contar.
+              </h2>
+            </div>
+            <p className="max-w-sm text-neutral-400">
+              A v4 é só o começo. Cada arquivo abaixo será revelado na data marcada.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <MysteryCard code="Arquivo 01" platform="Bot" reveal="2026-11-04" hint="Uma nova forma de vender para quem ainda nem entrou no seu servidor." />
+            <MysteryCard code="Arquivo 02" reveal="2026-11-18" />
+            <MysteryCard code="Arquivo 03" platform="Dashboard" reveal="2026-12-02" hint="Relatórios que respondem antes de você perguntar." />
+            <MysteryCard code="Arquivo 04" reveal="2026-12-09" />
+            <MysteryCard code="Arquivo 05" platform="App mobile" reveal="2026-12-16" hint="O app vai ganhar algo que hoje só existe no Discord." />
+            <MysteryCard code="Arquivo 06" period="2027" />
+          </div>
+        </div>
+      </section>
+
+      {/* Final */}
+      <section className="flex flex-col items-center gap-6 px-4 py-24 text-center">
+        <h2 className={cn(poppins.className, "max-w-2xl text-4xl font-semibold sm:text-5xl")}>
+          Já está na sua loja.
+        </h2>
+        <p className="max-w-md text-neutral-400">
+          Quem usa o ShopEasy recebe a v4 automaticamente. Não precisa reinstalar nada.
         </p>
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             href="/invite"
-            className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-emerald-600"
+            className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-black transition-colors hover:bg-emerald-400"
           >
             Adicionar o ShopEasy <FiArrowRight />
           </Link>
           <Link
-            href="/docs/novidades"
-            className="inline-flex items-center gap-2 rounded-xl border border-neutral-200/10 px-5 py-3 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100/10 dark:border-neutral-800 dark:text-neutral-200"
+            href="/plans"
+            className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-medium text-neutral-200 transition-colors hover:bg-white/5"
           >
-            <FiBookOpen /> Ver todas as mudanças
+            Conhecer os planos <FiArrowRight />
           </Link>
         </div>
-      </header>
-
-      <section aria-labelledby="plataformas" className="w-full max-w-6xl motion-preset-expand motion-delay-[200ms]">
-        <h2 id="plataformas" className="sr-only">
-          O que mudou
-        </h2>
-        <div className="grid gap-4 md:grid-cols-3">
-          {PLATFORMS.map(({ icon: Icon, name, summary, items }) => (
-            <article key={name} className={cardClass}>
-              <div className="flex items-center gap-3">
-                <span className="flex size-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-500 dark:text-emerald-400">
-                  <Icon className="size-5" />
-                </span>
-                <h3 className={`${poppins.className} text-xl text-neutral-800 dark:text-neutral-100`}>{name}</h3>
-              </div>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400">{summary}</p>
-              <ul className="flex flex-col gap-4 border-t border-neutral-200/10 pt-5 dark:border-neutral-800/50">
-                {items.map((item) => (
-                  <li key={item.title}>
-                    <p className="text-sm font-medium text-neutral-700 dark:text-neutral-200">{item.title}</p>
-                    <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">{item.text}</p>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section aria-labelledby="vem-ai" className="flex w-full max-w-4xl flex-col items-center gap-8">
-        <div className="flex flex-col items-center gap-3 text-center">
-          <span className={`${jetbrains.className} text-xs uppercase tracking-widest text-neutral-500`}>
-            Ainda não podemos contar
-          </span>
-          <h2 id="vem-ai" className={`${poppins.className} text-3xl text-neutral-800 dark:text-neutral-100`}>
-            Vem aí
-          </h2>
-        </div>
-        <div className="grid w-full gap-3 sm:grid-cols-2">
-          <Spoiler platform="bot" eta="Novembro" hint="Uma nova forma de vender para quem ainda não entrou no seu servidor." />
-          <Spoiler platform="dashboard" eta="Novembro" hint="Relatórios que respondem antes de você perguntar." />
-          <Spoiler platform="mobile" eta="Dezembro" hint="O app vai ganhar algo que hoje só existe no Discord." />
-          <Spoiler platform="api" eta="2027" hint="Mais liberdade para quem constrói em cima do ShopEasy." />
-        </div>
-      </section>
-
-      <section className="flex flex-col items-center gap-4 text-center">
-        <h2 className={`${poppins.className} text-2xl text-neutral-800 dark:text-neutral-100`}>
-          Já disponível para todas as lojas
-        </h2>
-        <p className="max-w-md text-sm text-neutral-500 dark:text-neutral-400">
-          Quem já usa o ShopEasy recebe a v4 automaticamente. Não precisa reinstalar nada.
-        </p>
-        <Link
-          href="/plans"
-          className="inline-flex items-center gap-2 text-sm font-medium text-emerald-500 hover:underline dark:text-emerald-400"
-        >
-          Conhecer os planos <FiArrowRight />
-        </Link>
       </section>
     </main>
   );
