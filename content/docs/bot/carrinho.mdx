@@ -18,6 +18,14 @@ Simulação do canal de carrinho do ponto de vista do cliente, com um produto de
   command="Comprar"
   ephemeral={false}
   start="cart"
+  channel="🛒・carrinho-cliente"
+  tour={[
+    { target: "Continuar", text: "Você é o cliente. Revise o carrinho e clique em **Continuar**." },
+    { target: "💳 Clique para selecionar um metodo de pagamento", text: "Abra a escolha do método de pagamento." },
+    { target: "PIX", text: "Escolha **PIX**." },
+    { target: "Continuar Pagamento", text: "Clique em **Continuar Pagamento** para gerar o QR Code." },
+    { target: "Já Realizei o Pagamento", text: "Depois de pagar, clique em **Já Realizei o Pagamento**." }
+  ]}
   screens={{
     cart: { title: "Carrinho", blocks: [
       "## 🛒 Carrinho de Compras",

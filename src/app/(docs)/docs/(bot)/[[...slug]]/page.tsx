@@ -10,6 +10,7 @@ import { getMDXComponents } from "@/mdx-components";
 import { createRelativeLink } from "fumadocs-ui/mdx";
 import { LLMCopyButton, ViewOptions } from "@/components/page-actions";
 import { JsonLd } from "@/components/json-ld";
+import { AskAssistantButton } from "@/components/ai/ask-assistant-button";
 import { docsJsonLd, docsMetadata, markdownUrl } from "@/lib/docs-seo";
 import type { Metadata } from "next";
 
@@ -33,18 +34,25 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
   if (!page) notFound();
 
   const MDX = page.data.body;
+  const isHome = page.slugs.length === 0;
   const jsonLd = docsJsonLd(page, botSource, { name: "Documentação", url: "/docs" }, getPageImage(page));
 
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>
       <JsonLd data={jsonLd} />
-      <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
+      {/* A capa (/docs) tem o próprio hero no MDX */}
+      {!isHome && (
+        <>
+          <DocsTitle>{page.data.title}</DocsTitle>
+          <DocsDescription>{page.data.description}</DocsDescription>
 
-      <div className="flex flex-row gap-2 items-center border-b pt-2 pb-6">
-        <LLMCopyButton markdownUrl={markdownUrl(page)} />
-        <ViewOptions markdownUrl={markdownUrl(page)} />
-      </div>
+          <div className="flex flex-row flex-wrap gap-2 items-center border-b pt-2 pb-6">
+            <AskAssistantButton />
+            <LLMCopyButton markdownUrl={markdownUrl(page)} />
+            <ViewOptions markdownUrl={markdownUrl(page)} />
+          </div>
+        </>
+      )}
 
       <DocsBody>
         <MDX

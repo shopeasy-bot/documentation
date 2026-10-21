@@ -2,6 +2,7 @@
 title: Bem-Vindo
 icon: PiHandWavingBold
 description: Página inicial da documentação do ShopEasy
+full: true
 ---
 
 import { Rocket, Settings, ShoppingCart, ShieldCheck, BadgePercent, CreditCard, Package, Crown, Terminal, LifeBuoy, Ticket, BarChart3 } from "lucide-react";
@@ -9,25 +10,13 @@ import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { Callout } from 'fumadocs-ui/components/callout';
 
-Bem-vindo à documentação oficial do **ShopEasy**, o bot de vendas para Discord. Configure sua loja, cadastre produtos, receba pagamentos e entregue pedidos sem sair do servidor.
+<DocsHero />
 
-<Cards className="lg:grid-cols-3 mt-6">
-  <Card
-    icon={<ShieldCheck className="text-primary" />}
-    title="Entrega automática"
-    description="Estoque automático entregue por mensagem direta assim que o pagamento é aprovado."
-  />
-  <Card
-    icon={<BadgePercent className="text-primary" />}
-    title="Sem comissão do ShopEasy"
-    description="O ShopEasy não cobra comissão sobre suas vendas. Apenas os gateways cobram suas próprias taxas."
-  />
-  <Card
-    icon={<CreditCard className="text-primary" />}
-    title="Pagamentos integrados"
-    description="PIX manual liberado para todos e gateways automáticos conforme o plano."
-  />
-</Cards>
+<SpotlightGrid>
+  <SpotlightCard icon={<ShieldCheck />} color="16 185 129" title="Entrega automática" description="Estoque automático entregue por mensagem direta assim que o pagamento é aprovado." href="/docs/products/stock" />
+  <SpotlightCard icon={<BadgePercent />} color="236 72 153" title="Sem comissão do ShopEasy" description="O ShopEasy não cobra comissão sobre suas vendas. Apenas os gateways cobram suas próprias taxas." href="/docs/plans" />
+  <SpotlightCard icon={<CreditCard />} color="99 102 241" title="Pagamentos integrados" description="PIX Manual liberado para todos e gateways automáticos conforme o plano." href="/docs/pagamentos" />
+</SpotlightGrid>
 
 ## Primeiros passos
 
@@ -60,18 +49,18 @@ Bem-vindo à documentação oficial do **ShopEasy**, o bot de vendas para Discor
 
 ## Explore a documentação
 
-<Cards className="lg:grid-cols-2 mt-4">
-  <Card icon={<Rocket className="text-primary" />} title="Primeiros passos" description="Instalação e configuração inicial da loja" href="/docs/primeiros-passos" />
-  <Card icon={<Settings className="text-primary" />} title="Configurações" description="Carrinhos, vendas, canais, permissões e personalização" href="/docs/configs" />
-  <Card icon={<Package className="text-primary" />} title="Produtos" description="Cadastro, configuração, estoque, catálogos e galeria" href="/docs/products" />
-  <Card icon={<CreditCard className="text-primary" />} title="Pagamentos" description="Gateways, taxas, PIX manual, saldo e carteira" href="/docs/pagamentos" />
-  <Card icon={<ShoppingCart className="text-primary" />} title="Carrinho e checkout" description="Como o cliente compra e recebe o produto" href="/docs/carrinho" />
-  <Card icon={<BarChart3 className="text-primary" />} title="Vendas e relatórios" description="Relatórios, ranking, perfis e reembolsos" href="/docs/vendas" />
-  <Card icon={<Ticket className="text-primary" />} title="Tickets" description="Painel de atendimento com tickets" href="/docs/tickets" />
-  <Card icon={<Crown className="text-primary" />} title="Planos" description="Recursos e preços de cada plano" href="/docs/plans" />
-  <Card icon={<Terminal className="text-primary" />} title="Comandos" description="Referência de todos os comandos disponíveis" href="/docs/comandos" />
-  <Card icon={<LifeBuoy className="text-primary" />} title="Solução de problemas" description="Erros comuns e perguntas frequentes" href="/docs/solucao-de-problemas" />
-</Cards>
+<SpotlightGrid>
+  <SpotlightCard wide icon={<Rocket />} color="16 185 129" badge="comece aqui" title="Primeiros passos" description="Instalação e configuração inicial da loja, do convite à primeira venda" href="/docs/primeiros-passos" />
+  <SpotlightCard icon={<Settings />} color="148 163 184" title="Configurações" description="Carrinhos, vendas, canais, permissões e personalização" href="/docs/configs" />
+  <SpotlightCard icon={<Package />} color="245 158 11" title="Produtos" description="Cadastro, configuração, estoque, catálogos e galeria" href="/docs/products" />
+  <SpotlightCard icon={<CreditCard />} color="99 102 241" title="Pagamentos" description="Gateways, taxas, PIX Manual, saldo e carteira" href="/docs/pagamentos" />
+  <SpotlightCard icon={<ShoppingCart />} color="34 197 94" title="Carrinho e checkout" description="Como o cliente compra e recebe o produto" href="/docs/carrinho" />
+  <SpotlightCard icon={<BarChart3 />} color="14 165 233" title="Vendas e relatórios" description="Relatórios, ranking, perfis e reembolsos" href="/docs/vendas" />
+  <SpotlightCard icon={<Ticket />} color="244 63 94" title="Tickets" description="Painel de atendimento com tickets" href="/docs/tickets" />
+  <SpotlightCard icon={<Crown />} color="234 179 8" title="Planos" description="Recursos e preços de cada plano" href="/docs/plans" />
+  <SpotlightCard icon={<Terminal />} color="168 85 247" title="Comandos" description="Referência de todos os comandos disponíveis" href="/docs/comandos" />
+  <SpotlightCard wide icon={<LifeBuoy />} color="239 68 68" title="Solução de problemas" description="Erros comuns, mensagens do bot e perguntas frequentes" href="/docs/solucao-de-problemas" />
+</SpotlightGrid>
 
 ## Dúvidas Frequentes
 

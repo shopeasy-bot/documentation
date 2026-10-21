@@ -10,6 +10,7 @@ import { getMDXComponents } from "@/mdx-components";
 import { createRelativeLink } from "fumadocs-ui/mdx";
 import { LLMCopyButton, ViewOptions } from "@/components/page-actions";
 import { JsonLd } from "@/components/json-ld";
+import { AskAssistantButton } from "@/components/ai/ask-assistant-button";
 import { docsJsonLd, docsMetadata, markdownUrl } from "@/lib/docs-seo";
 import type { Metadata } from "next";
 
@@ -41,7 +42,8 @@ export default async function Page(props: PageProps<"/docs/dev/[[...slug]]">) {
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
 
-      <div className="flex flex-row gap-2 items-center border-b pt-2 pb-6">
+      <div className="flex flex-row flex-wrap gap-2 items-center border-b pt-2 pb-6">
+        <AskAssistantButton />
         <LLMCopyButton markdownUrl={markdownUrl(page)} />
         <ViewOptions markdownUrl={markdownUrl(page)} />
       </div>

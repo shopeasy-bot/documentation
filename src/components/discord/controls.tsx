@@ -85,6 +85,11 @@ interface DiscordSelectProps {
   onChange?: (values: string[]) => void;
   /** Mantém a opção escolhida exibida após a seleção. */
   keepSelection?: boolean;
+  /** Destaca o seletor (tour guiado). */
+  highlight?: boolean;
+  /** Rótulo da opção destacada quando a lista está aberta (tour guiado). */
+  highlightOption?: string;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export function DiscordSelect({
@@ -96,8 +101,17 @@ export function DiscordSelect({
   onSelect,
   onChange,
   keepSelection = true,
+  highlight = false,
+  highlightOption,
+  onOpenChange,
 }: DiscordSelectProps) {
   const [open, setOpen] = useState(false);
+  const onOpenChangeRef = useRef(onOpenChange);
+  onOpenChangeRef.current = onOpenChange;
+
+  useEffect(() => {
+    onOpenChangeRef.current?.(open);
+  }, [open]);
   const [selected, setSelected] = useState<string[]>(defaultValues);
   const ref = useRef<HTMLDivElement>(null);
   const listId = useId();
@@ -150,6 +164,7 @@ export function DiscordSelect({
           "hover:border-black focus-visible:outline-2 focus-visible:outline-dc-link",
           open && "rounded-b-none border-black",
           disabled && "cursor-not-allowed opacity-50",
+          highlight && !open && "se-tour-ring",
         )}
       >
         <span className="min-w-0 flex-1 truncate">
@@ -190,6 +205,7 @@ export function DiscordSelect({
                   className={cn(
                     "flex w-full items-center gap-3 px-3 py-2 text-left hover:bg-dc-hover",
                     isSelected && "bg-dc-hover",
+                    highlightOption === option.label && "se-tour-option",
                   )}
                 >
                   {option.emoji && (

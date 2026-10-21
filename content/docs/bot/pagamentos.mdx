@@ -43,6 +43,14 @@ Simulação de um servidor no plano **Básico**, usando o bot público. Escolha 
 <DiscordMenuSimulator
   command="/pagamento configurar"
   start="main"
+  channel="staff"
+  tour={[
+    { target: "💳 Selecione um metodo para configurar", text: "Abra o seletor de métodos de pagamento." },
+    { target: "PIX", text: "Escolha **PIX**." },
+    { target: "Conectar", text: "O PIX Manual já vem selecionado. Clique em **Conectar**." },
+    { target: "💳 Autenticando Pagamento", text: "Preencha o nome da conta, a chave PIX e o tipo da chave, e clique em **Enviar**.", on: "submit" },
+    { target: "Usar no checkout", text: "Clique em **Usar no checkout** para os clientes pagarem com essa chave." }
+  ]}
   screens={{
     main: { title: "Pagamentos", blocks: [
       "## 🏦 Configuração Pagamentos\n> Configure como o checkout vai receber cada tipo de pagamento.",
