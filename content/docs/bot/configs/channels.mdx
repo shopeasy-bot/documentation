@@ -1,302 +1,80 @@
 ---
 title: Canais e Categorias
 icon: BiHash
-description: Configure onde as mensagens e logs serão enviados
+description: Configure onde as notificações, avaliações e carrinhos ficam
 ---
-import { Hash, Bell, Lock, Star, ShoppingBag, Save, Clock, AlertCircle, Plus } from "lucide-react";
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Bell, Lock, Star, ShoppingBag, Sparkles, AlertCircle } from "lucide-react";
 import { Callout } from 'fumadocs-ui/components/callout';
 
-# Configurações de Canais e Categorias
+# Canais e Categorias
 
-Defina onde cada tipo de mensagem e notificação será enviado no seu servidor.
-
-## Acessando as Configurações
-
-Para configurar os canais e categorias, primeiro acesse o menu principal:
-
-<DiscordSlashCommand
-  name="configuracoes"
-  description="[⚙️] Acesse as configurações gerais"
-/>
-
-<Steps>
-<Step>
-## Selecione Canais e Categorias
-
-Após executar o comando `/configuracoes`, será exibido o menu principal de configurações.
-
-![Menu principal de configurações](/images/configs/menu-configuracoes.png)
-
-No **select menu**, escolha a opção **"Configurações de Canais e Categorias"**.
-
-</Step>
-
-<Step>
-## Menu de Canais
-
-Você será direcionado para o menu específico de configuração de canais.
+Em `/configuracoes` → **📁 Canais e Categorias** você define os canais que o bot usa.
 
 ![Menu de configuração de canais](/images/configs/menu-canais.png)
-
-Aqui você verá todas as opções de canais disponíveis para configuração.
-
-</Step>
-</Steps>
 
 ## Canais Disponíveis
 
 ### <Bell className="inline w-5 h-5" /> Notificações Públicas
 
-Canal onde serão enviadas notificações de vendas **sem dados confidenciais**.
-
-**O que é enviado neste canal:**
-- Notificação de nova compra (sem dados sensíveis)
-- Nome do produto vendido
-- Horário da venda
-- Valor da compra (opcional)
-
-**Como configurar:**
-- Clique no **select menu** abaixo de "Notificações Públicas"
-- Selecione um canal existente, OU
-- Clique em **"Criar Canal"** para criar um novo automaticamente
-
-<Callout type="info">
-Este canal pode ser visualizado por membros do servidor para mostrar atividade da loja.
-</Callout>
-
-**Exemplo de configuração:**
-```
-Canal recomendado: #vendas ou #notificações
-Permissões: Apenas visualizar
-```
-
----
+Canal de texto onde o bot anuncia as vendas aprovadas para a comunidade. O formato (com ou sem imagem) é definido em [Vendas](/docs/configs/purchase#-formato-da-notificação-pública).
 
 ### <Lock className="inline w-5 h-5" /> Notificações Privadas
 
-Canal onde serão enviadas notificações de vendas **com dados confidenciais**.
+Canal de texto **somente para a equipe**. Recebe:
 
-**O que é enviado neste canal:**
-- Detalhes completos da compra
-- Dados do comprador
-- Informações de pagamento
-- Produto entregue
-- Status da transação
+- Abertura e cancelamento de carrinhos (com os botões **Restaurar** e **Enviar promoção**).
+- Logs administrativos de cada venda, com os botões **Detalhes** e **Entrega**.
+- Comprovantes enviados por clientes no **PIX Manual**.
+- Marcos da loja: primeira venda, faturamento e quantidade de vendas atingidos, estoque zerado, entrega pendente e problemas críticos de configuração.
+- A recompensa de 10 vendas e as solicitações de produto (`/produto solicitar`).
 
-**Como configurar:**
-- Clique no **select menu** abaixo de "Notificações Privadas"
-- Selecione um canal existente, OU
-- Clique em **"Criar Canal"** para criar um novo automaticamente
-
-<Callout type="warn">
-**Importante:** Este canal deve ser privado e acessível apenas pela equipe administrativa!
+<Callout type="warn" icon={<AlertCircle />}>
+  Mantenha este canal privado. Ele mostra dados de clientes e de pedidos.
 </Callout>
-
-**Exemplo de configuração:**
-```
-Canal recomendado: #logs-vendas ou #admin-vendas
-Permissões: Apenas administradores
-```
-
----
 
 ### <Star className="inline w-5 h-5" /> Avaliações
 
-Canal onde serão enviadas as avaliações feitas pelos clientes após a compra.
+Canal de texto que recebe as avaliações. Quando ele está configurado e o produto foi entregue por DM, o cliente recebe um pedido de avaliação de **1 a 5 estrelas**, com comentário opcional de até 200 caracteres.
 
-**O que é enviado neste canal:**
-- Avaliação do cliente (estrelas)
-- Comentário do cliente
-- Produto avaliado
-- Data da avaliação
+### <ShoppingBag className="inline w-5 h-5" /> Categoria carrinhos
 
-**Como configurar:**
-- Clique no **select menu** abaixo de "Avaliações"
-- Selecione um canal existente, OU
-- Clique em **"Criar Canal"** para criar um novo automaticamente
+Categoria onde os canais privados de compra são criados. **Sem ela, não é possível abrir carrinhos.**
 
-<Callout type="success">
-Exibir avaliações publicamente aumenta a credibilidade da sua loja!
-</Callout>
+## <Sparkles className="inline w-5 h-5" /> Gerar canais com IA
 
-**Exemplo de configuração:**
-```
-Canal recomendado: #avaliações ou #feedback
-Permissões: Apenas visualizar
-```
+O botão **Gerar canais com IA** abre um formulário onde você descreve a estrutura desejada (até 300 caracteres) e o bot cria os canais.
 
----
+- Requer um **plano pago** ativo.
+- O bot precisa da permissão **Gerenciar Canais**.
 
-### <ShoppingBag className="inline w-5 h-5" /> Categoria Carrinhos
+## Salvando
 
-Categoria onde serão criados os canais de carrinho (tickets de compra) dos clientes.
-
-**O que acontece nesta categoria:**
-- Criação automática de canais privados para cada compra
-- Cliente discute detalhes da compra
-- Suporte tira dúvidas
-- Entrega do produto
-
-**Como configurar:**
-- Clique no **select menu** abaixo de "Categoria Carrinhos"
-- **Selecione uma categoria existente** no servidor
-
-<Callout type="info">
-<Plus className="inline w-4 h-4" /> Diferente dos canais, a categoria **não pode ser criada automaticamente** - você deve selecionar uma existente.
-</Callout>
-
-**Exemplo de configuração:**
-```
-Categoria recomendada: 🛒 CARRINHOS ou 🎫 ATENDIMENTO
-Permissões: Sincronizadas da categoria
-```
-
-<Callout type="warn">
-Certifique-se de que a categoria escolhida tem as permissões corretas:
-- @everyone: Sem acesso
-- Bot: Gerenciar canais, enviar mensagens
-- Equipe: Ver canais
-</Callout>
-
-## Sistema de Draft
-
-<Callout type="warn" icon={<Clock />}>
-**Importante:** As alterações ficam salvas como rascunho por **24 horas**.
-
-Se você não clicar em "Salvar Alterações" dentro deste período, todas as modificações serão perdidas!
-</Callout>
-
-### Como Funciona
-
-1. Configure os canais desejados
-2. As mudanças ficam temporariamente salvas (draft)
-3. Você tem até 24 horas para revisar e fazer mais alterações
-4. Clique em **"Salvar Alterações"** para aplicar definitivamente
-
-**Exemplo de uso:**
-```
-10:00 - Você configura o canal de notificações públicas
-10:15 - Você configura o canal de avaliações
-10:30 - Você seleciona a categoria de carrinhos
-10:45 - Você clica em "Salvar Alterações"
-✅ Todas as configurações são aplicadas de uma vez
-```
-
-### <Save className="inline w-5 h-5" /> Salvando as Alterações
-
-Após configurar todos os canais desejados, **não se esqueça** de clicar no botão **"Salvar Alterações"**.
-
-O que acontece ao salvar:
-- ✅ Os canais são vinculados ao sistema
-- ✅ O bot começa a enviar notificações nos canais configurados
-- ✅ Carrinhos serão criados na categoria selecionada
-- ✅ O draft é limpo
-
-<Callout type="success">
-Configurações salvas com sucesso! Os canais foram vinculados ao sistema.
-</Callout>
-
-<Callout type="warn" icon={<AlertCircle />}>
-**Atenção:** Se você fechar o menu sem salvar, as alterações permanecem no draft por 24 horas. Você pode voltar e continuar editando.
-</Callout>
-
-## Criando vs Selecionando Canais
-
-### <Plus className="inline w-5 h-5" /> Criar Canal
-
-Quando você clica em **"Criar Canal"**, o bot:
-- Cria automaticamente um novo canal
-- Aplica o nome sugerido (ex: `vendas-publicas`)
-- Configura permissões básicas
-- Vincula o canal ao sistema
-
-**Vantagem:** Rápido e automático
-
----
-
-### Selecionar Canal Existente
-
-Quando você seleciona um canal existente:
-- Você escolhe entre os canais do servidor
-- Mantém o nome e permissões atuais
-- Apenas vincula ao sistema do bot
-
-**Vantagem:** Mais controle sobre nome e permissões
-
-<Callout type="info">
-Você pode alterar os canais configurados a qualquer momento repetindo o processo.
-</Callout>
+Depois de escolher os canais, clique em **Salvar Alterações**. Veja como funciona o [rascunho](/docs/configs#rascunho-e-salvamento).
 
 ## Estrutura Recomendada
 
-Organize seu servidor com esta estrutura sugerida:
-
 ```
-📢 PÚBLICOS
-├─ #vendas          (Notificações Públicas)
-└─ #avaliações      (Avaliações)
-
-🔒 ADMINISTRAÇÃO
-├─ #logs-vendas     (Notificações Privadas)
-└─ #logs-sistema
-
-🛒 CARRINHOS        (Categoria Carrinhos)
-├─ 🛒・carrinho-001
-├─ 🛒・carrinho-002
-└─ ...
-```
-
-## Dicas de Configuração
-
-**Boas práticas:**
-
-- **Separe público e privado:** Nunca misture dados sensíveis em canais públicos
-- **Nomes claros:** Use nomes descritivos para os canais
-- **Permissões corretas:** Revise as permissões de cada canal
-- **Categoria organizada:** Mantenha a categoria de carrinhos limpa e organizada
-- **Teste tudo:** Faça uma compra teste para verificar se as notificações estão funcionando
-
-**Exemplos de bons nomes:**
-```
-✅ #vendas-publicas
-✅ #logs-admin
-✅ #feedback-clientes
-✅ 🛒 CARRINHOS
-```
-
-**Exemplos de nomes ruins:**
-```
-❌ #canal1
-❌ #logs
-❌ #teste
-❌ categoria sem nome
+📁 LOJA
+  ├─ 📦 produtos        (mensagens dos produtos)
+  ├─ 🔔 vendas          (Notificações Públicas)
+  └─ ⭐ avaliações      (Avaliações)
+📁 ADMINISTRAÇÃO (privada)
+  └─ 🔒 logs-loja       (Notificações Privadas)
+📁 CARRINHOS            (Categoria carrinhos)
 ```
 
 ## Solução de Problemas
 
 ### Notificações não estão chegando
-
-1. Verifique se você salvou as alterações
-2. Confirme se o bot tem permissão para enviar mensagens no canal
-3. Certifique-se de que o canal ainda existe
+- Confira se os canais foram **salvos**.
+- Verifique se o bot pode **ver** o canal e **enviar mensagens** nele.
 
 ### Carrinhos não estão sendo criados
-
-1. Verifique se a categoria foi selecionada e salva
-2. Confirme se o bot tem permissão de "Gerenciar Canais" na categoria
-3. Verifique se a categoria não atingiu o limite de 50 canais
-
-### Draft expirou
-
-1. Refaça as configurações
-2. Lembre-se de salvar dentro de 24 horas
-3. Configure tudo de uma vez para evitar esquecimento
+- Confira se a **Categoria carrinhos** está definida.
+- O bot precisa da permissão **Gerenciar Canais**.
+- A categoria pode ter atingido o limite de 50 canais do Discord.
 
 ## Próximos Passos
 
-Depois de configurar os canais, você pode:
-
-- [Configurar Permissões](/docs/configs/perms) - Defina quem pode usar cada funcionalidade
-- [Configurar Personalização](/docs/configs/customization) - Customize a aparência das mensagens
-- [Voltar às Configurações](/docs/configs) - Ver todas as categorias de configuração
+- [Carrinhos e Vendas](/docs/configs/purchase)
+- [Permissões](/docs/configs/perms)

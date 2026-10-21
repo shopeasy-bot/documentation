@@ -1,0 +1,55 @@
+---
+title: Galeria
+icon: BiImages
+description: Guarde imagens para usar em produtos, catálogos e personalização
+---
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Galeria de Imagens
+
+A galeria guarda as imagens do servidor para você reutilizar em produtos, catálogos e na personalização.
+
+<DiscordSlashCommand
+  name="galeria"
+  description="[🖼️] - Adicione, configure, Exclua imagens."
+/>
+
+**Permissão necessária:** Produtos (`manage_products`).
+
+## Limite por plano
+
+| Plano | Imagens |
+| --- | --- |
+| Básico | 20 |
+| Essencial | 50 |
+| Profissional | 100 |
+| Completo e Enterprise | Ilimitado |
+
+## Adicionando uma imagem
+
+1. Clique em **Adicionar**.
+2. Informe uma **Referência** (até 10 caracteres) para encontrar a imagem depois.
+3. Envie o arquivo em **PNG, JPEG, WEBP ou GIF**, com até **5 MB**.
+
+<Callout type="info">
+  Imagens enviadas em **Configurar imagens** do produto e no banner do painel de ticket também são salvas na galeria e contam para o limite.
+</Callout>
+
+## Gerenciando
+
+Selecione uma imagem no seletor e use:
+
+| Botão | Função |
+| --- | --- |
+| **Editar** | Altera os dados da imagem |
+| **Visualizar** | Mostra a imagem |
+| **Copiar URL** | Envia o link da imagem |
+| **Excluir** | Remove a imagem da galeria |
+| **Anterior / Próxima** | Navega entre as páginas |
+| **Atualizar** | Recarrega a lista |
+
+## Erros comuns
+
+- **"Limite de X imagens do seu plano atingido"**: exclua imagens ou faça upgrade do [plano](/docs/plans).
+- **"Formato inválido"**: envie PNG, JPEG, WEBP ou GIF.
+- **"A imagem ultrapassa o limite de 5 MB"**: reduza o tamanho do arquivo.

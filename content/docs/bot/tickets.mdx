@@ -1,0 +1,90 @@
+---
+title: Tickets
+icon: BiSupport
+description: Configure o atendimento por tickets e o painel de abertura
+---
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Tickets
+
+O sistema de tickets cria um canal privado para cada atendimento.
+
+**Permissão necessária:** Configurações (`manage_config`) para configurar e enviar o painel.
+
+## Configurando
+
+<Steps>
+<Step>
+### Abra as configurações
+
+<DiscordSlashCommand
+  name="ticket"
+  subcommand="configurar"
+  description="[🎫] - Configurações do sistema de tickets"
+/>
+
+Escolha uma categoria no seletor:
+
+| Categoria | Opções |
+| --- | --- |
+| 📁 **Canais** | **Categoria dos Tickets** (onde os canais são criados) e **Canal de Log** (abertura, assumir e fechamento) |
+| ⚙️ **Opções** | **Máx. Tickets Abertos** por usuário, **Padrão de Nome** e **Prioridade Visível** |
+| 🛡️ **Cargos** | **Cargos de suporte** com acesso aos tickets |
+
+Clique em **Salvar Alterações** ao terminar.
+</Step>
+
+<Step>
+### Envie o painel
+
+<DiscordSlashCommand
+  name="ticket"
+  subcommand="definir"
+  description="[🎫] - Enviar o painel de abertura de ticket"
+  options={[{ name: "canal", type: "text" }]}
+/>
+
+Se `canal` não for informado, o painel é enviado no canal atual. A aparência do painel é definida em [Personalização](/docs/configs/customization#-card-de-ticket).
+</Step>
+</Steps>
+
+## Opções em detalhe
+
+- **Máx. Tickets Abertos**: de 0 a 999 (0 = ilimitado). Sem configuração, cada usuário pode ter **1 ticket** aberto.
+- **Padrão de Nome**: até 50 caracteres. Padrão: `ticket-{user}`.
+  - `{user}`: nome do usuário (em minúsculas, até 20 caracteres).
+  - `{id}`: ID do usuário.
+- **Prioridade Visível**: ativa ou desativa a exibição da prioridade.
+
+## Abrindo um ticket (cliente)
+
+1. Clique no botão do painel.
+2. Preencha o **Assunto** (até 100 caracteres) e, se quiser, a **Descrição** (até 1000 caracteres).
+3. O bot cria o canal e mostra o botão **Ir ao Canal**.
+
+O canal fica visível apenas para o cliente, o bot e os cargos de suporte.
+
+## Dentro do ticket
+
+- **Fechar Ticket**: pede confirmação e encerra o atendimento.
+- **Prioridade** (só para a equipe): **Baixa**, **Normal**, **Alta** ou **Urgente**.
+- **Ferramentas Administrador** (só para a equipe):
+  - Assumir ticket
+  - Alterar prioridade
+  - Adicionar usuários / Remover usuários
+  - Histórico de tickets do usuário
+  - Informações do usuário
+  - Enviar mensagem privada ao usuário
+
+<Callout type="info">
+  São considerados equipe: membros com **Administrador** no Discord, o dono do servidor e quem tem um dos **cargos de suporte**.
+</Callout>
+
+## Problemas comuns
+
+| Mensagem | Solução |
+| --- | --- |
+| "Você já possui **N** ticket(s) aberto(s)…" | Feche um ticket ou aumente o **Máx. Tickets Abertos** |
+| "Categoria de tickets não encontrada…" | Defina a categoria em `/ticket configurar` → **Canais** |
+| "Não tenho permissão para criar canais…" | Dê ao bot a permissão **Administrador** ou **Gerenciar Canais** |

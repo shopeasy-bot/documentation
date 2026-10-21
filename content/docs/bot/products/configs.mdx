@@ -1,183 +1,97 @@
 ---
 title: Configuração
 icon: BiCog
-description: Configure e personalize seus produtos de forma completa
+description: Configure título, preço, imagens, cargos e mensagens dos produtos
 ---
-import { Settings, Image, DollarSign, Package, FileText, Save, Clock, AlertCircle } from "lucide-react";
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Image, DollarSign, Package, FileText, Palette, ListTree, MessageSquare, Settings, Sparkles, Trash2, AlertCircle } from "lucide-react";
 import { Callout } from 'fumadocs-ui/components/callout';
 
 # Configuração de Produtos
 
-Personalize todos os detalhes dos seus produtos de forma simples e intuitiva.
+**Permissão necessária:** Produtos (`manage_products`).
 
 ## Acessando as Configurações
-
-Para configurar um produto existente, use o comando:
 
 <DiscordSlashCommand
   name="produto"
   subcommand="configurar"
   description="[📦] - Configure um produto cadastrado"
+  options={[{ name: "referencia", type: "text" }]}
 />
 
-<Steps>
-<Step>
-## Selecione o Produto
-
-Após executar o comando, será exibido um menu com todos os produtos criados no servidor.
+Informe a referência para abrir o produto direto. Sem referência, o bot mostra a lista de produtos para você escolher.
 
 ![Menu de seleção de produtos](/images/products/selecao-produtos.png)
 
-Clique no **select menu** e escolha o produto que deseja configurar.
-
-</Step>
-
-<Step>
 ## Menu de Configuração
-
-Depois de selecionar o produto, um novo menu será exibido com todas as opções de configuração disponíveis.
 
 ![Menu de configuração do produto](/images/products/menu-configuracao.png)
 
-</Step>
-</Steps>
+Escolha uma opção no seletor **O que deseja alterar?**:
 
-## Opções de Configuração
+### <FileText className="inline w-5 h-5" /> Alterar título
+Nome do produto, com até **40 caracteres**.
 
-### <FileText className="inline w-5 h-5" /> Título
+### <FileText className="inline w-5 h-5" /> Alterar descrição
+Texto exibido na mensagem do produto, com até **2000 caracteres**. Aceita a formatação Markdown do Discord.
 
-Define o nome do produto que será exibido para os clientes.
+### <DollarSign className="inline w-5 h-5" /> Alterar valor
+Preço em reais. Aceita formatos como `19,90`, `19.90` ou `R$ 19,90`. O valor deve ser **maior que 0** e **no máximo R$ 999**.
 
-**Exemplo:**
-```
-VIP Premium - 30 Dias
-```
+### <Palette className="inline w-5 h-5" /> Alterar cor
+Cor da borda lateral da mensagem. Escolha uma das 25 cores prontas ou informe um código hexadecimal (`#RGB` ou `#RRGGBB`).
 
-### <FileText className="inline w-5 h-5" /> Descrição
+### <Package className="inline w-5 h-5" /> Configurar estoque
+Abre o menu de estoque. Veja [Estoque](/docs/products/stock).
 
-Adicione uma descrição detalhada sobre o produto, seus benefícios e o que o cliente receberá.
+### <Image className="inline w-5 h-5" /> Configurar imagens
+Até **5 imagens** por produto. Você pode:
+- **Enviar arquivos**: até 5 de uma vez, em PNG, JPEG, WEBP ou GIF, com até 5 MB cada. As imagens também são salvas na [galeria](/docs/products/galeria).
+- **Adicionar por link**: URL direta de uma imagem (jpg, png ou gif).
+- **Escolher da galeria**: usar uma imagem já cadastrada.
+- **Alterar** ou **excluir** uma imagem existente.
 
-**Exemplo:**
-```
-Acesso VIP completo por 30 dias incluindo:
-• Chat exclusivo
-• Cor personalizada
-• Suporte prioritário
-• Benefícios especiais
-```
+### <ListTree className="inline w-5 h-5" /> Vincular catálogo
+Adiciona o produto a um [catálogo](/docs/products/catalogos). Requer um **plano pago**.
 
-### <DollarSign className="inline w-5 h-5" /> Preço
+### <MessageSquare className="inline w-5 h-5" /> Configurar mensagens
+Lista as mensagens publicadas do produto. Para cada uma, você pode **Abrir mensagem** ou **Desvincular** (a mensagem deixa de ser atualizada pelo bot).
 
-Defina o valor do produto em reais (R$).
+### <Settings className="inline w-5 h-5" /> Configurações extras
+- **Cargo de acesso**: até **5 cargos** que podem comprar o produto. Se ficar vazio, todos podem comprar.
+- **Cargo ao comprar**: cargo entregue ao cliente quando a compra é aprovada.
 
-**Formato aceito:**
-```
-29.90
-15.00
-100
-```
+### <Trash2 className="inline w-5 h-5" /> Descartar alterações / Excluir produto
+- **Descartar alterações** aparece quando existe um rascunho e apaga as mudanças não salvas.
+- **Excluir produto** apaga o produto de forma permanente. Não é possível excluir um produto que está em algum carrinho aberto.
 
-<Callout type="info">
-Use ponto (.) para separar os centavos, não vírgula.
-</Callout>
+## Botões do menu
 
-### <Image className="inline w-5 h-5" /> Imagem
+| Botão | Função |
+| --- | --- |
+| <Sparkles className="inline w-4 h-4" /> **Gerar com IA** | Descreva o produto (até 300 caracteres) e a IA preenche título, descrição e preço. Requer plano pago |
+| **Ativar / Desativar** | Produtos desativados não podem ser comprados |
+| **Salvar Alterações** | Aplica o rascunho |
+| **Menu Principal** / **Voltar** | Navegação |
 
-Adicione uma imagem atrativa para o produto. A imagem deve ser uma URL pública.
+## Sistema de Rascunho
 
-**Exemplo:**
-```
-https://i.imgur.com/exemplo.png
-```
+Todas as alterações ficam em um **rascunho individual** que dura até **24 horas**. Ao clicar em **Salvar Alterações**:
 
-<Callout type="info">
-Formatos aceitos: PNG, JPG, JPEG, GIF. Recomendamos imagens com proporção 16:9 ou 1:1.
-</Callout>
-
-### <Package className="inline w-5 h-5" /> Estoque
-
-Gerencie a quantidade disponível do produto. Esta opção abre um menu específico para controle de estoque.
-
-<Callout type="info">
-A configuração detalhada de estoque será abordada em uma página separada.
-</Callout>
-
-## Sistema de Draft
-
-<Callout type="warn" icon={<Clock />}>
-**Importante:** As alterações ficam salvas como rascunho por **24 horas**.
-
-Se você não clicar em "Salvar Alterações" dentro deste período, todas as modificações serão perdidas!
-</Callout>
-
-### Como Funciona
-
-1. Você faz as alterações nos campos desejados
-2. As mudanças ficam temporariamente salvas (draft)
-3. Você tem até 24 horas para revisar e fazer mais alterações
-4. Clique em **"Salvar Alterações"** para aplicar definitivamente
-
-**Exemplo de uso:**
-```
-14:00 - Você altera o título
-14:30 - Você altera o preço
-15:00 - Você altera a descrição
-15:15 - Você clica em "Salvar Alterações"
-✅ Todas as alterações são aplicadas de uma vez
-```
-
-### <Save className="inline w-5 h-5" /> Salvando as Alterações
-
-Após configurar todos os campos desejados, clique no botão **"Salvar Alterações"**.
-
-O que acontece ao salvar:
-- ✅ As configurações são aplicadas permanentemente
-- ✅ Todas as mensagens do produto são atualizadas automaticamente nos canais
-- ✅ Os clientes já podem ver as novas informações
-- ✅ O draft é limpo
-
-<Callout type="success">
-Alterações salvas com sucesso! O produto foi atualizado em todos os canais.
-</Callout>
+1. O produto é atualizado.
+2. Todas as mensagens do produto e os catálogos vinculados são atualizados.
+3. Se o estoque foi reposto, os clientes que clicaram em **Notificar-me** recebem um aviso.
 
 <Callout type="warn" icon={<AlertCircle />}>
-**Atenção:** Se você fechar o menu sem salvar, as alterações permanecem no draft por 24 horas. Você pode voltar e continuar editando.
+  Se você sair sem salvar, as alterações continuam no rascunho até expirarem. Se você sair pelo **Menu Principal**, o bot pede confirmação.
 </Callout>
 
-## Dicas de Configuração
+## Dicas
 
-**Para um produto atrativo:**
-
-- **Título claro:** Use nomes diretos e fáceis de entender
-- **Descrição completa:** Liste todos os benefícios e o que está incluso
-- **Imagem de qualidade:** Use imagens nítidas e profissionais
-- **Preço competitivo:** Pesquise o mercado antes de definir
-- **Atualize regularmente:** Mantenha as informações sempre correntes
-
-**Exemplos de bons títulos:**
-```
-✅ VIP Premium - 30 Dias
-✅ Pack de Keys Minecraft - 5 Unidades
-✅ Acesso Vitalício ao Servidor
-```
-
-**Exemplos de títulos ruins:**
-```
-❌ produto 1
-❌ vip
-❌ coisa legal compre
-```
+- Use títulos curtos e descrições objetivas.
+- A aparência geral do card (estilo, thumbnail, botão) é definida em [Personalização](/docs/configs/customization).
 
 ## Próximos Passos
 
-Depois de configurar o básico do produto, você pode:
-
-<Cards className="mt-4">
-  <Card
-    icon={<Package className="text-primary" />}
-    title="Gerenciar Estoque"
-    description="Configure o controle de estoque do produto"
-    href="/products/stock"
-  />
-</Cards>
+- [Estoque](/docs/products/stock)
+- [Catálogos](/docs/products/catalogos)

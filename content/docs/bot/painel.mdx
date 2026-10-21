@@ -1,0 +1,63 @@
+---
+title: Painel e integrações
+icon: BiGridAlt
+description: Gerencie a loja em um só lugar com /painel e crie chaves de API em /integracoes
+---
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Painel de Controle
+
+<DiscordSlashCommand
+  name="painel"
+  description="[🔧] - Gerencie o bot"
+/>
+
+**Permissão necessária:** Administrador (`full_access`).
+
+O painel mostra um resumo da loja, com o número de **notificações não lidas**, e dá acesso às principais áreas.
+
+## Áreas do seletor
+
+| Área | O que você encontra |
+| --- | --- |
+| 📦 **Produtos** | Lista de produtos com **Criar Produto**, **Buscar** e **Atualizar** |
+| 🎟️ **Vendas** | Histórico de vendas, com filtros, exportação e reembolsos. Veja [Vendas](/docs/vendas#histórico-de-vendas-painel) |
+| ⚙️ **Configurações** | O mesmo menu de [`/configuracoes`](/docs/configs) |
+| 💰 **Pagamentos** | O mesmo menu de [`/pagamento configurar`](/docs/pagamentos) |
+| 🛒 **Carrinhos** | Carrinhos abertos. Em cada carrinho: **Aprovar Pedido** e **Finalizar Carrinho** |
+| 👑 **Plano** | Plano atual e opções de compra. Veja [Planos](/docs/plans) |
+| 🧩 **Integrações** | Integrações e chaves de API (veja abaixo) |
+| 🖼️ **Galeria** | O mesmo menu de [`/galeria`](/docs/products/galeria) |
+| 🎫 **Cupons** | Cupons cadastrados. Veja [Cupons](/docs/cupons) |
+
+## Botões
+
+- **Fechar Loja / Abrir Loja**: com a loja fechada, ninguém consegue abrir novos carrinhos. O cliente vê "A loja está **fechada** no momento".
+- **Notificações**: lista as notificações não lidas enviadas pelo ShopEasy.
+- **Documentação**: abre esta documentação.
+
+# Integrações
+
+<DiscordSlashCommand
+  name="integracoes"
+  description="[👑] - Gerencie integrações"
+/>
+
+**Requisitos:** permissão Configurações (`manage_config`) e conta no site ([login](https://shopeasy.site/login)).
+
+## Modelos de integração
+
+As integrações **Free Fire**, **Roblox** e **Notificação de WhatsApp** aparecem no menu como **Em breve** e ainda não podem ser conectadas.
+
+## Chaves de API
+
+Clique em **Chaves API** para gerenciar as chaves da sua loja:
+
+- **Gerar Chave**: cria uma chave, com nome opcional (até 100 caracteres).
+- Selecione uma chave para **Editar**, copiar ou **Deletar**.
+
+Use as chaves para integrar sistemas externos à [API do ShopEasy](/docs/dev/api).
+
+<Callout type="warn">
+  Trate a chave de API como uma senha. Não publique a chave em canais nem em repositórios públicos.
+</Callout>

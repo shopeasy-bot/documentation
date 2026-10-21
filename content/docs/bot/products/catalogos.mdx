@@ -1,0 +1,92 @@
+---
+title: Catálogos
+icon: BiCategory
+description: Agrupe vários produtos em uma única mensagem com menu de seleção
+---
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Catálogos
+
+Um catálogo é uma mensagem que reúne vários produtos em um **menu de seleção**. Quando o cliente escolhe um produto, o carrinho é aberto com ele.
+
+**Requisitos:**
+- Permissão **Produtos** (`manage_products`).
+- Um **plano pago** ativo (a partir do Essencial).
+- Pelo menos **um produto** cadastrado.
+
+## Criando um catálogo
+
+<Steps>
+<Step>
+### Crie
+
+<DiscordSlashCommand
+  name="catalogo"
+  subcommand="criar"
+  description="[📑] - Cadastre um catalogo de produtos."
+  options={[{ name: "referencia", type: "text" }]}
+/>
+
+A referência segue as mesmas regras dos produtos: letras, números e hífen, de 3 a 20 caracteres.
+</Step>
+
+<Step>
+### Configure
+
+<DiscordSlashCommand
+  name="catalogo"
+  subcommand="configurar"
+  description="[📑] - Configure um catalogo de produtos."
+  options={[{ name: "referencia", type: "text" }]}
+/>
+
+O campo `referencia` tem sugestões automáticas.
+</Step>
+
+<Step>
+### Publique
+
+<DiscordSlashCommand
+  name="catalogo"
+  subcommand="definir"
+  description="[📑] - Defina um catalogo de produtos"
+  options={[{ name: "referencia", type: "text" }]}
+/>
+
+A mensagem do catálogo é publicada no canal atual.
+</Step>
+</Steps>
+
+## Opções de configuração
+
+| Opção | Descrição |
+| --- | --- |
+| **Alterar título** | Nome do catálogo |
+| **Alterar descrição** | Texto explicando o que o catálogo reúne |
+| **Alterar cor** | Cor da borda lateral |
+| **Alterar texto do seletor** | Texto exibido no menu de produtos (padrão: "📦 Selecione um produto") |
+| **Configurar imagens** | Até **5 imagens**, adicionadas por link ou escolhidas da [galeria](/docs/products/galeria) |
+| **Configurar produtos** | Adiciona, edita, ordena e remove produtos |
+| **Modo de exibição** | Seletor direto na mensagem ou botão **Ver opções** que abre o seletor |
+
+O botão **Excluir catálogo** apaga o catálogo. As alterações ficam em rascunho até você clicar em **Salvar Alterações**.
+
+## Configurar produtos
+
+- **Adicionar produtos**: marque os produtos na lista paginada. Um catálogo aceita até **25 produtos**.
+- Selecione um produto vinculado para:
+  - **Alterar título no catálogo**: nome exibido só neste catálogo.
+  - **Alterar emoji**: reaja à mensagem do bot com um emoji **deste servidor** em até **2 minutos**.
+  - **Alterar posição**: **Subir**, **Descer**, **Primeiro** ou **Último**.
+  - **Ativar ou desativar**: esconde o produto do catálogo sem removê-lo.
+  - **Remover do catálogo**: desvincula o produto.
+
+<Callout type="info">
+  Você também pode vincular um produto a um catálogo pelo menu do produto, em **📋 Vincular catálogo**. Quando o produto é salvo, os catálogos vinculados são atualizados.
+</Callout>
+
+## Próximos Passos
+
+- [Galeria](/docs/products/galeria)
+- [Carrinho e checkout](/docs/carrinho)

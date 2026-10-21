@@ -1,63 +1,54 @@
 ---
 title: Cadastro
 icon: BiPlus
-description: Como criar e cadastrar produtos na sua loja
+description: Como criar, publicar e gerenciar produtos na sua loja
 ---
-import { Plus, Package, AlertCircle, Settings, ArrowRight } from "lucide-react";
+import { AlertCircle } from "lucide-react";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { Callout } from 'fumadocs-ui/components/callout';
 
 # Cadastro de Produtos
 
-Aprenda a criar seu primeiro produto no ShopEasy de forma simples e rápida.
+**Permissão necessária:** Produtos (`manage_products`).
 
 ## Criando um Produto
-
-Para criar um novo produto, execute o comando no canal onde deseja que o produto seja exibido:
 
 <DiscordSlashCommand
   name="produto"
   subcommand="criar"
   description="[📦] - Cadastre um produto para venda"
   options={[
-    { name: "referencia", type: "text" }
+    { name: "referencia", type: "text" },
+    { name: "canal", type: "text" }
   ]}
 />
 
+| Opção | Obrigatória | Descrição |
+| --- | :---: | --- |
+| `referencia` | Sim | Identificador único do produto (SKU) |
+| `canal` | Não | Canal de texto onde a mensagem será publicada. Se omitido, usa o canal atual |
 
-<Callout type="info" icon={<AlertCircle />}>
-O produto será enviado no canal onde você executar o comando. Certifique-se de estar no canal correto!
-</Callout>
-
-## Campo de Referência
-
-Para criar o produto, o bot solicitará que você informe a referência do produto.
 <Steps>
 <Step>
-### O que é a Referência?
+### Escolha a referência
 
-A referência é um identificador único para o produto, usado para gerenciá-lo posteriormente. Pense nela como um "código" ou "ID" do produto.
+A referência identifica o produto nos outros comandos.
 
-**Características:**
-- Deve ser única (não pode haver dois produtos com a mesma referência)
-- Pode conter letras, números e hífens
-- Não pode conter espaços
+- Deve ser **única** no servidor.
+- Use apenas **letras, números e hífen** (`-`), sem espaços.
+- Tamanho entre **3 e 20 caracteres**.
 
-**Exemplos válidos:**
 ```
 vip-30-dias
 produto-001
 key-minecraft
-cargo-premium
 ```
 </Step>
 
 <Step>
-### Após Enviar a Referência
+### Mensagem publicada
 
-Depois de definir a referência, o bot enviará a mensagem do produto no canal onde o comando foi executado.
-
-**Como ficará:**
+O bot publica a mensagem do produto. Enquanto ele não for configurado, aparece assim:
 
 <DiscordProductCard
   title="Sem título configurado.."
@@ -66,54 +57,34 @@ Depois de definir a referência, o bot enviará a mensagem do produto no canal o
   stock="0 unidades disponíveis"
 />
 
-O produto aparecerá como um embed elegante contendo:
-- Nome do produto
-- Descrição
-- Preço
-- Botão de compra
+O preço padrão de um produto sem valor definido é **R$ 10,00**.
+</Step>
 
+<Step>
+### Configure
+
+Use `/produto configurar` para definir título, descrição, preço e estoque. Veja [Configuração](/docs/products/configs).
 </Step>
 </Steps>
+
+## Outros subcomandos de produto
+
+| Subcomando | O que faz | Plano |
+| --- | --- | --- |
+| `/produto configurar [referencia]` | Abre o menu de configuração. Sem referência, mostra a lista de produtos | — |
+| `/produto definir [referencia]` | Publica (de novo) a mensagem do produto no canal atual. Uma mesma referência pode ter várias mensagens, e todas são atualizadas ao salvar | — |
+| `/produto esgotados` | Lista os produtos sem estoque | — |
+| `/produto solicitar [canal]` | Envia o painel **Solicitar Produto**. As solicitações chegam ao canal de Notificações Privadas | Essencial |
+| `/produto enviar usuario quantidade` | Entrega manualmente um produto de **estoque automático** a um usuário (quantidade mínima 1) | Essencial |
 
 ## Produto Não Apareceu?
 
 <Callout type="warn" icon={<AlertCircle />}>
-Se o produto não foi enviado no canal, verifique se o bot tem as seguintes permissões:
-
-- ✅ Ver canal
-- ✅ Enviar mensagens
-- ✅ Inserir links
-- ✅ Adicionar reações
-
-Sem essas permissões, o bot não conseguirá exibir o produto.
+  O bot precisa **ver o canal** e **enviar mensagens** nele. Se a mensagem não foi publicada, confira as permissões do cargo do bot no canal e use `/produto definir` para publicar novamente.
 </Callout>
-
-### Como Corrigir Permissões
-
-1. Clique com o botão direito no canal
-2. Vá em "Editar Canal"
-3. Selecione "Permissões"
-4. Adicione o ShopEasy e conceda as permissões necessárias
 
 ## Próximos Passos
 
-Agora que seu produto foi criado, você pode configurá-lo completamente:
-
-<Cards className="mt-4">
-  <Card
-    icon={<Settings className="text-primary" />}
-    title="Configurar Produto"
-    description="Defina preço, descrição, imagem e muito mais"
-    href="/products/configs"
-  />
-  <Card
-    icon={<Package className="text-primary" />}
-    title="Gerenciar Estoque"
-    description="Adicione e gerencie o estoque do produto"
-    href="/products/stock"
-  />
-</Cards>
-
-<Callout type="success">
-Produto criado com sucesso! Continue para a [configuração do produto](/produtos/configuracao) para personalizar todos os detalhes.
-</Callout>
+- [Configuração](/docs/products/configs)
+- [Estoque](/docs/products/stock)
+- [Catálogos](/docs/products/catalogos)

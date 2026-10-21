@@ -1,0 +1,90 @@
+---
+title: Cupons
+icon: BiPurchaseTag
+description: Crie cupons de desconto, defina regras e envie para clientes
+---
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Cupons
+
+Cupons dão um desconto percentual no carrinho.
+
+**Permissão necessária:** Produtos (`manage_products`).
+
+## Criando um cupom
+
+<Steps>
+<Step>
+### Crie
+
+<DiscordSlashCommand
+  name="cupom"
+  subcommand="criar"
+  description="[🎟️] - Cadastre um novo cupom de desconto"
+  options={[{ name: "referencia", type: "text" }]}
+/>
+
+A referência é o **código** que o cliente digita. Use até 20 caracteres, entre letras, números, `_` e `-`.
+</Step>
+
+<Step>
+### Configure
+
+<DiscordSlashCommand
+  name="cupom"
+  subcommand="configurar"
+  description="[🎟️] - Configure um cupom de desconto"
+  options={[{ name: "referencia", type: "text" }]}
+/>
+
+| Opção | Descrição | Padrão |
+| --- | --- | --- |
+| 💰 **Desconto (%)** | Percentual de 1 a 100 | 50% |
+| 🎟️ **Usos disponíveis** | Número máximo de usos (0 = ilimitado) | Ilimitado |
+| ⬇️ **Valor mínimo de compra** | Valor mínimo para aplicar o cupom (0 = sem limite) | Sem limite |
+| ⬆️ **Valor máximo de compra** | Valor máximo para aplicar o cupom (0 = sem limite) | Sem limite |
+| 👤 **Cargo com acesso** | Só membros com o cargo podem usar (vazio = todos) | Todos |
+| 📦 **Produto exclusivo** | Referência do produto que precisa estar no carrinho (vazio = todos) | Todos |
+
+O status do cupom aparece como **Ativo**, **Desativado** ou **Expirado**.
+</Step>
+
+<Step>
+### Salve
+
+Clique em **Salvar Alterações**. O rascunho dura até 24 horas. O botão **Excluir** apaga o cupom.
+</Step>
+</Steps>
+
+## Enviando um cupom
+
+<DiscordSlashCommand
+  name="cupom"
+  subcommand="enviar"
+  description="[🎟️] - Envie um cupom de desconto para um usuário"
+  options={[{ name: "usuario", type: "text" }]}
+/>
+
+Escolha um cupom com usos disponíveis. O bot envia o cupom por mensagem direta ao usuário. Se a DM estiver fechada, o bot mostra o código para você repassar manualmente.
+
+<Callout type="info">
+  Enviar um cupom **não reserva** usos: ele continua valendo para qualquer cliente elegível.
+</Callout>
+
+## Como o cliente usa
+
+1. No carrinho, clica em **Cupom** e digita o código.
+2. O bot confere se o cupom existe, se o cliente tem o cargo exigido e se o produto exclusivo está no carrinho.
+3. O desconto aparece no resumo da compra. Para tirar o cupom, use **Remover Cupom**.
+
+O botão **Cupom** só aparece se a opção **Permitir cupons** estiver ativa em [Carrinhos e Vendas](/docs/configs/purchase).
+
+## Erros comuns
+
+| Mensagem | Causa |
+| --- | --- |
+| "Cupom inválido ou não encontrado." | Código digitado errado ou cupom inexistente |
+| "Você não tem o cargo necessário para usar este cupom." | O cupom tem **Cargo com acesso** |
+| "Este cupom é válido apenas para um produto específico…" | O **Produto exclusivo** não está no carrinho |
+| "Cupons estão desativados neste servidor." | **Permitir cupons** está desativado |

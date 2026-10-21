@@ -1,0 +1,99 @@
+---
+title: Vendas e relatórios
+icon: BiBarChartAlt2
+description: Acompanhe vendas, rankings e perfis de clientes e faça reembolsos
+---
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Vendas e relatórios
+
+## Relatório de vendas
+
+<DiscordSlashCommand
+  name="vendas"
+  subcommand="relatorio"
+  description="[💲] - Veja o relatorio de venndas."
+/>
+
+**Permissão:** Vendas (`view_orders`).
+
+Mostra métricas gerais, um gráfico de vendas, os **5 produtos mais vendidos** e os **5 melhores clientes**. Botões:
+
+- **Ver Detalhes**: abre o detalhamento do período.
+- **Filtrar Período**: **Hoje**, **7 dias** ou **1 Mês**.
+- **Exportar**: gera um arquivo com as vendas.
+
+Se o servidor ainda não tiver vendas, o bot responde "O Servidor ainda não realizou vendas".
+
+## Resumo semanal com IA
+
+<DiscordSlashCommand
+  name="vendas"
+  subcommand="resumo"
+  description="[💲] - Resumo semanal de vendas gerado por IA."
+/>
+
+**Permissão:** Vendas · **Plano:** Profissional.
+
+Compara os **últimos 7 dias** com a semana anterior (vendas, faturamento e avaliação média) e traz um resumo escrito pela IA.
+
+## Perfil de cliente
+
+<DiscordSlashCommand
+  name="vendas"
+  subcommand="perfil"
+  description="[💲] - Veja o perfil de um usuario."
+  options={[{ name: "usuario", type: "text" }]}
+/>
+
+**Permissão:** Vendas.
+
+Mostra o total de compras e o total gasto pelo usuário **neste servidor**, com a lista de compras. Botões:
+- **Exibir para todos**: publica o perfil no canal.
+- **Ver Perfil Global**: mostra as compras do usuário em todos os servidores com ShopEasy.
+
+<Callout type="info">
+  Qualquer pessoa pode ver o próprio histórico com `/perfil`, que funciona também em mensagem direta.
+</Callout>
+
+## Ranking
+
+| Comando | Mostra |
+| --- | --- |
+| `/rank produtos` | Produtos mais vendidos |
+| `/rank clientes` | Clientes que mais compraram |
+
+**Permissão:** Vendas · **Plano:** Profissional.
+
+## Histórico de vendas (painel)
+
+Em `/painel` → **🎟️ Vendas** você vê o **Histórico de Vendas** paginado:
+
+- **Filtrar** por usuário e período, ou **Limpar Filtros**.
+- **Exportar Tudo**.
+- Selecione uma venda para ver os detalhes e usar **Reembolsar**, **Exportar Venda** ou **Excluir Venda**.
+
+## Log de cada venda
+
+Cada venda aprovada gera uma log nas **Notificações Privadas** com os botões:
+
+- **Detalhes**: dados completos do comprador, identificadores do pedido e itens entregues ou pendentes.
+- **Entrega**: mostra o estoque entregue.
+
+Esses botões exigem a permissão **Carrinhos** (`manage_carts`).
+
+## Reembolsos
+
+1. Abra a venda (pela log ou pelo histórico) e clique em **Reembolsar**.
+2. Confira os dados e clique em **Confirmar reembolso**.
+3. O bot tenta fazer o reembolso automático. Se não conseguir, ele **pede a chave PIX ao comprador** e registra o caso nas Notificações Privadas.
+
+Reembolsos exigem a permissão **Carrinhos**.
+
+## Avisos automáticos de marcos
+
+Nas Notificações Privadas, o bot avisa quando a loja atinge marcos como:
+- Primeira venda.
+- Faturamento de R$ 1 mil, 10 mil, 100 mil, 500 mil e 1 milhão.
+- 10, 50, 100, 500 e 1000 vendas.
+- Estoque zerado, entrega pendente e problemas críticos de configuração.

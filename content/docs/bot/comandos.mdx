@@ -1,0 +1,194 @@
+---
+title: Comandos
+icon: BiTerminal
+description: Referência de todos os comandos do ShopEasy, com permissões e planos
+---
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Referência de comandos
+
+Legenda:
+- **Permissão**: permissão do ShopEasy exigida (veja [Permissões](/docs/configs/perms)). "—" significa que qualquer membro pode usar.
+- **Plano**: plano mínimo. "—" significa que funciona em todos os planos.
+- Opções entre colchetes (`[opção]`) são opcionais.
+
+<Callout type="info">
+  Enquanto nenhum cargo de equipe for configurado, os comandos com permissão exigem **Administrador** no Discord.
+</Callout>
+
+## Visão geral
+
+| Comando | Permissão | Plano |
+| --- | --- | --- |
+| `/ajuda` | — | — |
+| `/configuracoes` | Configurações | — |
+| `/personalizar` | Configurações | Essencial |
+| `/painel` | Administrador | — |
+| `/produto criar · configurar · definir · esgotados` | Produtos | — |
+| `/produto solicitar · enviar` | Produtos | Essencial |
+| `/catalogo criar · configurar · definir` | Produtos | Essencial |
+| `/cupom criar · configurar · enviar` | Produtos | — |
+| `/galeria` | Produtos | — |
+| `/pagamento configurar · aprovar · consultar` | Gerenciar Pagamentos | — |
+| `/vendas relatorio · perfil` | Vendas | — |
+| `/vendas resumo` | Vendas | Profissional |
+| `/rank produtos · clientes` | Vendas | Profissional |
+| `/saldo ver` | — | Profissional |
+| `/saldo dar` | Administrador | Profissional |
+| `/clientes vincular` | Gerenciar clientes¹ | — |
+| `/dm` | Gerenciar clientes¹ | Profissional |
+| `/ticket configurar · definir` | Configurações | — |
+| `/plano adquirir · gerenciar · resgatar` | Configurações | — |
+| `/integracoes` | Configurações + login | — |
+| `/bot` | Gerenciar Bot | Essencial |
+| `/automacoes` | Gerenciar Bot | Bot exclusivo |
+| `/voz conectar · desconectar` | Gerenciar Bot | — |
+| `/perfil` | — | — |
+| `/carteira` | — (requer login) | — |
+
+¹ Permissão interna que não aparece no menu. Na prática: dono do servidor ou cargo com **Administrador**.
+
+---
+
+## ajuda
+
+`/ajuda` mostra a ajuda do bot, com as opções **Bugs e problemas** (relatar um erro, com 15 a 2000 caracteres e sem links) e **Planos** (recursos de cada plano), além de links para a Comunidade e a Documentação.
+
+## configuracoes
+
+`/configuracoes` abre o menu de carrinhos, vendas, canais e permissões. Veja [Configurações](/docs/configs).
+
+## personalizar
+
+`/personalizar` ajusta a cor da loja, o card de produto e o card de ticket. Veja [Personalização](/docs/configs/customization).
+
+## painel
+
+`/painel` é o painel central, com acesso a todas as áreas e o botão para abrir ou fechar a loja. Veja [Painel](/docs/painel).
+
+## produto
+
+| Subcomando | Opções | Descrição |
+| --- | --- | --- |
+| `criar` | `referencia` (obrigatória, 3 a 20 caracteres: letras, números e `-`), `[canal]` | Cria o produto e publica a mensagem |
+| `configurar` | `[referencia]` | Abre o menu de configuração |
+| `definir` | `[referencia]` | Publica a mensagem do produto no canal atual |
+| `esgotados` | — | Lista os produtos sem estoque |
+| `solicitar` | `[canal]` | Envia o painel **Solicitar Produto** (Essencial) |
+| `enviar` | `usuario`, `quantidade` (mínimo 1) | Entrega um produto de estoque automático a um usuário (Essencial) |
+
+Veja [Produtos](/docs/products).
+
+## catalogo
+
+| Subcomando | Opções | Descrição |
+| --- | --- | --- |
+| `criar` | `referencia` | Cria um catálogo (exige pelo menos um produto) |
+| `configurar` | `[referencia]` | Abre o menu do catálogo |
+| `definir` | `[referencia]` | Publica o catálogo no canal atual |
+
+Veja [Catálogos](/docs/products/catalogos).
+
+## cupom
+
+| Subcomando | Opções | Descrição |
+| --- | --- | --- |
+| `criar` | `referencia` (até 20 caracteres: letras, números, `_` e `-`) | Cria o cupom |
+| `configurar` | `[referencia]` | Configura desconto, usos, valores, cargo e produto |
+| `enviar` | `usuario` | Envia um cupom por DM |
+
+Veja [Cupons](/docs/cupons).
+
+## galeria
+
+`/galeria` gerencia as imagens do servidor. Veja [Galeria](/docs/products/galeria).
+
+## pagamento
+
+| Subcomando | Opções | Descrição |
+| --- | --- | --- |
+| `configurar` | — | Conecta gateways e escolhe o que vai para o checkout |
+| `aprovar` | `id` | Aprova manualmente um pagamento pendente |
+| `consultar` | `id` | Mostra os detalhes de um pagamento |
+
+Veja [Pagamentos](/docs/pagamentos).
+
+## vendas
+
+| Subcomando | Opções | Descrição |
+| --- | --- | --- |
+| `relatorio` | — | Relatório com métricas, top produtos e top clientes |
+| `perfil` | `[usuario]` | Compras de um usuário no servidor |
+| `resumo` | — | Resumo semanal com IA (Profissional) |
+
+Veja [Vendas](/docs/vendas).
+
+## rank
+
+`/rank produtos` e `/rank clientes` mostram os rankings de vendas (Profissional).
+
+## saldo
+
+| Subcomando | Opções | Permissão | Descrição |
+| --- | --- | --- | --- |
+| `ver` | — | — | Mostra o seu saldo nesta loja |
+| `dar` | `usuario`, `valor` (0 a 999.999) | Administrador | Credita saldo ao usuário, que é avisado por DM |
+
+Ambos exigem o plano **Profissional**. Veja [Saldo](/docs/pagamentos#saldo).
+
+## clientes
+
+`/clientes vincular` entrega o **cargo de clientes** a todos os clientes que já compraram na loja.
+
+- Configure antes o cargo em [Carrinhos e Vendas](/docs/configs/purchase#-cargo-clientes).
+- O bot precisa de **Gerenciar Cargos**, e o cargo do bot deve estar acima do cargo de clientes.
+
+## dm
+
+`/dm usuario mensagem` envia uma mensagem privada (até 2000 caracteres) a um membro, com um botão **Ir para o servidor**.
+
+- Plano **Profissional**.
+- O bot precisa da permissão **Criar Convite**.
+
+## ticket
+
+| Subcomando | Opções | Descrição |
+| --- | --- | --- |
+| `configurar` | — | Canais, opções e cargos dos tickets |
+| `definir` | `[canal]` | Envia o painel de abertura de ticket |
+
+Veja [Tickets](/docs/tickets).
+
+## plano
+
+| Subcomando | Opções | Descrição |
+| --- | --- | --- |
+| `adquirir` | — | Compra um plano (exige também Administrador no Discord e login) |
+| `gerenciar` | — | Mostra o plano atual, com opções de renovar e de upgrade |
+| `resgatar` | `codigo` | Ativa um código de plano |
+
+Veja [Como adquirir um plano](/docs/comprar-plano).
+
+## integracoes
+
+`/integracoes` gerencia as chaves de API e as integrações (exige login no site). Veja [Painel e integrações](/docs/painel#integrações).
+
+## bot
+
+`/bot` personaliza o bot ou gerencia o bot exclusivo. Veja [Bot exclusivo](/docs/bot-exclusivo).
+
+## automacoes
+
+`/automacoes` configura as automações (somente no bot exclusivo). Veja [Automações](/docs/bot-exclusivo#automações).
+
+## voz
+
+`/voz conectar canal` e `/voz desconectar` controlam a conexão do bot a um canal de voz.
+
+## perfil
+
+`/perfil` mostra o seu histórico de compras. Em um servidor, mostra as compras naquele servidor. Em mensagem direta, mostra o perfil global, com as compras em todos os servidores.
+
+## carteira
+
+`/carteira` abre a sua carteira ShopEasy (exige login). Funciona também em mensagem direta. Veja [Carteira](/docs/pagamentos#carteira-shopeasy).

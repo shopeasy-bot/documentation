@@ -1,12 +1,17 @@
 ---
 title: Como adquirir um plano
 icon: BiCreditCard
-description: Passo a passo para assinar ou renovar seu plano ShopEasy pelo Discord
+description: Passo a passo para assinar, renovar ou resgatar um plano ShopEasy pelo Discord
 ---
 
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+
+## Requisitos
+
+- Permissão **Configurações** no ShopEasy **e** permissão **Administrador** no Discord.
+- Conta no site do ShopEasy. Se você ainda não fez login, o bot mostra um botão para [shopeasy.site/login](https://shopeasy.site/login).
 
 ## Primeira assinatura
 
@@ -15,88 +20,84 @@ import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 <Step>
 ### Abra o menu de planos
 
-Execute o comando abaixo em qualquer canal do seu servidor:
-
 <DiscordSlashCommand
   name="plano"
   subcommand="adquirir"
-  description="[👑] Abrir o menu de assinatura"
+  description="[✨] - Adquira um plano para o servidor."
 />
 
-O bot enviará uma mensagem com os planos disponíveis e seus preços.
+O bot mostra os planos **Essencial**, **Profissional** e **Completo** com preço e recursos. O plano atual aparece marcado como **Plano Atual**.
 </Step>
 
 <Step>
-### Selecione o plano
+### Clique em "Adquirir" no plano desejado
 
-Clique no **select menu** e escolha o plano desejado:
+Um formulário é aberto com três campos:
 
-- **Essencial** — R$ 4,90/mês
-- **Profissional** — R$ 8,90/mês
-- **Completo** — R$ 14,90/mês
+| Campo | Opções |
+| --- | --- |
+| **Duração** | Plano Mensal (30 dias), Trimensal (90 dias) ou Anual (365 dias) |
+| **Forma de pagamento** | PIX ou Cartão de Crédito ou Débito |
+| **Cupom** (opcional) | Código de desconto |
 
-Após selecionar, o bot exibirá os detalhes do plano escolhido e um botão para continuar.
+<Callout type="success">
+  Na primeira assinatura, use o cupom **`PRIMEIRACOMPRA`** para ganhar **10% de desconto**.
+</Callout>
 </Step>
 
 <Step>
-### Escolha a forma de pagamento
-
-Clique em **Continuar** e selecione como deseja pagar:
+### Pague
 
 <Tabs items={['PIX', 'Cartão']}>
   <Tab value="PIX">
-    1. Selecione **PIX** no menu de pagamento
-    2. O bot irá gerar um **QR Code** e o código **copia e cola**
-    3. Abra o app do seu banco e escaneie o QR Code ou cole o código
-    4. Confirme o pagamento — a ativação é **instantânea**
+    1. O bot exibe o **QR Code** e o código **PIX Copia e Cola** (use o botão **Copiar Código PIX**).
+    2. Abra o app do banco e pague.
+    3. O plano é ativado assim que o pagamento é confirmado.
   </Tab>
   <Tab value="Cartão">
-    1. Selecione **Cartão de crédito** no menu de pagamento
-    2. O bot irá gerar um **link de checkout seguro** (Stripe)
-    3. Clique no link e preencha os dados do cartão
-    4. Confirme o pagamento — a ativação ocorre em até **1 minuto**
+    1. Clique em **Ir para o Pagamento**.
+    2. Preencha os dados do cartão na página segura.
+    3. O plano é ativado assim que o pagamento é confirmado.
   </Tab>
 </Tabs>
-</Step>
 
-<Step>
-### Plano ativado
-
-Após a confirmação do pagamento, o bot enviará uma mensagem confirmando a ativação. Seus recursos estarão disponíveis imediatamente.
-
-<Callout type="success">
-  Você receberá uma DM no Discord confirmando a assinatura com a data de validade do plano.
-</Callout>
+Os dados de pagamento também são enviados para sua **mensagem direta**, caso suas DMs estejam abertas.
 </Step>
 
 </Steps>
 
----
-
-## Renovar ou gerenciar plano existente
-
-Se você já possui um plano ativo, use o comando de gerenciamento:
+## Gerenciar ou renovar
 
 <DiscordSlashCommand
   name="plano"
   subcommand="gerenciar"
-  description="[👑] Gerenciar seu plano atual"
+  description="[✨] - Gerencie o plano ativo do servidor."
 />
 
-O bot exibirá as informações do seu plano atual (nome, validade, status) e um botão **Renovar plano**. Clique nele e siga o mesmo fluxo de pagamento descrito acima.
+Mostra o status, o titular, as datas de início e de vencimento e os dias restantes. Os botões disponíveis são:
 
-<Callout type="info">
-  Renovar antes do vencimento **adiciona tempo** ao período atual — você não perde os dias restantes.
-</Callout>
+- **Renovar Plano** (ou **Reativar Plano**, se vencido): abre o mesmo fluxo de pagamento.
+- **Fazer Upgrade**: troca para um plano superior. Para o Enterprise, o botão leva ao [suporte](https://shopeasy.site/support).
+- **Ver Planos**: abre esta documentação.
+- **Resgatar Bot Exclusivo**: aparece no plano Completo enquanto o servidor ainda não tem um bot exclusivo. Veja [Bot exclusivo](/docs/bot-exclusivo).
 
----
+## Resgatar um código
+
+<DiscordSlashCommand
+  name="plano"
+  subcommand="resgatar"
+  description="[✨] - Resgate um key de plano"
+  options={[{ name: "codigo", type: "text" }]}
+/>
+
+Use para ativar códigos de plano, como a recompensa de 10 vendas.
 
 ## Problemas comuns
 
 <Callout type="warn">
-  **Pagamento confirmado mas plano não ativou?** Aguarde até 2 minutos. Se o problema persistir, abra um ticket em [/support](/support) com o comprovante de pagamento.
+  **Pagamento confirmado, mas o plano não ativou?** Aguarde alguns minutos e confira com `/plano gerenciar`. Se o problema continuar, procure o [suporte](https://shopeasy.site/support) com o comprovante.
 </Callout>
 
 <Callout type="warn">
-  **Não consigo usar o comando?** Verifique se você tem permissão de **Administrador** ou o cargo configurado em `/configuracoes` → Permissões.
+  **Não consigo usar o comando?** `/plano adquirir` exige a permissão **Administrador** do Discord, além da permissão **Configurações** do ShopEasy. Veja [Permissões](/docs/configs/perms).
 </Callout>

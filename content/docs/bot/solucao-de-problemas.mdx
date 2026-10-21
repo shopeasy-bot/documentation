@@ -1,0 +1,69 @@
+---
+title: Solução de problemas
+icon: BiHelpCircle
+description: Erros comuns, mensagens do bot e perguntas frequentes
+---
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Solução de problemas
+
+## Mensagens de erro do bot
+
+| Mensagem | O que significa | O que fazer |
+| --- | --- | --- |
+| "Você não possui permissão para utilizar esse comando!" | Falta a permissão do ShopEasy exigida pelo comando | Veja a [tabela de comandos](/docs/comandos) e ajuste as [Permissões](/docs/configs/perms) |
+| Aviso de plano necessário ("A partir do plano …") | O recurso exige um plano superior | Veja [Planos](/docs/plans) |
+| Aviso de bot exclusivo | O recurso só funciona no bot exclusivo | Veja [Bot exclusivo](/docs/bot-exclusivo) |
+| Aviso de login necessário | O comando exige uma conta no site | Faça login em [shopeasy.site/login](https://shopeasy.site/login) |
+| "Sua sessão expirou…" | A sessão com a API expirou | Use o comando novamente |
+| "Ocorreu um bug." | Erro inesperado | Use **Relatar Problema** ou entre na [Comunidade](https://shopeasy.site/discord) |
+
+## Problemas frequentes
+
+### O bot não responde aos comandos
+- Confira se o bot está online e se tem acesso ao canal.
+- Os comandos podem levar alguns minutos para aparecer depois que o bot é adicionado.
+
+### Um administrador perdeu acesso
+Depois que o primeiro cargo é configurado em Permissões, ter **Administrador** no Discord deixa de bastar. O dono do servidor deve dar a permissão **Administrador** (do ShopEasy) ao cargo. Veja [Permissões](/docs/configs/perms).
+
+### O cliente não consegue abrir o carrinho
+Veja a tabela [Quando o carrinho não é criado](/docs/carrinho#quando-o-carrinho-não-é-criado).
+
+### O produto não foi entregue
+- Se a DM do cliente estiver fechada, a entrega é feita no canal do carrinho.
+- No **estoque automático**, confira se havia unidades suficientes. No **manual**, a entrega é feita pela equipe, seguindo as instruções pós-compra.
+- No **PIX Manual**, o pagamento precisa ser aprovado pela equipe. Use `/pagamento consultar id` para ver o status.
+
+### O cargo de cliente não foi entregue
+O cargo do bot precisa estar **acima** do cargo de clientes, e o bot precisa de **Gerenciar Cargos**.
+
+### O gateway aparece como "Requer plano" ou "Exclusivo"
+Mercado Pago e EFI Pay exigem o plano **Profissional**. PagSeguro, Asaas, Stripe e NowPayments exigem o **bot exclusivo**. Veja [Pagamentos](/docs/pagamentos).
+
+### Minhas alterações sumiram
+As alterações de `/configuracoes`, produtos, catálogos e cupons ficam em rascunho por até 24 horas e só são aplicadas com **Salvar Alterações**.
+
+## Perguntas Frequentes
+
+<Accordions>
+  <Accordion title="O ShopEasy cobra comissão?" id="faq-comissao">
+    Não. As taxas exibidas em `/pagamento configurar` são cobradas pelos gateways.
+  </Accordion>
+  <Accordion title="Posso usar o ShopEasy sem pagar?" id="faq-gratis">
+    Sim. O plano Básico permite cadastrar produtos, vender com PIX Manual, Bravex Pay ou Carteira, usar cupons e tickets. Veja [Planos](/docs/plans).
+  </Accordion>
+  <Accordion title="Como ganho um teste do plano Completo?" id="faq-teste">
+    Ao atingir 10 vendas, a loja recebe um código de 3 dias do plano Completo no canal de Notificações Privadas.
+  </Accordion>
+  <Accordion title="Posso vender o mesmo produto em vários canais?" id="faq-varios-canais">
+    Sim. Use `/produto definir` em cada canal. Todas as mensagens são atualizadas quando você salva o produto.
+  </Accordion>
+  <Accordion title="Como paro as vendas temporariamente?" id="faq-fechar-loja">
+    Use **Fechar Loja** em `/painel`, ou desative produtos específicos em `/produto configurar`.
+  </Accordion>
+  <Accordion title="Onde peço ajuda?" id="faq-suporte">
+    Na [Comunidade do ShopEasy](https://shopeasy.site/discord) ou pelo [suporte](https://shopeasy.site/support).
+  </Accordion>
+</Accordions>

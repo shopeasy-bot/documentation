@@ -1,0 +1,85 @@
+---
+title: Primeiros passos
+icon: BiRocket
+description: Instale o ShopEasy e deixe sua loja pronta para vender
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+Este guia leva você da instalação até a primeira venda. Siga as etapas na ordem.
+
+## Requisitos
+
+- Ser o **dono** do servidor ou ter a permissão **Administrador** no Discord.
+- O bot precisa da permissão **Administrador** (ou, no mínimo, *Gerenciar Canais*, *Gerenciar Cargos*, *Enviar Mensagens* e *Criar Convite*).
+- Para comandos como `/plano adquirir`, `/carteira` e `/integracoes`, é preciso ter uma conta no site: faça login em [shopeasy.site/login](https://shopeasy.site/login).
+
+<Callout type="warn">
+  Enquanto nenhum cargo de equipe estiver configurado em **Permissões**, somente membros com **Administrador** no Discord podem usar os comandos de gerenciamento. Veja [Permissões](/docs/configs/perms).
+</Callout>
+
+## Passo a passo
+
+<Steps>
+
+<Step>
+### Adicione o bot
+
+Acesse [shopeasy.site/invite](https://shopeasy.site/invite), escolha o servidor e autorize. Depois, verifique se o cargo do bot está **acima** dos cargos que ele vai entregar (cargo de cliente e cargos por produto).
+</Step>
+
+<Step>
+### Configure canais e carrinhos
+
+<DiscordSlashCommand name="configuracoes" description="[⚙️] - Acesse as configurações gerais." />
+
+No menu, abra **📁 Canais e Categorias** e defina:
+
+- **Categoria carrinhos**: onde os canais privados de compra serão criados (obrigatório para vender).
+- **Notificações Privadas**: logs internos da equipe (vendas, carrinhos, alertas).
+- **Notificações Públicas**: anúncio das vendas para a comunidade.
+- **Avaliações**: canal que recebe as avaliações dos clientes.
+
+Clique em **Salvar Alterações**. Mais detalhes em [Canais e Categorias](/docs/configs/channels).
+</Step>
+
+<Step>
+### Cadastre um produto
+
+<DiscordSlashCommand
+  name="produto"
+  subcommand="criar"
+  description="[📦] - Cadastre um produto para venda"
+  options={[{ name: "referencia", type: "text" }, { name: "canal", type: "text" }]}
+/>
+
+A mensagem do produto é publicada no canal escolhido (ou no canal atual). Em seguida use `/produto configurar` para definir título, descrição, preço e estoque. Veja [Produtos](/docs/products).
+</Step>
+
+<Step>
+### Conecte um método de pagamento
+
+<DiscordSlashCommand name="pagamento" subcommand="configurar" description="[💳] - Configure a forma de pagamento" />
+
+Escolha **PIX**, selecione o gateway (por exemplo, **PIX Manual**), clique em **Conectar**, preencha os dados e depois em **Usar no checkout**. Veja [Pagamentos](/docs/pagamentos).
+</Step>
+
+<Step>
+### Faça um teste de compra
+
+Clique em **Comprar** na mensagem do produto. O bot abre um canal de carrinho só para você. Siga o fluxo até a tela de pagamento para conferir se está tudo certo. Veja [Carrinho e checkout](/docs/carrinho).
+</Step>
+
+</Steps>
+
+## Próximas etapas recomendadas
+
+- Defina o **cargo de clientes** e os **termos de compra** em [Vendas](/docs/configs/purchase).
+- Delegue acesso à equipe em [Permissões](/docs/configs/perms) (requer plano pago).
+- Crie [cupons](/docs/cupons) e [catálogos](/docs/products/catalogos).
+- Acompanhe tudo pelo [Painel](/docs/painel) com `/painel`.
+
+<Callout type="success">
+  Ao atingir **10 vendas**, a loja recebe no canal de notificações privadas um código de **3 dias do plano Completo**, com um botão para ativar (também pode ser resgatado com `/plano resgatar`).
+</Callout>

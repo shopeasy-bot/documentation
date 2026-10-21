@@ -1,0 +1,124 @@
+---
+title: Bot exclusivo e automações
+icon: BiBot
+description: Personalize o bot, tenha uma instância própria e configure automações
+---
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Bot exclusivo
+
+O comando `/bot` reúne a personalização do bot. O que aparece depende do plano.
+
+<DiscordSlashCommand name="bot" description="[🤖] Configure o bot" />
+
+**Permissão necessária:** Gerenciar Bot (`manager_bot`).
+
+| Plano | O que `/bot` oferece |
+| --- | --- |
+| Básico | Mostra o aviso de plano necessário |
+| Essencial e Profissional | **Apelido** e **avatar** do bot **apenas neste servidor**, além do botão **Quero um bot dedicado** |
+| Completo e Enterprise | Bot exclusivo com token próprio |
+
+## O que muda com o bot exclusivo
+
+O servidor passa a usar **uma instância própria do ShopEasy**, com nome, avatar, banner, status e descrição seus. Também passam a funcionar:
+
+- Gateways exclusivos: **PagSeguro**, **Asaas**, **Stripe** e **NowPayments**. Veja [Pagamentos](/docs/pagamentos).
+- [Automações](#automações).
+- **Login OAuth2**: membros fazem login em um painel web e recebem um cargo automaticamente.
+
+## Criando o bot no Discord
+
+<Steps>
+<Step>
+### Crie a aplicação
+Acesse o [Discord Developer Portal](https://discord.com/developers/applications), clique em **New Application**, dê um nome e confirme.
+</Step>
+
+<Step>
+### Copie o token
+Na aba **Bot**, use **Reset Token** e depois **Copy**.
+
+<Callout type="warn">
+  O token funciona como uma senha. Nunca envie o token em canais, tickets ou capturas de tela. Se ele vazar, gere outro e use **Atualizar Token** no `/bot`.
+</Callout>
+</Step>
+
+<Step>
+### Ative os Intents
+Ainda na aba **Bot**, em **Privileged Gateway Intents**, ative **Presence Intent**, **Server Members Intent** e **Message Content Intent**.
+</Step>
+
+<Step>
+### Registre no ShopEasy
+Use `/bot`, clique em **Registrar Bot** e cole o token. O ShopEasy registra o bot e faz o deploy automaticamente.
+</Step>
+
+<Step>
+### Adicione ao servidor
+Clique em **Adicionar ao servidor**.
+</Step>
+</Steps>
+
+<Callout type="info">
+  No plano Completo, `/plano gerenciar` mostra o botão **Resgatar Bot Exclusivo** enquanto o servidor ainda não tem um bot.
+</Callout>
+
+## Estados e botões
+
+| Estado | Botões |
+| --- | --- |
+| Nenhum bot registrado | **Registrar Bot** |
+| Bot não implantado | **Deploy**, **Atualizar Token**, **Remover Bot** |
+| Token inválido | **Atualizar Token**, **Remover Bot** |
+| Bot offline | **Iniciar**, **Atualizar Token**, **Remover Bot** |
+| Bot online | **Reiniciar**, **Parar**, **Atualizar Token**, **Adicionar ao servidor**, **Deletar**, **Login OAuth2** |
+
+## Personalização do perfil
+
+No seletor **Personalizar bot…**:
+
+| Opção | Limite |
+| --- | --- |
+| Alterar nome | 2 a 32 caracteres |
+| Alterar avatar / Alterar banner | Imagem PNG, JPG, GIF ou WebP |
+| Alterar status | Online, Ausente, Ocupado (Não perturbe) ou Invisível |
+| Alterar atividade | Jogando, Assistindo, Ouvindo etc. (até 128 caracteres) |
+| Alterar descrição | Até 400 caracteres |
+| Alterar apelido no servidor | Até 32 caracteres (vazio remove) |
+
+## Login OAuth2
+
+Usa a mesma aplicação do Discord do seu bot exclusivo.
+
+1. **Configurar credenciais**: informe o Client ID e o Client Secret da aplicação.
+2. **Definir cargo**: escolha o cargo entregue a quem fizer login.
+3. **Ver membros**: lista quem já fez login e se o cargo foi entregue.
+
+# Automações
+
+<DiscordSlashCommand name="automacoes" description="[🛠️] - Acesse as automacoes do servidor" />
+
+**Requisitos:** o comando precisa ser usado **no bot exclusivo**, com a permissão Gerenciar Bot (`manager_bot`). No bot público, o ShopEasy mostra o aviso de bot exclusivo.
+
+Escolha uma automação, clique em **Configurar** e depois em **Ativar**.
+
+| Automação | Como funciona |
+| --- | --- |
+| **Mensagens Automáticas** | Envia uma mensagem (até 1500 caracteres) em um canal a cada **N minutos** (mínimo 1) ou todo dia em um **horário fixo** (HH:MM). Depois de **3 falhas seguidas** de envio, a mensagem é removida e a equipe é avisada |
+| **Limpeza Automática** | Limpa as mensagens de um canal a cada **N minutos**, com opção de manter as mensagens fixadas |
+| **Avaliações** | Reage com um emoji a cada mensagem enviada no canal escolhido |
+| **Trava/Destrava de Canais** | Trava e destrava um canal em horários definidos (HH:MM). O fuso horário é configurável, por exemplo `America/Sao_Paulo` |
+| **Alerta de Reposição de Estoque** | Avisa em um canal, com menção opcional a um cargo, quando um produto tem o estoque reposto |
+
+Cada automação pode ter várias regras. Use **Adicionar Regra** ou **Adicionar Mensagem**, e **Ativar/Desativar** ou **Deletar** em cada uma.
+
+# Conexão de voz
+
+| Comando | Descrição |
+| --- | --- |
+| `/voz conectar canal` | Conecta o bot a um canal de voz |
+| `/voz desconectar` | Desconecta o bot do canal de voz |
+
+**Permissão:** Gerenciar Bot (`manager_bot`).

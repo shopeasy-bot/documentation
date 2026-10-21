@@ -1,322 +1,121 @@
 ---
 title: Estoque
 icon: BiPackage
-description: Configure o estoque e entrega dos seus produtos
+description: Configure o estoque, os limites de compra e a entrega dos seus produtos
 ---
-import { Package, Zap, Hand, FileText, Plus, Trash2, Download, AlertCircle, CheckCircle, Settings } from "lucide-react";
+import { Zap, Hand, AlertCircle } from "lucide-react";
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 
 # Configurações de Estoque
 
-Gerencie como seus produtos serão entregues aos clientes de forma automática ou manual.
+O estoque define **o que** o cliente recebe e **quantas** unidades estão disponíveis.
 
-## Acessando as Configurações de Estoque
-
-As configurações de estoque são acessadas através do menu de configuração do produto:
+## Acessando
 
 <Steps>
 <Step>
-## Abra as Configurações
-
-Execute o comando e selecione o produto:
+### Abra o produto
 
 <DiscordSlashCommand
   name="produto"
   subcommand="configurar"
   description="[📦] - Configure um produto cadastrado"
+  options={[{ name: "referencia", type: "text" }]}
 />
-
 </Step>
 
 <Step>
-## Selecione "Configurar Estoque"
-
-No menu de configurações, clique na opção **"Configurar Estoque"** no select menu.
+### Selecione "📦 Configurar estoque"
 
 ![Opção configurar estoque](/images/products/opcao-configurar-estoque.png)
-
 </Step>
 
 <Step>
-## Menu de Estoque
-
-A mensagem será editada exibindo o menu completo de configurações de estoque.
+### Menu de Estoque
 
 ![Menu de configurações de estoque](/images/products/menu-config-estoque.png)
-
 </Step>
 </Steps>
 
-## Tipos de Entrega
+## Modos de entrega
 
-No centro do menu existem dois botões para escolher o tipo de entrega:
+Use os botões **Automática** e **Manual** para escolher o modo.
 
-### <Zap className="inline w-5 h-5" /> Automático (Padrão)
+### <Zap className="inline w-5 h-5" /> Automática
 
-O produto é entregue automaticamente ao cliente após a confirmação do pagamento, de acordo com o estoque configurado.
-
-**Quando usar:**
-- Keys de jogos
-- Códigos de ativação
-- Credenciais de acesso
-- Qualquer conteúdo digital pré-definido
-
-<Callout type="success" icon={<CheckCircle />}>
-Recomendado para a maioria dos produtos digitais! A entrega é instantânea.
-</Callout>
+Cada linha cadastrada é **uma unidade** (uma chave, uma conta, um link…). Quando o pagamento é aprovado, o bot envia as unidades compradas ao cliente por **mensagem direta** e as remove do estoque.
 
 ### <Hand className="inline w-5 h-5" /> Manual
 
-O produto aguarda sua intervenção manual para ser entregue. Você receberá uma notificação e deverá enviar o produto manualmente.
+Não há itens cadastrados, apenas uma **quantidade**. Quando o pagamento é aprovado, o cliente recebe por DM as **instruções pós-compra** e a quantidade disponível diminui.
 
-**Quando usar:**
-- Produtos personalizados
-- Serviços que exigem configuração manual
-- Produtos físicos
-- Itens que dependem de disponibilidade externa
+## Opções do modo Automático
 
-<Callout type="info">
-Com entrega manual, você tem controle total sobre quando e como entregar o produto.
-</Callout>
+<Tabs items={['Adicionar', 'Remover e backup', 'Fantasma e infinito']}>
+  <Tab value="Adicionar">
+    **➕ Adicionar por linhas**: cole o texto (uma unidade por linha) ou envie um arquivo **.txt** (até 4000 caracteres). Linhas vazias são ignoradas.
 
-## Configurações do Modo Automático
+    ![Formulário adicionar por linhas](/images/products/form-adicionar-linhas.png)
 
-Quando o modo **Automático** está ativado, as seguintes opções ficam disponíveis:
+    ```
+    CHAVE-AAAA-1111
+    CHAVE-BBBB-2222
+    CHAVE-CCCC-3333
+    ```
+    Resultado: 3 unidades.
 
-<Tabs items={['Adicionar por Linhas', 'Adicionar por Texto', 'Backup', 'Esvaziar']}>
-<Tab value="Adicionar por Linhas">
-
-### <Plus className="inline w-5 h-5" /> Adicionar por Linhas
-
-Adicione múltiplos itens ao estoque, onde **cada linha representa uma unidade**.
-
-**Como funciona:**
-
-1. Clique em **"Adicionar por Linhas"**
-2. Um formulário será aberto
-3. Cole ou digite os itens (um por linha)
-4. Confirme
-
-![Formulário adicionar por linhas](/images/products/form-adicionar-linhas.png)
-
-**Exemplo de uso - Keys de jogos:**
-```
-ABCD-1234-EFGH-5678
-IJKL-9012-MNOP-3456
-QRST-7890-UVWX-1234
-```
-
-**Exemplo de uso - Credenciais:**
-```
-usuario1:senha123
-usuario2:senha456
-usuario3:senha789
-```
-
-**Resultado:**
-- Cada linha vira uma unidade de estoque
-- Ao vender, o bot envia automaticamente um item da lista
-- O item usado é removido do estoque
-
-<Callout type="info">
-Perfeito para quando você tem múltiplos códigos/keys únicos!
-</Callout>
-
-</Tab>
-
-<Tab value="Adicionar por Texto">
-
-### <FileText className="inline w-5 h-5" /> Adicionar por Texto
-
-Adicione um único texto que será entregue para **todos** os clientes.
-
-**Como funciona:**
-
-1. Clique em **"Adicionar por Texto"**
-2. Digite o texto que será entregue
-3. Confirme
-
-**Exemplo de uso - Instruções:**
-```
-Seu acesso VIP foi ativado!
-
-Para começar a usar seus benefícios:
-1. Vá até o canal #vip
-2. Digite /verificar
-3. Aproveite!
-```
-
-**Exemplo de uso - Link fixo:**
-```
-Download disponível em: https://exemplo.com/download
-Código de acesso: PREMIUM2024
-```
-
-<Callout type="warn">
-Este texto será enviado para TODOS os clientes. Use apenas para conteúdo que não precisa ser único.
-</Callout>
-
-</Tab>
-
-<Tab value="Backup">
-
-### <Download className="inline w-5 h-5" /> Backup do Estoque
-
-Faça o download de todo o conteúdo do estoque atual em formato de texto.
-
-**Quando usar:**
-- Antes de fazer alterações grandes
-- Para ter uma cópia de segurança
-- Para migrar estoque entre produtos
-
-**O que é salvo:**
-- Todos os itens que ainda não foram vendidos
-- Formato de texto simples (um item por linha)
-
-<Callout type="success">
-Recomendamos fazer backup regularmente para não perder seus códigos/keys!
-</Callout>
-
-</Tab>
-
-<Tab value="Esvaziar">
-
-### <Trash2 className="inline w-5 h-5" /> Esvaziar Estoque
-
-Remove **todo** o conteúdo do estoque do produto.
-
-<Callout type="error" icon={<AlertCircle />}>
-**ATENÇÃO!** Esta ação é irreversível. Todo o conteúdo será permanentemente deletado.
-</Callout>
-
-**Quando usar:**
-- Trocar completamente o tipo de produto
-- Lote de keys inválidas/expiradas
-- Reiniciar o estoque do zero
-
-**Recomendação:**
-Faça um backup antes de esvaziar o estoque!
-
-</Tab>
+    **✏️ Adicionar um por um**: adiciona uma única unidade (até 200 caracteres). Útil quando o conteúdo tem várias linhas.
+  </Tab>
+  <Tab value="Remover e backup">
+    - **🗑️ Remover linha do estoque**: informe o número da linha (começando em 1).
+    - **💾 Backup do estoque**: baixa um arquivo `backup.txt` com o estoque disponível.
+    - **⚠️ Esvaziar estoque**: remove todas as unidades. Clique em **Salvar Alterações** para confirmar.
+  </Tab>
+  <Tab value="Fantasma e infinito">
+    - **♾️ Estoque Infinito**: os itens cadastrados são entregues a cada venda **sem sair da lista**.
+    - **👻 Estoque Fantasma**: entrega um **texto fixo** em vez de itens da lista. Com ele ativo, as opções são:
+      - **Alterar texto de entrega**: até 2000 caracteres.
+      - **Alterar quantidade em estoque**: de 1 a 100.
+      - **Desativar Estoque Fantasma**: volta à entrega padrão.
+  </Tab>
 </Tabs>
 
-## Configurações do Modo Manual
+## Opções do modo Manual
 
-Quando o modo **Manual** está ativado, as seguintes opções ficam disponíveis:
+- **📝 Alterar instruções pós-compra**: mensagem enviada por DM após a compra (até 500 caracteres). Exemplo: *"Abra um ticket para receber seu produto."*
+- **📦 Alterar quantidade em estoque**: quantidade disponível para venda.
+- **♾️ Estoque Infinito**: a quantidade nunca diminui após uma venda.
 
-<Tabs items={['Alterar Instruções', 'Alterar Quantidade', 'Esvaziar']}>
-<Tab value="Alterar Instruções">
+## Limites de compra por pedido
 
-### <FileText className="inline w-5 h-5" /> Alterar Instruções
+Disponível nos dois modos:
 
-Defina as instruções que você verá quando precisar fazer a entrega manual.
+| Opção | Faixa | Padrão |
+| --- | --- | --- |
+| **⬇️ Quantidade Mínima por Compra** | 1 a 1000 | 1 |
+| **⬆️ Quantidade Máxima por Compra** | 0 a 1000 (0 = sem limite) | Sem limite |
 
-**Como funciona:**
-
-1. Clique em **"Alterar Instruções"**
-2. Digite as instruções para você mesmo
-3. Confirme
-
-**Exemplo:**
-```
-1. Verificar disponibilidade no site X
-2. Gerar código personalizado
-3. Enviar via DM do Discord
-4. Confirmar recebimento com o cliente
-```
-
-<Callout type="info">
-Estas instruções são apenas para você! O cliente não as verá.
+<Callout type="info" icon={<AlertCircle />}>
+  As alterações de estoque também ficam no rascunho do produto. Clique em **Salvar Alterações** para aplicá-las.
 </Callout>
 
-</Tab>
+## Sem estoque
 
-<Tab value="Alterar Quantidade">
+- O botão de compra continua visível, mas ao clicar o cliente recebe a opção **Notificar-me**. Quando o estoque for reposto e salvo, ele recebe um aviso.
+- `/produto esgotados` lista todos os produtos sem estoque.
+- Quando o estoque de um produto zera após uma venda, o canal de Notificações Privadas recebe um alerta.
 
-### Alterar Quantidade
+## Comparação
 
-Defina quantas unidades estão disponíveis para venda manual.
-
-**Como funciona:**
-
-1. Clique em **"Alterar Quantidade"**
-2. Digite o número de unidades disponíveis
-3. Confirme
-
-**Exemplo:**
-```
-Quantidade: 10
-```
-
-**O que isso significa:**
-- Até 10 pessoas poderão comprar
-- Você receberá 10 notificações de entrega pendente
-- Após as 10 vendas, o produto ficará esgotado
-
-<Callout type="warn">
-Lembre-se de atualizar a quantidade conforme você entrega os produtos!
-</Callout>
-
-</Tab>
-
-<Tab value="Esvaziar">
-
-### <Trash2 className="inline w-5 h-5" /> Esvaziar Estoque
-
-Reseta a quantidade do estoque manual para zero.
-
-**O que acontece:**
-- A quantidade disponível volta para 0
-- O produto fica marcado como esgotado
-- As instruções não são apagadas
-
-<Callout type="info">
-Diferente do modo automático, aqui você não perde nenhum conteúdo, apenas reseta o contador.
-</Callout>
-
-</Tab>
-</Tabs>
-
-## Comparação: Automático vs Manual
-
-| Característica | Automático | Manual |
-|----------------|------------|--------|
-| Entrega | Instantânea | Você entrega |
-| Estoque | Keys/códigos únicos | Quantidade numérica |
-| Notificações | Apenas venda concluída | Pedido + confirmação de entrega |
-| Melhor para | Produtos digitais | Serviços/produtos físicos |
-| Trabalho | Nenhum após configurar | Requer ação sua |
-
-## Dicas de Uso
-
-**Para produtos automáticos:**
-- Sempre adicione mais estoque do que você acha que vai vender
-- Teste um código antes de adicionar o lote todo
-- Faça backup antes de adicionar novo estoque
-- Use "por linhas" para códigos únicos
-- Use "por texto" apenas para instruções gerais
-
-**Para produtos manuais:**
-- Seja realista com a quantidade disponível
-- Defina instruções claras para você mesmo
-- Configure notificações para não perder vendas
-- Atualize a quantidade regularmente
+| | Automática | Manual |
+| --- | --- | --- |
+| O que é entregue | Itens da lista (ou texto fixo, no modo fantasma) | Instruções pós-compra |
+| Controle de quantidade | Número de linhas (ou quantidade fantasma) | Quantidade definida |
+| Ideal para | Chaves, contas, links | Serviços, entregas feitas pela equipe |
 
 ## Próximos Passos
 
-<Cards className="mt-4">
-  <Card
-    icon={<Settings className="text-primary" />}
-    title="Voltar para Configuração"
-    description="Configurações gerais do produto"
-    href="/produtos/configuracao"
-  />
-  <Card
-    icon={<FileText className="text-primary" />}
-    title="Tipos de Entrega"
-    description="Configure cargos, webhooks e mais"
-    href="/produtos/entrega"
-  />
-</Cards>
+- [Configuração](/docs/products/configs)
+- [Carrinho e checkout](/docs/carrinho)

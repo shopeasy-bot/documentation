@@ -1,0 +1,149 @@
+---
+title: Pagamentos
+icon: BiDollarCircle
+description: Conecte gateways, escolha o que aparece no checkout e acompanhe pagamentos
+---
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+
+# Pagamentos
+
+O ShopEasy organiza os pagamentos em **métodos** (PIX, Cartão, Cripto e Saldo). Cada método usa um **gateway** conectado por você.
+
+**Permissão necessária:** Gerenciar Pagamentos (`manager_payments`).
+
+<Callout type="warn">
+  O ShopEasy atua apenas como intermediário tecnológico. O dinheiro vai direto para a conta do gateway que você conectar, e as taxas são cobradas pelo próprio gateway. Leia os **Termos E Responsabilidades** no menu antes de conectar.
+</Callout>
+
+## Gateways disponíveis
+
+| Método | Gateway | Tipo | Taxa informada | Disponibilidade |
+| --- | --- | --- | --- | --- |
+| PIX | **PIX Manual** | Manual | Sem taxa | Todos os planos |
+| PIX | **Bravex Pay** | Automático | Depósito: R$0,50 + 1,50% · Saque: R$1,00 + 1% | Todos os planos |
+| PIX | **Carteira** (ShopEasy) | Carteira | Taxa indefinida (veja [Carteira](#carteira-shopeasy)) | Todos os planos. Valor mínimo de R$ 1,00 |
+| PIX | **Mercado Pago** | Automático | 0,99% | A partir do **Profissional** |
+| PIX | **EFI Pay** | Automático | 0,99% | A partir do **Profissional** |
+| PIX | **PagSeguro** | Automático | 1,09% | Somente [bot exclusivo](/docs/bot-exclusivo) |
+| PIX | **Asaas** | Automático | 1,99% | Somente bot exclusivo |
+| Cartão | **Stripe** | Automático | 3,49% | Somente bot exclusivo |
+| Cripto | **NowPayments** | Automático | 0,5% | Somente bot exclusivo |
+| Saldo | Saldo da loja | Instantâneo | — | A partir do **Profissional** |
+
+<Callout type="info">
+  As taxas acima são as exibidas no menu do bot. Confirme sempre os valores atuais no site de cada gateway.
+</Callout>
+
+## Configurando um gateway
+
+<Steps>
+<Step>
+### Abra o menu
+
+<DiscordSlashCommand
+  name="pagamento"
+  subcommand="configurar"
+  description="[💳] - Configure a forma de pagamento"
+/>
+</Step>
+
+<Step>
+### Escolha o método
+No seletor, escolha **PIX**, **Cartao**, **Cripto** ou **Saldo**.
+</Step>
+
+<Step>
+### Escolha o gateway
+No seletor **Selecione o gateway**, cada opção mostra a taxa e o status:
+
+| Status | Significado |
+| --- | --- |
+| **Pendente** | Ainda não conectado |
+| **Conectado** | Credenciais salvas |
+| **Pronto** | Conectado e habilitado |
+| **Ativo no checkout** | É o gateway usado por este método |
+| **Requer plano** / **Exclusivo** | Bloqueado pelo plano ou pelo tipo de bot |
+</Step>
+
+<Step>
+### Conecte
+Clique em **Conectar** (ou **Editar**, se já estiver conectado) e preencha o formulário.
+</Step>
+
+<Step>
+### Ative no checkout
+Clique em **Usar no checkout**. Cada método usa **um gateway por vez**.
+</Step>
+</Steps>
+
+## Dados pedidos por gateway
+
+<Tabs items={['PIX Manual', 'Mercado Pago', 'EFI Pay', 'Outros']}>
+  <Tab value="PIX Manual">
+    - **Nome da conta**: nome do titular (até 20 caracteres).
+    - **Chave PIX**: a chave que receberá os pagamentos.
+    - **Tipo da chave**: CPF, Aleatória, E-mail ou Telefone. A chave é validada conforme o tipo.
+
+    Botão extra: **Exigir comprovante** (ativado por padrão). Veja [Aprovação no PIX Manual](#aprovação-no-pix-manual).
+  </Tab>
+  <Tab value="Mercado Pago">
+    - **Token de Acesso**: deve começar com `APP_USR-` ou `TEST-`.
+  </Tab>
+  <Tab value="EFI Pay">
+    - **Client ID** e **Client Secret** da conta EFI.
+    - **Chave PIX** cadastrada na conta EFI.
+    - **Certificado .p12** em base64 (deixe em branco para manter o atual).
+  </Tab>
+  <Tab value="Outros">
+    - **Bravex Pay**: Client ID e Client Secret.
+    - **PagSeguro**: Token de Acesso.
+    - **Asaas**: API Key.
+    - **Stripe**: Secret Key e Public Key.
+    - **NowPayments**: API Key e, opcionalmente, IPN Secret.
+    - **Carteira**: API Key da carteira, obtida em `/carteira`.
+  </Tab>
+</Tabs>
+
+<Callout type="warn">
+  Nunca compartilhe tokens, chaves secretas ou certificados em canais do Discord. Eles devem ser informados apenas nos formulários do bot.
+</Callout>
+
+## Aprovação no PIX Manual
+
+No PIX Manual, o bot gera o QR Code com a sua chave, mas **não confirma o pagamento sozinho**:
+
+1. O cliente paga e clica em **Já Realizei o Pagamento**.
+2. Se **Exigir comprovante** estiver ativo, ele envia uma **imagem ou PDF** do comprovante.
+3. O carrinho fica **Aguardando aprovação**, e o canal de Notificações Privadas recebe o comprovante com o botão **Ir até o Carrinho**.
+4. Um membro com a permissão **Carrinhos** clica em **Aprovar Pagamento** no carrinho, ou usa `/pagamento aprovar`.
+
+## Saldo
+
+Com o plano **Profissional**, você pode ativar o **Saldo** como forma de pagamento em `/pagamento configurar` → **Saldo**.
+
+- A opção só aparece no checkout quando o saldo do cliente **cobre o valor total** da compra.
+- O pagamento com saldo é aprovado na hora.
+- Para creditar saldo, use `/saldo dar usuario valor` (até 999.999). O cliente consulta o próprio saldo com `/saldo ver`. Veja [Comandos](/docs/comandos#saldo).
+
+## Carteira ShopEasy
+
+`/carteira` abre a carteira online do usuário (funciona também em mensagem direta e exige [login](https://shopeasy.site/login)). Nela você pode:
+
+- **Vincular Gateway**: conectar a carteira ao gateway **Atos LTDA** (taxa informada: 3% + R$0,30 por transação).
+- **Solicitar Chave Api**: gerar a chave usada no gateway **Carteira** do `/pagamento configurar`.
+- **Histórico de Saques** e **Sacar**: o saque mínimo é **R$ 5,00** e sempre retira o valor total disponível.
+- **Ativar / Desativar** a carteira.
+
+## Consultar e aprovar pagamentos
+
+| Comando | Descrição |
+| --- | --- |
+| `/pagamento consultar id` | Mostra status, provedor, valor, comprador, produtos, datas e o PIX Copia e Cola ou link de checkout |
+| `/pagamento aprovar id` | Aprova manualmente um pagamento pendente |
+
+## Próximos Passos
+
+- [Carrinho e checkout](/docs/carrinho)
+- [Planos](/docs/plans)

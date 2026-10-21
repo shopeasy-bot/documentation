@@ -1,0 +1,97 @@
+---
+title: Carrinho e checkout
+icon: BiCart
+description: Como o cliente compra, paga e recebe os produtos
+---
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+# Carrinho e checkout
+
+Esta página mostra a compra do ponto de vista do cliente e o que acontece por trás.
+
+## Fluxo completo
+
+<Steps>
+<Step>
+### O cliente clica em "Comprar"
+
+O botão fica na mensagem do produto. Em um [catálogo](/docs/products/catalogos), o cliente escolhe o produto no seletor.
+
+Se o cliente já tiver um carrinho aberto, o produto é **adicionado** a ele. Um mesmo produto não pode ser adicionado duas vezes.
+</Step>
+
+<Step>
+### O bot cria o carrinho
+
+Um canal privado é criado na **Categoria carrinhos**. O canal fica oculto para `@everyone` e visível para o cliente e o bot. Membros com **Administrador** no Discord também conseguem vê-lo. O nome segue o padrão definido em [Carrinhos e Vendas](/docs/configs/purchase). A abertura é registrada nas Notificações Privadas.
+</Step>
+
+<Step>
+### O cliente revisa o carrinho
+
+Para cada produto há os botões **−**, **quantidade** (para digitar o valor) e **+**, além de um botão para remover o item. Os limites mínimo e máximo do produto são respeitados. Com vários produtos, o carrinho é paginado.
+
+Botões gerais:
+- **Cupom** / **Remover Cupom**: aplica ou remove um [cupom](/docs/cupons) (quando permitido).
+- **Continuar**: vai para a escolha do pagamento.
+- **Cancelar**: pede confirmação e apaga o carrinho.
+</Step>
+
+<Step>
+### Escolha do pagamento
+
+O cliente escolhe o método (**PIX**, **Cartao**, **Cripto** ou **Saldo**) e vê o resumo com subtotal, cupom, total e prazo do carrinho.
+
+- **Continuar Pagamento**: gera a cobrança.
+- **Ler Termos**: mostra os termos de compra (fica desativado se não houver termos).
+- **Voltar**: retorna ao carrinho.
+</Step>
+
+<Step>
+### Pagamento
+
+- **PIX**: QR Code e código Copia e Cola, com os botões **Copiar Código PIX**, **Tutorial**, **Já Realizei o Pagamento** e **Cancelar Pedido**.
+- **Cartão e Cripto**: botão **Pagar Agora**, que abre a página de pagamento do gateway.
+- **Saldo**: aprovado na hora.
+
+Nos gateways automáticos, a aprovação é detectada sozinha. No **PIX Manual**, a equipe aprova depois de conferir o comprovante. Veja [Pagamentos](/docs/pagamentos#aprovação-no-pix-manual).
+</Step>
+
+<Step>
+### Entrega
+
+Quando o pagamento é aprovado:
+1. Os produtos são entregues por **mensagem direta**. Se a DM do cliente estiver fechada, a entrega é feita no canal do carrinho.
+2. O **cargo de clientes** e o **cargo ao comprar** do produto são atribuídos.
+3. A venda é anunciada nas Notificações Públicas e registrada nas Notificações Privadas.
+4. As mensagens dos produtos são atualizadas com o novo estoque.
+5. Se a entrega foi por DM, o canal do carrinho é apagado **após 2 minutos**, e o cliente recebe um pedido de avaliação (se o canal de Avaliações estiver configurado).
+</Step>
+</Steps>
+
+## Quando o carrinho não é criado
+
+| Mensagem | Causa | Solução |
+| --- | --- | --- |
+| "A loja está **fechada** no momento" | A loja foi fechada no `/painel` | Abra a loja em [Painel](/docs/painel) |
+| "Este produto está **desativado**" | Produto desativado | Ative em `/produto configurar` |
+| "Você não tem o cargo necessário para comprar este produto." | Produto com **Cargo de acesso** | Dê o cargo ao cliente ou ajuste o produto |
+| "Produto sem estoque…" | Sem estoque | O cliente pode clicar em **Notificar-me** |
+| "Estoque insuficiente para a quantidade mínima configurada" | Estoque menor que o mínimo por compra | Reponha o estoque ou ajuste o mínimo |
+| "Nenhum metodo de pagamento está disponivel no momento" | Nenhum gateway ativo | Configure em [Pagamentos](/docs/pagamentos) |
+| "A **categoria** de carrinho não foi encontrada" | Categoria apagada ou não definida | Defina em [Canais e Categorias](/docs/configs/channels) |
+| "Não tenho permissão para criar canais" | Bot sem permissão | Dê **Administrador** (ou Gerenciar Canais) ao bot |
+| "Você está proibido de fazer compras no servidor." | Cliente bloqueado na loja | — |
+| "Produto foi banido por não seguir os termos" | Produto bloqueado por violar os [termos](https://shopeasy.site/terms) | Fale com o suporte |
+
+## Expiração
+
+O carrinho expira conforme a **Duração do Carrinho**. Ao expirar, o canal é apagado e o cancelamento é registrado. Na log de cancelamento, a equipe com permissão **Carrinhos** pode:
+
+- **Restaurar**: recria o carrinho do cliente.
+- **Enviar promoção**: envia uma DM convidando o cliente a voltar.
+
+<Callout type="info">
+  A equipe com a permissão **Carrinhos** pode interagir com carrinhos de outros usuários e acompanhar os carrinhos abertos em `/painel` → **🛒 Carrinhos**.
+</Callout>

@@ -1,11 +1,13 @@
 {
   "title": "Produtos",
-  "description": "Library de componentes UI",
+  "description": "Cadastro, configuração, estoque, catálogos e galeria",
   "icon": "BiPackage",
   "defaultOpen": true,
   "pages": [
     "index",
     "configs",
-     "stock"
+    "stock",
+    "catalogos",
+    "galeria"
   ]
 }

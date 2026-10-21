@@ -1,11 +1,23 @@
 {
   "pages": [
     "index",
-    "plans",
-    "comprar-plano",
+    "primeiros-passos",
+    "---Loja---",
     "configs",
     "products",
-    "api"
+    "pagamentos",
+    "carrinho",
+    "cupons",
+    "vendas",
+    "tickets",
+    "painel",
+    "---Planos---",
+    "plans",
+    "comprar-plano",
+    "bot-exclusivo",
+    "---Referência---",
+    "comandos",
+    "solucao-de-problemas"
   ],
   "defaultOpen": true
 }
