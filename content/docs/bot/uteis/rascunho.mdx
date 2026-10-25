@@ -1,0 +1,79 @@
+---
+title: Rascunho
+icon: BiSave
+description: Por que suas alterações só valem depois de clicar em Salvar Alterações
+---
+import { Settings, Package } from "lucide-react";
+
+<Callout type="hint" title="Resumo">
+  O que você muda nos menus fica num **rascunho** e só aparece para os clientes quando você clica em **💾 Salvar Alterações**. O rascunho dura **24 horas**.
+</Callout>
+
+## Como funciona
+
+<Steps>
+<Step>
+### Você altera
+Abre um menu e muda alguma coisa: título, preço, canal, permissão...
+</Step>
+<Step>
+### Vai para o rascunho
+A alteração fica guardada só para você. A loja continua igual para os clientes.
+</Step>
+<Step>
+### Você salva
+Ao clicar em **Salvar Alterações**, tudo o que está no rascunho é aplicado de uma vez. Nos produtos, as mensagens e os catálogos também são atualizados.
+</Step>
+</Steps>
+
+<DiscordMessage command="/produto configurar">
+  <DcActionRow>
+    <DcButton label="Salvar Alterações" emoji="💾" style="success" />
+    <DcButton label="Menu Principal" style="secondary" />
+  </DcActionRow>
+</DiscordMessage>
+
+## Regras
+
+| Regra | O que significa |
+| --- | --- |
+| Dura 24 horas | Cada nova alteração renova o prazo. Depois disso, o rascunho some sozinho |
+| É individual | Cada membro da equipe tem o seu. O colega não vê o que você não salvou |
+| Fechar não apaga | Se fechar a mensagem, as alterações continuam no rascunho até expirar |
+| Menu Principal avisa | Se houver algo não salvo, o bot pergunta se quer sair mesmo assim |
+
+## Onde existe rascunho
+
+<Tabs items={["Tem rascunho", "Salva na hora"]}>
+<Tab value="Tem rascunho">
+- `/configuracoes` (carrinhos, vendas, canais e permissões)
+- `/produto configurar`, incluindo o estoque
+- `/catalogo configurar`
+- `/cupom configurar`
+- Configuração de tickets
+</Tab>
+<Tab value="Salva na hora">
+- `/personalizar` (cor, card de produto e card de ticket)
+</Tab>
+</Tabs>
+
+## Dúvidas comuns
+
+<Accordions>
+  <Accordion title="Configurei e não mudou nada. E agora?">
+    Quase sempre é um rascunho esquecido. Abra o mesmo menu, confira as alterações e clique em **Salvar Alterações**.
+  </Accordion>
+  <Accordion title="Como desfaço o que não salvei?">
+    Nos produtos, use **Descartar alterações**. Nos outros menus, basta não salvar: o rascunho expira em 24 horas.
+  </Accordion>
+  <Accordion title="Dois membros podem editar o mesmo produto ao mesmo tempo?">
+    Podem, porque cada um tem o seu rascunho. Se os dois mudarem o mesmo campo, fica o valor de quem salvar por último.
+  </Accordion>
+</Accordions>
+
+## Veja também
+
+<Cards>
+  <Card icon={<Settings />} title="Configurações" href="/docs/configs" />
+  <Card icon={<Package />} title="Configuração de produtos" href="/docs/products/configs" />
+</Cards>

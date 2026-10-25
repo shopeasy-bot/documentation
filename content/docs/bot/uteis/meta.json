@@ -1,0 +1,17 @@
+{
+  "title": "Úteis",
+  "description": "Conceitos e explicações que ajudam a usar o bot",
+  "icon": "BiBulb",
+  "defaultOpen": true,
+  "pages": [
+    "index",
+    "referencia",
+    "rascunho",
+    "variaveis",
+    "tipos-de-entrega",
+    "ids",
+    "permissoes",
+    "cores",
+    "glossario"
+  ]
+}

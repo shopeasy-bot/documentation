@@ -1,0 +1,87 @@
+---
+title: Variáveis
+icon: BiCodeCurly
+description: Palavras entre chaves que o bot troca por dados reais, como o nome do cliente
+---
+import { ShoppingCart, LifeBuoy } from "lucide-react";
+
+<Callout type="hint" title="Resumo">
+  Uma variável, como `{{nome}}`, é trocada pelo bot por um dado real na hora de usar o texto. Cada campo tem as suas variáveis e o seu formato: **copie exatamente** da aba do campo que você está editando.
+</Callout>
+
+## Como funciona
+
+Você escreve o padrão uma vez, e o bot gera um resultado diferente para cada cliente:
+
+| Você escreve | Cliente | O bot cria |
+| --- | --- | --- |
+| `🛒・carrinho-{{nome}}` | Ana | `🛒・carrinho-ana` |
+| `🛒・carrinho-{{nome}}` | Bruno | `🛒・carrinho-bruno` |
+| `ticket-{user}` | Ana | `ticket-ana` |
+
+## Variáveis de cada campo
+
+<Tabs items={["Carrinho", "Ticket", "Loja fechada", "Promoções"]}>
+<Tab value="Carrinho">
+**Onde:** `/configuracoes` → 🛒 Carrinhos → **Nome do Carrinho**. Usa **chaves duplas**.
+
+| Variável | Vira |
+| --- | --- |
+| `{{nome}}` | Nome de exibição do cliente |
+| `{{id}}` | ID do cliente no Discord |
+
+<Callout type="warn">
+  O menu também cita `{{username}}`, mas ela **não é trocada** hoje e aparece como texto. Use `{{nome}}` ou `{{id}}`.
+</Callout>
+</Tab>
+<Tab value="Ticket">
+**Onde:** configuração de tickets → **Padrão de Nome**. Usa **chaves simples**.
+
+| Variável | Vira |
+| --- | --- |
+| `{user}` | Nome do usuário em minúsculas, com `-` no lugar dos espaços (até 20 caracteres) |
+| `{id}` | ID do usuário no Discord |
+
+Cada variável é trocada **uma vez só**: se repetir `{user}`, só a primeira vira o nome.
+</Tab>
+<Tab value="Loja fechada">
+**Onde:** mensagem mostrada fora do horário de funcionamento, nos carrinhos e nos tickets.
+
+| Variável | Vira |
+| --- | --- |
+| `{horario}` | O horário de funcionamento configurado, com o fuso |
+
+Se você não usar `{horario}`, o horário é colocado **sozinho no fim** da mensagem.
+</Tab>
+<Tab value="Promoções">
+**Onde:** `/promocoes` (somente [bot exclusivo](/docs/bot-exclusivo)), no título, descrição, rodapé e botão.
+
+| Variável | Vira |
+| --- | --- |
+| `{usuario}` | Nome de quem recebe a DM |
+| `{servidor}` | Nome do servidor |
+| `{promocao}` | Nome da campanha |
+| `{preco}` | Preço informado na campanha |
+| `{link}` | Link informado na campanha |
+
+Outras palavras entre chaves são recusadas ao salvar. Usou `{preco}` ou `{link}`? Preencha o preço ou o link da campanha.
+</Tab>
+</Tabs>
+
+## Dúvidas comuns
+
+<Accordions>
+  <Accordion title="Por que apareceu {{username}} escrito no nome do canal?">
+    Essa variável não é trocada no nome do carrinho. Troque por `{{nome}}` ou `{{id}}` e salve.
+  </Accordion>
+  <Accordion title="Posso usar uma variável de um campo em outro?">
+    Não. Cada campo só entende as variáveis da sua aba. Uma variável fora do lugar aparece como texto (ou é recusada, nas promoções).
+  </Accordion>
+</Accordions>
+
+## Veja também
+
+<Cards>
+  <Card icon={<ShoppingCart />} title="Carrinhos e Vendas" href="/docs/configs/purchase" />
+  <Card icon={<LifeBuoy />} title="Tickets" href="/docs/tickets" />
+</Cards>

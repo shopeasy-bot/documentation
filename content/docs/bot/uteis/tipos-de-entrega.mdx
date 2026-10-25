@@ -1,0 +1,68 @@
+---
+title: Tipos de entrega
+icon: BiGitCompare
+description: Entrega automática ou manual, e qual usar para cada produto
+---
+import { Boxes, ShoppingCart } from "lucide-react";
+
+<Callout type="hint" title="Resumo">
+  **Automática:** o bot entrega sozinho algo que você cadastrou (chave, conta, link). **Manual:** o bot avisa o cliente e **sua equipe** entrega.
+</Callout>
+
+O modo é escolhido em `/produto configurar` → **📦 Configurar estoque**, nos botões **Automática** e **Manual**.
+
+## Lado a lado
+
+<Tabs items={["Automática", "Manual"]}>
+<Tab value="Automática">
+Cada linha do estoque é **uma unidade**. Quando o pagamento é aprovado, o bot envia as unidades por **DM** e as tira do estoque.
+
+```txt title="Estoque com 3 unidades"
+CHAVE-AAAA-1111
+CHAVE-BBBB-2222
+CHAVE-CCCC-3333
+```
+
+**Ideal para:** chaves, gift cards, contas, links.
+</Tab>
+<Tab value="Manual">
+Não há itens cadastrados, só uma **quantidade**. Quando o pagamento é aprovado, o cliente recebe por DM as **instruções pós-compra**, e a quantidade diminui.
+
+Exemplo de instruções que você pode escrever:
+
+> Abra um ticket em #suporte com o ID do pagamento para receber seu produto.
+
+**Ideal para:** serviços, boosts, itens dentro de jogos, encomendas.
+</Tab>
+</Tabs>
+
+## Qual escolher
+
+| Você vende... | Use |
+| --- | --- |
+| Chaves, gift cards, códigos | **Automática** |
+| Contas (login e senha) | **Automática**, com **Adicionar um por um** se ocupar várias linhas |
+| O mesmo link ou arquivo para todos | **Automática** + **Estoque Fantasma** |
+| Algo que nunca acaba (ex.: um guia) | **Automática** + **Estoque Infinito** |
+| Serviços e entregas feitas pela equipe | **Manual** |
+
+## Dúvidas comuns
+
+<Accordions>
+  <Accordion title="E se a DM do cliente estiver fechada?">
+    A entrega é feita no **canal do carrinho**, nos dois modos.
+  </Accordion>
+  <Accordion title="O que é o Estoque Fantasma?">
+    Em vez de itens da lista, o bot entrega sempre o **mesmo texto** (até 2000 caracteres), com uma quantidade de 1 a 100 definida por você.
+  </Accordion>
+  <Accordion title="O que acontece quando o estoque acaba?">
+    O botão de compra continua na mensagem, mas o cliente recebe a opção **Notificar-me** e é avisado quando você repor e salvar.
+  </Accordion>
+</Accordions>
+
+## Veja também
+
+<Cards>
+  <Card icon={<Boxes />} title="Estoque" description="Todas as opções de cada modo" href="/docs/products/stock" />
+  <Card icon={<ShoppingCart />} title="Carrinho e checkout" href="/docs/carrinho" />
+</Cards>

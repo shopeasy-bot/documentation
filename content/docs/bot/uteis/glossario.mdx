@@ -1,0 +1,46 @@
+---
+title: Glossário
+icon: BiBook
+description: Os termos mais usados no ShopEasy, explicados em uma linha
+---
+
+<Callout type="hint" title="Dica">
+  Use **Ctrl + F** para achar um termo. Cada um tem um link para a página completa.
+</Callout>
+
+<Tabs items={["Loja e produtos", "Compra e pagamento", "Configuração"]}>
+<Tab value="Loja e produtos">
+| Termo | O que é |
+| --- | --- |
+| **Catálogo** | Uma única mensagem com vários produtos em um menu de seleção. [Ver mais](/docs/products/catalogos) |
+| **Cupom** | Código de desconto percentual que o cliente digita no carrinho. [Ver mais](/docs/cupons) |
+| **Entrega automática** | O bot entrega sozinho os itens cadastrados no estoque. [Ver mais](/docs/uteis/tipos-de-entrega) |
+| **Entrega manual** | O bot envia instruções e a equipe faz a entrega. [Ver mais](/docs/uteis/tipos-de-entrega) |
+| **Estoque fantasma** | Entrega sempre o mesmo texto, com uma quantidade definida por você. [Ver mais](/docs/products/stock) |
+| **Estoque infinito** | Os itens são entregues sem sair do estoque, que nunca acaba. [Ver mais](/docs/products/stock) |
+| **Referência / SKU** | O nome interno de um produto, catálogo ou cupom. [Ver mais](/docs/uteis/referencia) |
+</Tab>
+<Tab value="Compra e pagamento">
+| Termo | O que é |
+| --- | --- |
+| **Carrinho** | Canal privado criado para cada compra. Expira se ficar parado. [Ver mais](/docs/carrinho) |
+| **Carteira** | Carteira online do ShopEasy (`/carteira`), para receber pagamentos e fazer saques. [Ver mais](/docs/pagamentos#carteira-shopeasy) |
+| **Checkout** | A etapa de pagamento dentro do carrinho, com as formas de pagamento ativas. [Ver mais](/docs/carrinho) |
+| **Gateway** | A empresa que processa o pagamento (Mercado Pago, EFI, Stripe...). [Ver mais](/docs/pagamentos) |
+| **ID do pagamento** | Número de cada compra, usado em `/pagamento consultar` e `/pagamento aprovar`. [Ver mais](/docs/uteis/ids) |
+| **PIX Manual** | Pagamento por chave PIX em que a equipe confere o comprovante e aprova. [Ver mais](/docs/pagamentos) |
+| **Saldo** | Crédito do cliente dentro do servidor, que pode pagar compras. [Ver mais](/docs/pagamentos#saldo) |
+</Tab>
+<Tab value="Configuração">
+| Termo | O que é |
+| --- | --- |
+| **Bot exclusivo** | Seu próprio bot, com nome e foto da sua loja e recursos extras. [Ver mais](/docs/bot-exclusivo) |
+| **Cargo de cliente** | Cargo que o bot entrega a quem conclui uma compra. [Ver mais](/docs/configs/purchase) |
+| **ID** | Número único de um usuário, canal, cargo ou servidor no Discord. [Ver mais](/docs/uteis/ids) |
+| **Notificações privadas** | Canal da equipe que recebe comprovantes, alertas de estoque e solicitações. [Ver mais](/docs/configs/channels) |
+| **Plano** | Nível de assinatura que libera recursos (Essencial, Profissional...). [Ver mais](/docs/plans) |
+| **Rascunho** | Onde ficam suas alterações até você clicar em Salvar Alterações. [Ver mais](/docs/uteis/rascunho) |
+| **Ticket** | Canal privado de atendimento entre o cliente e a equipe. [Ver mais](/docs/tickets) |
+| **Variável** | Palavra entre chaves, como `{{nome}}`, que o bot troca por um dado real. [Ver mais](/docs/uteis/variaveis) |
+</Tab>
+</Tabs>

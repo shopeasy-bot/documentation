@@ -1,0 +1,96 @@
+---
+title: Referência (SKU)
+icon: BiHash
+description: O "nome interno" de produtos, catálogos e cupons, e como escolher um bom
+---
+import { Package, Ticket, LayoutGrid } from "lucide-react";
+
+<Callout type="hint" title="Resumo">
+  A referência é um código curto que identifica o item nos comandos, como `vip-30d`. É **única**, **sem espaços** e **não pode ser trocada** depois de criada.
+</Callout>
+
+## O que é
+
+Quando você cria um produto, catálogo ou cupom, o bot pede uma **referência**. Ela funciona como o código de um produto numa loja física (o **SKU**): o cliente vê o título bonito, e a equipe usa o código para achar o item rápido.
+
+<DiscordSlashCommand
+  name="produto"
+  subcommand="criar"
+  description="[📦] - Cadastre um produto para venda"
+  options={[{ name: "referencia", type: "text" }, { name: "canal", type: "text" }]}
+/>
+
+## Para que serve
+
+<Steps>
+<Step>
+### Encontrar o item nos comandos
+`/produto configurar`, `/produto definir`, `/catalogo configurar` e `/cupom configurar` usam a referência para saber de qual item você está falando. O campo tem sugestões automáticas: comece a digitar e escolha na lista.
+</Step>
+<Step>
+### Buscar no painel
+O botão de busca de produtos do painel pede a referência.
+</Step>
+<Step>
+### Ligar um cupom a um produto
+Em **Produto exclusivo** do cupom, você informa a referência do produto que precisa estar no carrinho.
+</Step>
+</Steps>
+
+## Regras por tipo
+
+<Tabs items={["Produto", "Catálogo", "Cupom"]}>
+<Tab value="Produto">
+- **Caracteres:** letras, números e hífen (`-`).
+- **Tamanho:** 3 a 20 caracteres.
+- **Quem vê:** só a equipe. O cliente vê o título configurado.
+- **Exemplos:** `vip-30d`, `robux-800`, `key-minecraft`.
+</Tab>
+<Tab value="Catálogo">
+- **Caracteres:** letras, números e hífen (`-`).
+- **Tamanho:** 3 a 20 caracteres.
+- **Quem vê:** só a equipe. O cliente vê o título e os produtos do menu.
+- **Exemplos:** `catalogo-jogos`, `contas-vip`.
+</Tab>
+<Tab value="Cupom">
+- **Caracteres:** letras, números, `_` e `-`.
+- **Tamanho:** até 20 caracteres.
+- **Quem vê:** **o cliente**, porque a referência é o código que ele digita no carrinho.
+- **Exemplos:** `NATAL10`, `BLACKFRIDAY`, `VOLTA_15`.
+</Tab>
+</Tabs>
+
+<Callout type="warn" title="Não dá para trocar depois">
+  Título, descrição, preço e todo o resto podem mudar quando quiser. A referência, não. Se errar, crie o item de novo.
+</Callout>
+
+## Boa ou ruim?
+
+| ✅ Boa | ❌ Evite | Por quê |
+| --- | --- | --- |
+| `vip-30d` | `produto1` | Não diz o que é |
+| `robux-800` | `robux 800` | Espaço não é permitido |
+| `key-minecraft` | `kéy-minecraft` | Acento não é permitido |
+| `NATAL10` (cupom) | `cupom-de-natal-dez` | Longo demais para o cliente digitar |
+
+## Dúvidas comuns
+
+<Accordions>
+  <Accordion title="Dois produtos podem ter a mesma referência?">
+    Não. A referência é única no servidor: o bot recusa uma que já exista. Produtos, catálogos e cupons são contados separadamente.
+  </Accordion>
+  <Accordion title="Esqueci a referência de um produto. Onde vejo?">
+    Use `/produto configurar` sem preencher a referência: o bot mostra a lista de produtos. No campo `referencia`, as sugestões automáticas também ajudam.
+  </Accordion>
+  <Accordion title="Maiúsculas fazem diferença?">
+    Para evitar confusão, use sempre minúsculas em produtos e catálogos. Nos cupons, combine com o cliente o código exatamente como foi criado.
+  </Accordion>
+</Accordions>
+
+## Veja também
+
+<Cards>
+  <Card icon={<Package />} title="Cadastro de produtos" href="/docs/products" />
+  <Card icon={<LayoutGrid />} title="Catálogos" href="/docs/products/catalogos" />
+  <Card icon={<Ticket />} title="Cupons" href="/docs/cupons" />
+</Cards>

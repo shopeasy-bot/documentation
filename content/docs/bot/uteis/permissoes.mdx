@@ -1,0 +1,78 @@
+---
+title: Cargos e permissões
+icon: BiShieldQuarter
+description: A diferença entre as permissões do Discord e as do ShopEasy
+---
+import { Shield, Rocket } from "lucide-react";
+
+<Callout type="hint" title="Resumo">
+  As permissões do **Discord** dizem o que o **bot** pode fazer no servidor. As do **ShopEasy** dizem o que cada **membro da equipe** pode fazer no bot. Uma não substitui a outra.
+</Callout>
+
+## As duas lado a lado
+
+<Tabs items={["Discord (para o bot)", "ShopEasy (para a equipe)"]}>
+<Tab value="Discord (para o bot)">
+**Onde:** Configurações do servidor → Cargos → cargo do bot.
+
+O mais simples é dar **Administrador** ao bot. Se preferir dar só o necessário:
+
+| Permissão | Para quê |
+| --- | --- |
+| Ver canais e Enviar mensagens | Publicar produtos, catálogos e painéis |
+| Gerenciar canais | Criar os canais de carrinho e de ticket |
+| Gerenciar cargos | Entregar o cargo de cliente e os cargos de produto |
+| Criar convite | Recursos que geram convite do servidor |
+</Tab>
+<Tab value="ShopEasy (para a equipe)">
+**Onde:** `/configuracoes` → **🔐 Permissões** (só o dono do servidor abre, a partir do plano Essencial).
+
+| Exemplo de cargo | Permissões sugeridas |
+| --- | --- |
+| Gerente | 👑 Administrador |
+| Estoquista | 📦 Produtos |
+| Atendente | 🛒 Carrinhos, 📊 Vendas |
+| Financeiro | 🏦 Gerenciar Pagamentos, 📊 Vendas |
+
+A tabela completa está em [Permissões](/docs/configs/perms).
+</Tab>
+</Tabs>
+
+## A ordem dos cargos importa
+
+O Discord só deixa o bot entregar cargos que estão **abaixo** do cargo dele.
+
+<Steps>
+<Step>
+### Abra os cargos
+Configurações do servidor → **Cargos**.
+</Step>
+<Step>
+### Arraste o cargo do bot para cima
+Ele precisa ficar **acima** do cargo de clientes e dos cargos entregues pelos produtos.
+</Step>
+</Steps>
+
+## Por que um administrador perdeu acesso
+
+<Steps>
+<Step>
+### Antes de configurar
+Sem nenhum cargo nas Permissões do ShopEasy, qualquer membro com **Administrador no Discord** usa os comandos de gerenciamento.
+</Step>
+<Step>
+### Depois do primeiro cargo
+O ShopEasy passa a seguir **só** as permissões configuradas. O dono do servidor continua com acesso total, mas ser Administrador no Discord **deixa de bastar**.
+</Step>
+<Step>
+### Como resolver
+O dono do servidor dá ao cargo dos administradores a permissão **👑 Administrador** do ShopEasy e salva.
+</Step>
+</Steps>
+
+## Veja também
+
+<Cards>
+  <Card icon={<Shield />} title="Permissões" description="O que cada permissão libera" href="/docs/configs/perms" />
+  <Card icon={<Rocket />} title="Primeiros passos" href="/docs/primeiros-passos" />
+</Cards>

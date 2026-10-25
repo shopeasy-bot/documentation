@@ -1,0 +1,56 @@
+---
+title: Cores (HEX)
+icon: BiPalette
+description: O que é um código de cor como #23a55a e onde usar no bot
+---
+import { Palette } from "lucide-react";
+
+<Callout type="hint" title="Resumo">
+  O bot pede cores no formato **HEX**: um `#` seguido de 6 caracteres (de 0 a 9 e de A a F), como `#23a55a`.
+</Callout>
+
+## Como fica no Discord
+
+A cor aparece na **barra lateral** das mensagens da loja:
+
+<div className="grid gap-3 sm:grid-cols-2 not-prose">
+  <DiscordContainer accent="#23a55a" content={"**Verde** · `#23a55a`"} />
+  <DiscordContainer accent="#5865F2" content={"**Azul Discord** · `#5865F2`"} />
+  <DiscordContainer accent="#ED4245" content={"**Vermelho** · `#ED4245`"} />
+  <DiscordContainer accent="#FEE75C" content={"**Amarelo** · `#FEE75C`"} />
+  <DiscordContainer accent="#EB459E" content={"**Rosa** · `#EB459E`"} />
+  <DiscordContainer accent="#FFFFFF" content={"**Branco** · `#FFFFFF`"} />
+</div>
+
+Maiúsculas e minúsculas tanto faz: `#5865f2` e `#5865F2` são a mesma cor.
+
+## Escolha sua cor
+
+Arraste no quadrado para escolher o tom e na barra para mudar a cor. Depois clique em **Copiar** e cole no bot.
+
+<ColorPicker />
+
+<Accordions>
+  <Accordion title="Quero usar a cor exata do meu logo">
+    Abra a imagem num editor (Canva, Photoshop, Figma), use o **conta-gotas** em cima da cor e copie o código HEX. Cole no campo acima para ver a prévia.
+  </Accordion>
+</Accordions>
+
+## Onde o bot usa cores
+
+| Onde | Formato aceito |
+| --- | --- |
+| `/personalizar` → **Cor** (cor geral da loja) | `#` + 6 caracteres |
+| Produto (`/produto configurar` → **🎨 Alterar cor**) | `#` + 3 ou 6 caracteres, ou uma das 25 cores prontas |
+| Catálogo | `#` + 6 caracteres |
+| Promoções (`/promocoes`) | `#` + 6 caracteres |
+
+<Callout type="warn" title="O bot recusou minha cor">
+  Confira se começa com `#` e se só tem números de 0 a 9 e letras de A a F. `#GG0000` e `23a55a` (sem `#`) não funcionam.
+</Callout>
+
+## Veja também
+
+<Cards>
+  <Card icon={<Palette />} title="Personalização" href="/docs/configs/customization" />
+</Cards>

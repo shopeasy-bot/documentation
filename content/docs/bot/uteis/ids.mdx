@@ -1,0 +1,84 @@
+---
+title: IDs do Discord
+icon: BiIdCard
+description: Como ativar o Modo Desenvolvedor e copiar o ID de usuários, canais, cargos e servidores
+---
+import { Braces, CreditCard } from "lucide-react";
+
+<Callout type="hint" title="Resumo">
+  Todo usuário, canal, cargo e servidor tem um **ID**, um número único como `1302236216300933171`. Para copiar, ligue o **Modo Desenvolvedor** uma vez e use **Copiar ID**.
+</Callout>
+
+## Para que serve
+
+- O **suporte** costuma pedir o ID do servidor ou do usuário.
+- A variável `{{id}}` coloca o ID do cliente no nome do carrinho.
+- Dois membros com o mesmo nome? O ID mostra quem é quem, e ele **nunca muda**.
+
+## 1. Ligue o Modo Desenvolvedor
+
+<Tabs items={["Computador", "Celular"]}>
+<Tab value="Computador">
+<Steps>
+<Step>
+### Abra as configurações
+Clique na **engrenagem** ao lado do seu nome, no canto inferior esquerdo.
+</Step>
+<Step>
+### Vá em Avançado
+Na lateral, em **Configurações do App**, clique em **Avançado**.
+</Step>
+<Step>
+### Ative
+Ligue **Modo Desenvolvedor**.
+</Step>
+</Steps>
+</Tab>
+<Tab value="Celular">
+<Steps>
+<Step>
+### Abra as configurações
+Toque na sua **foto** no canto inferior direito e depois na **engrenagem**.
+</Step>
+<Step>
+### Vá em Avançado
+Role até **Configurações do App** e toque em **Avançado**.
+</Step>
+<Step>
+### Ative
+Ligue **Modo Desenvolvedor**.
+</Step>
+</Steps>
+</Tab>
+</Tabs>
+
+## 2. Copie o ID
+
+No computador, clique com o **botão direito**. No celular, **segure** o item.
+
+| O que | Onde clicar | Opção |
+| --- | --- | --- |
+| Usuário | Nome ou foto da pessoa | **Copiar ID do usuário** |
+| Canal | Nome do canal | **Copiar ID do canal** |
+| Cargo | Configurações do servidor → Cargos → o cargo | **Copiar ID do cargo** |
+| Servidor | Ícone do servidor | **Copiar ID do servidor** |
+| Mensagem | A mensagem | **Copiar ID da mensagem** |
+
+## ID do pagamento é outra coisa
+
+`/pagamento consultar` e `/pagamento aprovar` pedem o **ID do pagamento**, criado pelo ShopEasy em cada compra. Ele aparece no carrinho:
+
+<DiscordMessage>
+  <DiscordContainer accent="#23a55a" content={"### ℹ️ Informações do Pagamento\n>>> **💲 Valor Total:**\nR$ 10,00\n\n**🆔 ID do pagamento**\n123456789"} />
+</DiscordMessage>
+
+<Callout type="info" title="Posso mandar meu ID para alguém?">
+  Pode, ID não é segredo. Já **token**, **Client Secret** e **chaves de API** são senhas: nunca compartilhe.
+</Callout>
+
+## Veja também
+
+<Cards>
+  <Card icon={<Braces />} title="Variáveis" href="/docs/uteis/variaveis" />
+  <Card icon={<CreditCard />} title="Pagamentos" href="/docs/pagamentos" />
+</Cards>
