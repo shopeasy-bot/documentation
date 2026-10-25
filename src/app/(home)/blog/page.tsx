@@ -24,6 +24,26 @@ export const metadata: Metadata = {
 const poppins = Poppins({ subsets: ["latin"], weight: "500" });
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], weight: "500" });
 
+const TAG_CLASS =
+  "text-[11px] sm:text-xs px-2 sm:px-2.5 py-1 rounded-full bg-neutral-100/10 dark:bg-neutral-800/50 border border-neutral-200/20 dark:border-neutral-700/50 text-neutral-500 dark:text-neutral-400";
+
+// No celular mostra só as 2 primeiras tags para o card não virar uma parede de etiquetas.
+function PostTags({ tags }: { tags?: string[] }) {
+  if (!tags?.length) return null;
+  const hidden = tags.length - 2;
+
+  return (
+    <>
+      {tags.map((tag, i) => (
+        <span key={tag} className={cn(jetbrains.className, TAG_CLASS, i >= 2 && "hidden sm:inline-flex")}>
+          {tag}
+        </span>
+      ))}
+      {hidden > 0 && <span className={cn(jetbrains.className, TAG_CLASS, "sm:hidden")}>+{hidden}</span>}
+    </>
+  );
+}
+
 export default function BlogPage() {
   const posts = blog.getPages().sort((a, b) => {
     const dateA = a.data.date ? new Date(a.data.date).getTime() : 0;
@@ -34,19 +54,19 @@ export default function BlogPage() {
   const [featured, ...rest] = posts;
 
   return (
-    <main className="flex flex-1 flex-col z-10 items-center justify-center text-center gap-16 px-4">
+    <main className="relative flex flex-1 flex-col z-10 items-center justify-center text-center gap-10 sm:gap-16 px-4 pb-16 sm:pb-24 overflow-x-clip">
       <FlareDecoration />
 
-      <div className="flex flex-col items-center gap-4 motion-preset-expand motion-delay-[100ms] pt-20">
+      <div className="flex flex-col items-center gap-4 motion-preset-expand motion-delay-[100ms] pt-12 sm:pt-20">
         <h1
-          className={`${poppins.className} text-4xl lg:text-7xl uppercase bg-gradient-to-r
+          className={`${poppins.className} text-5xl sm:text-6xl lg:text-7xl uppercase bg-gradient-to-r
             dark:from-white from-black dark:to-neutral-400 to-neutral-500 bg-clip-text text-transparent
             tracking-tight leading-none
           `}
         >
           Blog
         </h1>
-        <p className="text-lg lg:text-xl font-light text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-xl">
+        <p className="text-base sm:text-lg lg:text-xl font-light text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-xl">
           Acompanhe todas as{" "}
           <span className="font-bold bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">
             novidades
@@ -55,33 +75,29 @@ export default function BlogPage() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-6 max-w-4xl w-full motion-preset-expand motion-delay-[200ms]">
+      <div className="flex flex-col gap-4 sm:gap-6 max-w-4xl w-full motion-preset-expand motion-delay-[200ms]">
         {/* Featured */}
         {featured && (
           <Link
             href={featured.url}
             className={cn(
-              "group relative p-8 rounded-3xl border backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] text-left",
+              "group relative p-5 sm:p-8 rounded-2xl sm:rounded-3xl border backdrop-blur-sm transition-all duration-300 md:hover:scale-[1.02] text-left",
               "bg-emerald-500/10 border-emerald-500/30 shadow-emerald-500/20 shadow-2xl",
             )}
           >
-            <div className="flex flex-wrap items-center gap-2 mb-4">
-              <span className={`${jetbrains.className} text-xs px-3 py-1 rounded-full bg-emerald-500 text-white`}>
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+              <span className={`${jetbrains.className} text-[11px] sm:text-xs px-2.5 sm:px-3 py-1 rounded-full bg-emerald-500 text-white`}>
                 Mais recente
               </span>
-              {featured.data.tags?.map((tag) => (
-                <span key={tag} className={`${jetbrains.className} text-xs px-2.5 py-1 rounded-full bg-neutral-100/10 dark:bg-neutral-800/50 border border-neutral-200/20 dark:border-neutral-700/50 text-neutral-500 dark:text-neutral-400`}>
-                  {tag}
-                </span>
-              ))}
+              <PostTags tags={featured.data.tags} />
             </div>
 
-            <h2 className={`${poppins.className} text-2xl lg:text-3xl font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-emerald-400 transition-colors duration-200 mb-2`}>
+            <h2 className={`${poppins.className} text-xl sm:text-2xl lg:text-3xl font-semibold leading-snug break-words text-neutral-900 dark:text-neutral-100 group-hover:text-emerald-400 transition-colors duration-200 mb-2`}>
               {featured.data.title}
             </h2>
 
             {featured.data.description && (
-              <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
                 {featured.data.description}
               </p>
             )}
@@ -97,25 +113,23 @@ export default function BlogPage() {
 
         {/* Rest */}
         {rest.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {rest.map((post) => (
               <Link
                 key={post.url}
                 href={post.url}
                 className={cn(
-                  "group relative p-8 rounded-3xl border backdrop-blur-sm transition-all duration-300 hover:scale-105 text-left",
+                  "group relative flex flex-col p-5 sm:p-8 rounded-2xl sm:rounded-3xl border backdrop-blur-sm transition-all duration-300 md:hover:scale-[1.03] text-left",
                   "bg-neutral-100/5 border-neutral-200/10 dark:border-neutral-800/50",
                 )}
               >
-                <div className="flex flex-wrap items-center gap-2 mb-4">
-                  {post.data.tags?.map((tag) => (
-                    <span key={tag} className={`${jetbrains.className} text-xs px-2.5 py-1 rounded-full bg-neutral-100/10 dark:bg-neutral-800/50 border border-neutral-200/20 dark:border-neutral-700/50 text-neutral-500 dark:text-neutral-400`}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+                    <PostTags tags={post.data.tags} />
+                  </div>
+                )}
 
-                <h2 className={`${poppins.className} text-xl font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-emerald-400 transition-colors duration-200 mb-2`}>
+                <h2 className={`${poppins.className} text-lg sm:text-xl font-semibold leading-snug break-words text-neutral-900 dark:text-neutral-100 group-hover:text-emerald-400 transition-colors duration-200 mb-2`}>
                   {post.data.title}
                 </h2>
 
@@ -126,7 +140,7 @@ export default function BlogPage() {
                 )}
 
                 {post.data.date && (
-                  <span className={`${jetbrains.className} flex items-center gap-1.5 text-xs text-neutral-500`}>
+                  <span className={`${jetbrains.className} mt-auto flex items-center gap-1.5 text-xs text-neutral-500`}>
                     <FiCalendar className="w-3 h-3" />
                     {new Date(post.data.date).toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" })}
                   </span>
