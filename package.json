@@ -16,6 +16,7 @@
     "@skyra/discord-components-react": "^4.0.2",
     "@vercel/analytics": "^1.6.1",
     "class-variance-authority": "^0.7.1",
+    "crisp-sdk-web": "1.2.1",
     "fumadocs-core": "16.17.7",
     "fumadocs-mdx": "15.4.9",
     "fumadocs-twoslash": "^4.0.3",

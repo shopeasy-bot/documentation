@@ -7,8 +7,7 @@ import type { Metadata } from 'next';
 import { absoluteUrl, siteUrl } from '@/lib/site';
 import { JsonLd } from '@/components/json-ld';
 import { UserProvider } from '@/context/user';
-import { CrispChat } from '@/components/crisp';
-import { HelpFab } from '@/components/help-fab';
+import { CrispChat, HelpBubble } from '@/components/crisp';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -120,10 +119,10 @@ export default function Layout({ children }: { children: ReactNode }) {
               
             <UserProvider>
             {children}
+            <CrispChat />
+            <HelpBubble />
           </UserProvider>
                <Analytics />
-               <CrispChat />
-               <HelpFab />
             </RootProvider>
       </body>
     </html>

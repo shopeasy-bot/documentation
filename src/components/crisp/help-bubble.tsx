@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { FiMessageCircle, FiX } from "react-icons/fi";
 import { HiSparkles } from "react-icons/hi2";
 import { cn } from "@/lib/cn";
-import { openCrispChat } from "@/components/crisp";
+import { openCrispChat, useCrispChatOpen } from "./store";
 
 const DISMISS_KEY = "shopeasy-help-bubble-dismissed";
 const SHOW_DELAY_MS = 8000;
@@ -89,9 +89,10 @@ function rememberDismiss() {
 
 type Phase = "hidden" | "typing" | "message";
 
-export function HelpFab() {
+export function HelpBubble() {
   const pathname = usePathname() ?? "/";
   const topic = topicFor(pathname);
+  const chatOpen = useCrispChatOpen();
   const [phase, setPhase] = useState<Phase>("hidden");
   const [hovered, setHovered] = useState(false);
   const triggered = useRef(false);
@@ -140,6 +141,9 @@ export function HelpFab() {
     openCrispChat({ message: text, page: pathname });
     dismiss();
   }
+
+  // Com o chat aberto o balão some, para não ficar por cima da janela do Crisp.
+  if (chatOpen) return null;
 
   const open = phase !== "hidden";
 
