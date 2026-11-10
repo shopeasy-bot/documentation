@@ -1,11 +1,11 @@
 import { GridDecoration } from "@/components/decoration/Grid"
 import { FlareDecoration } from "@/components/decoration/Flare"
 import { CrispTrigger } from "@/components/crisp"
-import { CONTACT_EMAIL, WHATSAPP_SUPPORT_URL } from "@/lib/contacts"
+import { CONTACT_EMAIL, DISCORD_SUPPORT_URL, WHATSAPP_SUPPORT_URL } from "@/lib/contacts"
 import { cn } from "@/lib/cn"
 import { JetBrains_Mono, Poppins } from "next/font/google"
 import Link from "next/link"
-import { FaWhatsapp } from "react-icons/fa"
+import { FaDiscord, FaWhatsapp } from "react-icons/fa"
 import { FiMessageSquare, FiFileText, FiMail } from "react-icons/fi"
 import type { Metadata } from "next"
 
@@ -23,6 +23,15 @@ const poppins = Poppins({ subsets: ["latin"], weight: "500" })
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], weight: "500" })
 
 const channels = [
+  {
+    icon: <FaDiscord className="w-5 h-5" />,
+    title: "Servidor Discord",
+    description: "Abra um ticket no nosso servidor e receba ajuda da equipe.",
+    href: DISCORD_SUPPORT_URL,
+    label: "Abrir ticket",
+    color: "border-indigo-500/20 hover:border-indigo-500/40 hover:bg-indigo-500/5",
+    iconColor: "bg-indigo-500/10 border-indigo-500/20 text-indigo-400",
+  },
   {
     icon: <FiMessageSquare className="w-5 h-5" />,
     title: "Chat no site",
@@ -75,12 +84,9 @@ export default function SupportPage() {
         <p className="text-sm text-neutral-500 dark:text-neutral-400">
           Escolha o canal mais adequado para a sua dúvida ou problema.
         </p>
-        <Link href="/comunicado" className="text-xs text-amber-500 hover:underline">
-          Por que não temos mais servidor no Discord? →
-        </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl w-full motion-preset-expand motion-delay-[150ms]">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 max-w-6xl w-full motion-preset-expand motion-delay-[150ms]">
         {channels.map((c) => {
           const cardClassName = cn(
             "group flex flex-col gap-4 p-6 rounded-2xl border backdrop-blur-sm transition-all duration-300 text-left w-full",

@@ -1,3 +1,4 @@
+export const DISCORD_SUPPORT_URL = "https://discord.gg/UNHzNCJJWK";
 export const WHATSAPP_SUPPORT_URL = "https://wa.me/555197183614";
 export const WHATSAPP_COMMUNITY_URL =
   "https://whatsapp.com/channel/0029VbDi1MPEquiUygNLXF0M";
